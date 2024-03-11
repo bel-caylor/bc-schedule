@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -43,7 +44,16 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: './dist/stylesheet.css'
-    })
+    }),
+    new BrowserSyncPlugin(
+      {
+        proxy: 'http://hope-church.local/wp-admin/', // Point to your local WordPress site
+        files: ["**/*.php", "**/*.css", "**/*.js"],
+      },
+      {
+        reload: false
+      }
+    )
   ],
   devtool: 'inline-source-map',
   watch: true

@@ -39,7 +39,8 @@ class BCS_Roles_Manager {
 
     public function delete_role( $role_id ) {
         global $wpdb;
-        $wpdb->delete( $this->table_name, array( 'id' => $role_id ) );
+        $result = $wpdb->delete( $this->table_name, array( 'id' => $role_id ) );
+        return $result;
     }
 }
 

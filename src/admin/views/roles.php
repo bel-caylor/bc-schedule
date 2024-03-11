@@ -32,23 +32,14 @@ function render_roles_admin_table() {
     echo '<thead><tr><th>ID</th><th>Group</th><th>Role</th><th>Trash</th></tr></thead>';
     echo '<tbody>';
     foreach ($all_roles as $role) {
-        echo '<tr>';
+        echo '<tr id="role-' . esc_html($role->id) . '">';
         echo '<td>' . esc_html($role->id) . '</td>';
         echo '<td>' . esc_html($role->group_name) . '</td>';
         echo '<td>' . esc_html($role->role) . '</td>';
-        echo '<td><i class="dashicons dashicons-trash" onclick="deleteRow(' . esc_js($role->id) . ')"></i></td>';
+        echo '<td><i class="dashicons dashicons-trash" data-role-id="' . esc_html($role->id) . '"></i></td>';
         echo '</tr>';
     }
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
-
-        // JavaScript function to handle row deletion
-    echo '<script>
-        function deleteRow(roleId) {
-            // Implement your logic to delete the row with roleId
-            // You can use AJAX to communicate with the server
-            console.log("Deleting role with ID: " + roleId);
-        }
-    </script>';
 }

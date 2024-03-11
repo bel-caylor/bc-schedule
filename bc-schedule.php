@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'BC_SCHEDULE_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once BC_SCHEDULE_PATH . '/src/database/table-setup.php';
+require_once BC_SCHEDULE_PATH . '/src/database/api/routes.php';
 require_once BC_SCHEDULE_PATH . 'admin-functions.php';
 
 /**

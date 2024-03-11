@@ -1,3 +1,18 @@
 .table-admin {
-    @apply table-auto whitespace-nowrap p-2 rounded-lg border-0
+    * {
+        @apply p-3
+    }
+    thead {
+        @apply bg-blue-100
+    }
+    tbody > * {
+        @apply border border-gray-200;
+    }
+    i.dashicons {
+        &:before {
+            @apply top-0 absolute
+        }
+        @apply relative
+    }
+    @apply table-auto whitespace-nowrap border-0 bg-white
 }
