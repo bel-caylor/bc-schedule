@@ -28,7 +28,7 @@ function render_roles_admin_table() {
     // Display roles in an HTML table
     echo '<div class="wrap">';
     echo '<h1>Manage Roles</h1>';
-    echo '<table class="widefat">';
+    echo '<table class="table-admin">';
     echo '<thead><tr><th>ID</th><th>Group</th><th>Role</th><th>Trash</th></tr></thead>';
     echo '<tbody>';
     foreach ($all_roles as $role) {

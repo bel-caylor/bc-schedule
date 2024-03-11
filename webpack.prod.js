@@ -11,7 +11,7 @@ module.exports = [
       'main': ['./js/index.js', './scss/stylesheet.scss']
     },
     output: {
-      filename: './dist/[name].min.[fullhash].js',
+      filename: './dist/[name].min.js',
       path: path.resolve(__dirname)
     },
     module: {
@@ -25,7 +25,19 @@ module.exports = [
         // Compile SCSS
         {
           test: /\.(sass|scss)$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+          use: [
+            MiniCssExtractPlugin.loader,
+            "css-loader",
+            {
+              loader: "postcss-loader",
+              options: {
+                postcssOptions: {
+                  plugins: [require("tailwindcss"), require("autoprefixer")],
+                },
+              },
+            },
+            "sass-loader",  
+          ]
         }
       ]
     },
