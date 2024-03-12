@@ -4,6 +4,8 @@ function BCS_form_submission_handler() {
     $roles_manager = new BCS_Roles_Manager();
     // Check if the form is submitted
     if (isset($_POST['add_role'])) {
+        // Verify the nonce
+        check_admin_referer('bcs_roles_nonce');
         // Sanitize and validate input
         $group_name = sanitize_text_field($_POST['group_name']);
         $role_name = sanitize_text_field($_POST['role_name']);

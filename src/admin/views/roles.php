@@ -6,6 +6,7 @@ function render_roles_add_form() {
     <div class="wrap">
         <h1>Add New Role</h1>
         <form method="post" action="admin-post.php">
+            <?php wp_nonce_field('bcs_roles_nonce'); ?>
             <input type="hidden" name="action" value="add_role_action">
             <label for="group_name">Group Name:</label>
             <input type="text" id="group_name" name="group_name">

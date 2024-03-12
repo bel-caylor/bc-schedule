@@ -6,7 +6,7 @@ function my_custom_rest_endpoint() {
     register_rest_route('bcs/v1', '/delete_role/(?P<role_id>\d+)', array(
         'methods' => 'DELETE',
         'callback' => 'bcs_delete_role_callback',
-        // 'permission_callback' => 'my_check_permissions',
+        'permission_callback' => 'my_check_permissions',
     ));
 }
 add_action('rest_api_init', 'my_custom_rest_endpoint');
