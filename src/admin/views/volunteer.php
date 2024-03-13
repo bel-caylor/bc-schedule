@@ -132,7 +132,7 @@ function render_volunteer_admin_table() {
     echo '<thead><tr><th>ID</th><th>Name</th><th>Group</th><th>Role</th><th>Trash</th></tr></thead>';
     echo '<tbody>';
     foreach ($all_volunteer as $volunteer) {
-        echo '<tr id="user-' . esc_html($volunteer->id) . '">';
+        echo '<tr id="row-' . esc_html($volunteer->id) . '">';
         echo '<td>' . esc_html($volunteer->id) . '</td>';
         echo '<td>' . esc_html($volunteer->display_name) . '</td>';
         echo '<td>' . esc_html($volunteer->group_name) . '</td>';

@@ -20,7 +20,7 @@ jQuery(document).ready(function($) {
                 // Handle success (e.g., remove the row from the table)
                 console.log(response);
                 console.log('Role deleted successfully');
-                $(`#role-${rowID}`).remove();
+                $(`#row-${rowID}`).remove();
             },
             error: function(error) {
                 // Handle error

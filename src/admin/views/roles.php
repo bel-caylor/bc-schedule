@@ -20,7 +20,7 @@ function render_roles_add_form() {
 
 function render_roles_admin_table() {
     global $wpdb;
-    $table_roles = $wpdb->prefix . 'BCS_roles';
+    $table_roles = $wpdb->prefix . 'bcs_roles';
 
     // Retrieve roles from the database
     $roles_manager = new BCS_Roles_Manager();
@@ -33,7 +33,7 @@ function render_roles_admin_table() {
     echo '<thead><tr><th>ID</th><th>Group</th><th>Role</th><th>Trash</th></tr></thead>';
     echo '<tbody>';
     foreach ($all_roles as $role) {
-        echo '<tr id="role-' . esc_html($role->id) . '">';
+        echo '<tr id="row-' . esc_html($role->id) . '">';
         echo '<td>' . esc_html($role->id) . '</td>';
         echo '<td>' . esc_html($role->group_name) . '</td>';
         echo '<td>' . esc_html($role->role) . '</td>';
