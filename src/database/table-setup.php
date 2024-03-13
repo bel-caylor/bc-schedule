@@ -18,11 +18,11 @@ $sql_roles = "CREATE TABLE $table_roles (
 // Create Volunteers table
 $sql_volunteers = "CREATE TABLE $table_volunteers (
     id INT NOT NULL AUTO_INCREMENT,
-    volunteer_name VARCHAR(255),
     role_id INT,
     wp_user_id INT,
     PRIMARY KEY (id),
-    FOREIGN KEY (role_id) REFERENCES $table_roles(id)
+    FOREIGN KEY (role_id) REFERENCES $table_roles(id),
+    FOREIGN KEY (wp_user_id) REFERENCES wp_users(ID)
 )";
 
 // Create Events table

@@ -1,0 +1,17 @@
+form {
+    input[type='submit'] {
+        @apply mx-2 border border-gray-300 bg-blue-600 text-white px-4 py-2 rounded-md
+    }
+    label:not(:first-of-type) {
+        @apply pl-2
+    }
+    .columns-3 {
+        columns: 3 auto;
+        @media (max-width: 767px) {
+            columns: 1 auto;
+        }
+        @media (min_width: 1023px) and (max-width: 767px) {
+            columns: 2 auto;
+        }
+    }
+}

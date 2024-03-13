@@ -6,7 +6,7 @@ function render_roles_add_form() {
     <div class="wrap">
         <h1>Add New Role</h1>
         <form method="post" action="admin-post.php">
-            <?php wp_nonce_field('bcs_roles_nonce'); ?>
+            <?php wp_nonce_field('bcs_nonce'); ?>
             <input type="hidden" name="action" value="add_role_action">
             <label for="group_name">Group Name:</label>
             <input type="text" id="group_name" name="group_name">
@@ -37,7 +37,7 @@ function render_roles_admin_table() {
         echo '<td>' . esc_html($role->id) . '</td>';
         echo '<td>' . esc_html($role->group_name) . '</td>';
         echo '<td>' . esc_html($role->role) . '</td>';
-        echo '<td><i class="dashicons dashicons-trash" data-role-id="' . esc_html($role->id) . '"></i></td>';
+        echo '<td><i class="dashicons dashicons-trash" data-table="' . $table_roles . '" data-row-id="' . esc_html($role->id) . '"></i></td>';
         echo '</tr>';
     }
     echo '</tbody>';

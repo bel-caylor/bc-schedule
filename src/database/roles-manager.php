@@ -37,22 +37,20 @@ class BCS_Roles_Manager {
         return $wpdb->get_results( "SELECT * FROM $this->table_name" );
     }
 
-    public function delete_role( $role_id ) {
+    public function get_roles_data() {
         global $wpdb;
-        $result = $wpdb->delete( $this->table_name, array( 'id' => $role_id ) );
-        return $result;
+        $results = $wpdb->get_results("SELECT * FROM $this->table_name", ARRAY_A);
+    
+        $roles_data = [];
+        foreach ($results as $row) {
+            $roles_data[] = [
+                'id' => $row['id'],
+                'group' => $row['group_name'],
+                'role' => $row['role']
+            ];
+        }
+    
+        return $roles_data;
     }
 }
 
-// Example usage:
-// $roles_manager = new BCS_Roles_Manager();
-// $roles_manager->create_table();
-// $roles_manager->insert_role( 'Admins', 'Administrator' );
-// $roles_manager->insert_role( 'Editors', 'Editor' );
-
-// // Get all roles
-// $all_roles = $roles_manager->get_roles();
-// foreach ( $all_roles as $role ) {
-//     echo "Role ID: {$role->id}, Group Name: {$role->group_name}, Role: {$role->role}<br>";
-// }
-// ?>

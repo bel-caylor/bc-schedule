@@ -1,5 +1,8 @@
 <?php
 require_once BC_SCHEDULE_PATH . '/src/admin/views/roles.php';
+require_once BC_SCHEDULE_PATH . '/src/admin/views/volunteer.php';
+require_once BC_SCHEDULE_PATH . '/src/database/db-manager.php';
+require_once BC_SCHEDULE_PATH . '/src/database/api/delete_role.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/message.php';
 
 // Add admin page to the menu
@@ -16,8 +19,8 @@ function add_schedule_admin_page() {
         'dashicons-calendar', // Icon (optional)
         10 // Position (set to 1 for first section)
     );
-    $nonce = wp_create_nonce('bcs_roles_nonce');
-    echo '<input type="hidden" id="bcs_roles_nonce" value="' . esc_attr($nonce) . '">';
+    $nonce = wp_create_nonce('bcs_nonce');
+    echo '<input type="hidden" id="bcs_nonce" value="' . esc_attr($nonce) . '">';
 }
 
 // Admin page HTML callback
@@ -41,7 +44,7 @@ function render_schedule_admin_page() {
     <nav class="nav-tab-wrapper">
         <a href="?page=volunteer-schedule" class="nav-tab <?php if ($tab === null) : ?>nav-tab-active<?php endif; ?>">Schedule</a>
             <a href="?page=volunteer-schedule&tab=roles" class="nav-tab <?php if ($tab === 'roles') : ?>nav-tab-active<?php endif; ?>">Roles</a>
-            <a href="?page=volunteer-schedule&tab=tools" class="nav-tab <?php if ($tab === 'tools') : ?>nav-tab-active<?php endif; ?>">Tools</a>
+            <a href="?page=volunteer-schedule&tab=volunteers" class="nav-tab <?php if ($tab === 'volunteers') : ?>nav-tab-active<?php endif; ?>">Volunteers</a>
     </nav>
                 
     <div class="tab-content">
@@ -52,8 +55,10 @@ function render_schedule_admin_page() {
                 render_roles_add_form();
                 render_roles_admin_table();
                 break;
-            case 'tools':
-                echo 'Tools'; // Put your HTML here
+            case 'volunteers':
+                display_form_message();
+                render_volunteer_add_form();
+                render_volunteer_admin_table();
                 break;
             default:
                 echo 'Schedule'; // Put your HTML here

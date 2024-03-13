@@ -30,6 +30,15 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
         true
     );
 
+    // Enqueue alpine.js
+    wp_enqueue_script(
+        'alpine-js', 
+        'https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js', 
+        array(), 
+        null, 
+        true
+    );
+
     // Enqueue the bundled CSS file
     wp_enqueue_style(
         'bc-schedule-admin-styles',

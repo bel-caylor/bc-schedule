@@ -1,5 +1,4 @@
 <?php
-require_once BC_SCHEDULE_PATH . '/src/database/roles-manager.php';
 
 // Callback function for handling the delete_role request
 function bcs_delete_role_callback($request) {
@@ -7,15 +6,17 @@ function bcs_delete_role_callback($request) {
     $nonce = $request->get_param('nonce');
 
     //TODO Nonce not working.
-    $new_nonce = wp_create_nonce('bcs_roles_nonce');
-    if (!wp_verify_nonce($nonce, 'bcs_roles_nonce')) {
+    $new_nonce = wp_create_nonce('bcs_nonce');
+    if (!wp_verify_nonce($nonce, 'bcs_nonce')) {
         // return new WP_Error('invalid_nonce', 'Invalid nonce', array('status' => 403));
     }
-
-    $role_id = $request->get_param('role_id');
     
-    $roles_manager = new BCS_Roles_Manager();
-    $result = $roles_manager->delete_role($role_id);
+    $row_id = $request->get_param('row');
+    $table = $request->get_param('table');
+    
+    $db_manager = new BCS_db_Manager();
+    $result = $db_manager->delete_row_from_tbl( $row_id, $table );
+    return $result;
 
     // Return a response (success or error)
     if ( $result ) {
