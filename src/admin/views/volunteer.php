@@ -70,7 +70,7 @@ function render_volunteer_add_form() {
 
                         init() {
                             // Your data (replace with your actual data)
-                            const data = <?php echo json_encode($all_roles_data); ?>;
+                            const data = data;
                             this.data = data;
                             // Populate unique groups and roles
                             this.groups = [...new Set(data.map(item => item.group))];
