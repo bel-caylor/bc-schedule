@@ -5,7 +5,7 @@ class BCS_Volunteers_Manager {
 
     public function __construct() {
         global $wpdb;
-        $this->table_name = $wpdb->prefix . 'BCS_volunteers';
+        $this->table_name = $wpdb->prefix . 'bcs_volunteers';
     }
 
     public function insert_volunteer( $volunteer_id, $role_id ) {

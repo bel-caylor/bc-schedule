@@ -2,6 +2,7 @@
 
 function BCS_form_submission_handler() {
 
+    //** Add role **//
     if (isset($_POST['add_role'])) {
         $roles_manager = new BCS_Roles_Manager();
         // Verify the nonce
@@ -25,6 +26,8 @@ function BCS_form_submission_handler() {
             exit;
         }
     }
+
+    //** Add volunteer **//
     if (isset($_POST['add_volunteer'])) {
         $volunteers_manager = new BCS_Volunteers_Manager();
         // Verify the nonce
@@ -45,5 +48,35 @@ function BCS_form_submission_handler() {
         wp_safe_redirect(admin_url('admin.php?page=volunteer-schedule&tab=volunteers&message=success'));
         exit;
     }
+
+    //** Add team **//
+    if (isset($_POST['add_team'])) {
+        $teams_manager = new BCS_Teams_Manager();
+        $selected_volunteers_json = stripslashes($_POST['selected_volunteers']);
+        // Verify the nonce
+        check_admin_referer('bcs_nonce');
+
+        // Sanitize and validate input
+        $group_name = sanitize_text_field($_POST['group-select']);
+        $team_name = sanitize_text_field($_POST['team']);
+        $volunteers = sanitize_text_field($selected_volunteers_json);
+
+        // Insert data into wp_bcs_teams only if the combination doesn't exist
+        $result = $teams_manager->insert_team( $group_name, $team_name, $volunteers );
+        if ($result) {
+            // Redirect to the specified page
+            wp_safe_redirect(admin_url('admin.php?page=volunteer-schedule&tab=teams&message=success'));
+            exit;
+        } elseif ($result == 'duplicate'){
+            // Combination already exists, handle accordingly (e.g., display an error message)
+            wp_safe_redirect(admin_url('admin.php?page=volunteer-schedule&tab=teams&message=duplicate'));
+            exit;
+        } else {
+            wp_safe_redirect(admin_url('admin.php?page=volunteer-schedule&tab=teams&message=duplicate'));
+            exit;
+        }
+    }
 }
-add_action('init', 'BCS_form_submission_handler');
+add_action('init', 'bcs_form_submission_handler');
+
+?>

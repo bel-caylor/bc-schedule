@@ -1,7 +1,11 @@
 <?php
 require_once BC_SCHEDULE_PATH . '/src/admin/views/roles.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/views/volunteer.php';
+require_once BC_SCHEDULE_PATH . '/src/admin/views/teams.php';
+require_once BC_SCHEDULE_PATH . '/src/database/teams-manager.php';
 require_once BC_SCHEDULE_PATH . '/src/database/db-manager.php';
+require_once BC_SCHEDULE_PATH . '/src/database/volunteer-manager.php';
+require_once BC_SCHEDULE_PATH . '/src/database/roles-manager.php';
 require_once BC_SCHEDULE_PATH . '/src/database/api/delete_role.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/message.php';
 
@@ -43,8 +47,9 @@ function render_schedule_admin_page() {
     <!-- Here are our tabs -->
     <nav class="nav-tab-wrapper">
         <a href="?page=volunteer-schedule" class="nav-tab <?php if ($tab === null) : ?>nav-tab-active<?php endif; ?>">Schedule</a>
-            <a href="?page=volunteer-schedule&tab=roles" class="nav-tab <?php if ($tab === 'roles') : ?>nav-tab-active<?php endif; ?>">Roles</a>
-            <a href="?page=volunteer-schedule&tab=volunteers" class="nav-tab <?php if ($tab === 'volunteers') : ?>nav-tab-active<?php endif; ?>">Volunteers</a>
+        <a href="?page=volunteer-schedule&tab=roles" class="nav-tab <?php if ($tab === 'roles') : ?>nav-tab-active<?php endif; ?>">Roles</a>
+        <a href="?page=volunteer-schedule&tab=volunteers" class="nav-tab <?php if ($tab === 'volunteers') : ?>nav-tab-active<?php endif; ?>">Volunteers</a>
+        <a href="?page=volunteer-schedule&tab=teams" class="nav-tab <?php if ($tab === 'teams') : ?>nav-tab-active<?php endif; ?>">Teams</a>
     </nav>
                 
     <div class="tab-content">
@@ -59,6 +64,11 @@ function render_schedule_admin_page() {
                 display_form_message();
                 render_volunteer_add_form();
                 render_volunteer_admin_table();
+                break;
+            case 'teams':
+                display_form_message();
+                render_team_add_form();
+                // render_team_admin_table();
                 break;
             default:
                 echo 'Schedule'; // Put your HTML here

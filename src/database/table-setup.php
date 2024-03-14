@@ -2,10 +2,11 @@
 global $wpdb;
 
 // Define table names
-$table_roles = $wpdb->prefix . 'BCS_roles';
-$table_volunteers = $wpdb->prefix . 'BCS_volunteers';
-$table_events = $wpdb->prefix . 'BCS_events';
-$table_schedule = $wpdb->prefix . 'BCS_schedule';
+$table_roles = $wpdb->prefix . 'bcs_roles';
+$table_volunteers = $wpdb->prefix . 'bcs_volunteers';
+$table_events = $wpdb->prefix . 'bcs_events';
+$table_schedule = $wpdb->prefix . 'bcs_schedule';
+$table_teams = $wpdb->prefix . 'bcs_teams';
 
 // Create Roles table
 $sql_roles = "CREATE TABLE $table_roles (
@@ -23,6 +24,15 @@ $sql_volunteers = "CREATE TABLE $table_volunteers (
     PRIMARY KEY (id),
     FOREIGN KEY (role_id) REFERENCES $table_roles(id),
     FOREIGN KEY (wp_user_id) REFERENCES wp_users(ID)
+)";
+
+// Create Teams table
+$sql_teams = "CREATE TABLE $table_teams (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255),
+    group_name VARCHAR(255),
+    volunteers LONGTEXT,
+    PRIMARY KEY (id)
 )";
 
 // Create Events table
@@ -49,3 +59,4 @@ dbDelta($sql_roles);
 dbDelta($sql_volunteers);
 dbDelta($sql_events);
 dbDelta($sql_schedule);
+dbDelta($sql_teams);

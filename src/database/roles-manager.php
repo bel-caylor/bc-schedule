@@ -5,7 +5,7 @@ class BCS_Roles_Manager {
 
     public function __construct() {
         global $wpdb;
-        $this->table_name = $wpdb->prefix . 'BCS_roles';
+        $this->table_name = $wpdb->prefix . 'bcs_roles';
     }
 
     public function insert_role( $group, $role ) {

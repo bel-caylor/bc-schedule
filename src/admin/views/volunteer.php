@@ -1,6 +1,4 @@
 <?php
-require_once BC_SCHEDULE_PATH . '/src/database/volunteer-manager.php';
-require_once BC_SCHEDULE_PATH . '/src/database/roles-manager.php';
 
 function render_volunteer_add_form() {
     $volunteers_manager = new BCS_Roles_Manager();
@@ -98,13 +96,6 @@ function render_volunteer_add_form() {
                             console.log(this.selectedRoleID);
                         }
 
-                        // filterGroups() {
-                        //     if (this.selectedRole) {
-                        //         this.filteredGroups = [...new Set(this.data.filter(item => item.role === this.selectedRole).map(item => item.group))];
-                        //     } else {
-                        //         this.filteredGroups = this.groups;
-                        //     }
-                        // }
                     };
                 }
             </script>

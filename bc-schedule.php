@@ -34,7 +34,8 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
     wp_enqueue_script(
         'alpine-js', 
         'https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js', 
-        array(), 
+        // 'https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/dist/alpine.min.js', 
+        // array(), 
         null, 
         true
     );

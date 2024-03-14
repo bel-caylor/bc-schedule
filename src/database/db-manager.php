@@ -4,7 +4,7 @@ class BCS_db_Manager {
 
     public function __construct() {
         global $wpdb;
-        $this->table_name = $wpdb->prefix . 'BCS_volunteers';
+        $this->table_name = $wpdb->prefix . 'bcs_volunteers';
     }
 
     public function delete_row_from_tbl( $row_id, $table_name ) {
