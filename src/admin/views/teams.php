@@ -11,7 +11,7 @@ function render_team_add_form() {
     <div class="wrap">
         <form method="post" action="admin-post.php">
             <?php wp_nonce_field('bcs_nonce'); ?>
-            <input type="hidden" name="action" value="add_team_action">
+            <!-- <input type="hidden" name="action" value="add_team_action"> -->
 
             <!-- Alpine.js app for dropdown boxes. -->
             <div x-data="alpineForm()" x-init="init()">
@@ -75,7 +75,7 @@ function render_team_add_form() {
                     </tbody>
                 </table>
                 <input type="hidden" name="selected_volunteers" :value="JSON.stringify(selectedVolunteers)">
-                <input type="submit" name="add_team" value="Add Team" x-show="Object.keys(selectedVolunteers).length > 0">
+                <input type="submit" :name="submitName" :value="submitText" x-show="Object.keys(selectedVolunteers).length > 0">
             </div>
 
             <script>
@@ -95,6 +95,8 @@ function render_team_add_form() {
                         allTeams: [],
                         allVolunteers: [],
                         uniqueGroups: [],
+                        submitText: 'Add Team',
+                        submitName: 'add_team',
 
                         init() {
                             this.allRoles = roles;
@@ -133,6 +135,8 @@ function render_team_add_form() {
                         },
 
                         displaySelectTeam() {
+                            this.submitText = "Edit Team"
+                            this.submitName = "edit_team"
                             const team = this.allTeams.find(item => item.id === this.selectedTeamID);
                             if (team) {
                                 this.teamName = team.name;
