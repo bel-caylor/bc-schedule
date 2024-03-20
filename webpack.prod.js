@@ -8,7 +8,7 @@ module.exports = [
     {
     mode: 'production',
     entry: {
-      'main': ['./js/index.js', './scss/stylesheet.scss']
+      'admin': ['./js/index.js', './scss/stylesheet.scss']
     },
     output: {
       filename: './dist/[name].min.js',
