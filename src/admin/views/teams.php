@@ -152,6 +152,7 @@ function render_team_add_form() {
                                         const volunteerID = teamVolunteers[item.roleID].volunteerID;
                                         item.selectedVolunteer = volunteerID;
                                     }
+                                    this.selectedVolunteers[item.roleID].volunteerID = teamVolunteers[item.roleID].volunteerID;
                                 });
                             }
 

@@ -32,7 +32,6 @@ function BCS_form_submission_handler() {
         $volunteers_manager = new BCS_Volunteers_Manager();
         // Verify the nonce
         check_admin_referer('bcs_nonce');
-
         // Sanitize and validate input
         $group_name = sanitize_text_field($_POST['group-select']);
         $role_id = sanitize_text_field($_POST['role-select-id']);
@@ -40,9 +39,8 @@ function BCS_form_submission_handler() {
 
         // Loop through $volunteers
         foreach ($volunteers as $volunteer) {
-            // var_dump($volunteer);
             // Insert data into your custom table (wp_BCS_volunteers) only if the combination doesn't exist
-            $volunteers_manager->insert_volunteer( $volunteer, $role_id );
+            $result = $volunteers_manager->insert_volunteer( $volunteer, $role_id );
         }
 
         wp_safe_redirect(admin_url('admin.php?page=volunteer-schedule&tab=volunteers&message=success'));

@@ -56,7 +56,7 @@ function render_volunteer_add_form() {
 
 
             <script>
-                const data = <?php echo json_encode($all_roles_data); ?>;
+                // const data = <?php echo json_encode($all_roles_data); ?>;
                 function dropdown() {
                     return {
                         selectedGroup: '',
@@ -70,11 +70,11 @@ function render_volunteer_add_form() {
 
                         init() {
                             // Your data (replace with your actual data)
-                            const data = data;
-                            this.data = data;
+                            // const data = data;
+                            this.data = <?php echo json_encode($all_roles_data); ?>;;
                             // Populate unique groups and roles
-                            this.groups = [...new Set(data.map(item => item.group))];
-                            this.roles = [...new Set(data.map(item => item.role))];
+                            this.groups = [...new Set(this.data.map(item => item.group))];
+                            this.roles = [...new Set(this.data.map(item => item.role))];
 
                             // Initialize filtered roles and groups
                             this.filteredRoles = this.roles;
@@ -91,7 +91,7 @@ function render_volunteer_add_form() {
 
                         setSelectedRoleID() {
                             // Find the row that matches selectedGroup and selectedRole
-                            const matchingUser = data.find(item => item.group === this.selectedGroup && item.role === this.selectedRole);
+                            const matchingUser = this.data.find(item => item.group === this.selectedGroup && item.role === this.selectedRole);
                             this.selectedRoleID = matchingUser['id']
                             console.log(this.selectedRoleID);
                         }
