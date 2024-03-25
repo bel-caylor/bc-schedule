@@ -52,25 +52,29 @@ function render_schedule_admin_table() {
                                     <!-- Detail -->
                                     <template x-for="event in events">
                                         <td x-data-event-id="event.id" x-data-role="role">
-                                            <div>Volunteer</div>
-                                            <div x-text="schedule[group][role][event.id]?.first_name ? schedule[group][role][event.id].first_name : 'Not Assigned'"></div>
-                                            <!-- <div x-text="schedule[group][role][event.id][first_name]"></div> -->
-                                            <!-- <template x-if="schedule[group][role.role_name][event.id].first_name">
-                                            </template> -->
-                                            <!-- <template x-if="schedule[group][role.role][event.id].first_name">
-                                                <div x-text="schedule[group][role.role][event.id].first_name"></div>
-                                            </template> -->
-                                            <!-- <select>
-                                                <option value="">Select Volunteer</option>
-                                                <template x-for="volunteer in Object.keys(schedule[allVolunteers][group][role])">
-                                                    <option :value="volunteer.id" x-text="volunteer.display_name"></option>
-                                                </template>
-                                            </select> -->
+                                            <!-- Selected Volunteer -->
+                                            <div x-show="schedule[group][role][event.id]?.first_name  && schedule[group][role][event.id].edit == false ">
+                                                <span x-text="schedule[group][role][event.id]?.first_name ? schedule[group][role][event.id].first_name : ''"></span>
+                                                <button class="dashicons dashicons-edit" @click="schedule[group][role][event.id].edit = true;"></button>
+                                                <!-- <button class="dashicons dashicons-edit" @click="console.log('Test')"></button> -->
+                                            </div>
+                                            <!-- Voluteer Dropdown -->
+                                            <div x-show="!schedule[group][role][event.id]?.first_name || schedule[group][role][event.id].edit == true ">
+                                                <select x-model="schedule[group][role][event.id].selectedVolunteer" x-data-event-id="event.id" x-data-role="role">
+                                                    <option value="">Select Volunteer</option>
+                                                    <template x-for="volunteer in Object.keys(allVolunteers[group][role])" :key="volunteer">
+                                                    <option :value="volunteer" x-text="allVolunteers[group][role][volunteer].display_name"></option>
+                                                    </template>
+                                                </select>
+                                                <span x-show="schedule[group][role][event.id]?.selectedVolunteer !== ''" 
+                                                      @click="saveVolunteer( schedule[group][role][event.id].schedule_id, schedule[group][role][event.id].selectedVolunteer, group, role, event.id )" 
+                                                      class="dashicons dashicons-saved">
+                                                </span>
+                                            </div>
+
                                         </td>
                                     </template>
-                                    <!-- <template x-for="volunteer in Object.keys(schedule[group][role])" :key="volunteer">
-                                        <td x-text="schedule[group][role][volunteer].first_name" x-data-schedule-id="schedule[group][role][volunteer].schedule_id"  class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"></td> -->
-                                </tr>
+                                 </tr>
                             </template>
                         </tbody>
                     </template>
@@ -92,23 +96,40 @@ function render_schedule_admin_table() {
                     this.events = <?php echo json_encode($all_events); ?>;
                     this.schedule = <?php echo json_encode($all_schedule_roles); ?>;
                     this.allVolunteers = <?php echo json_encode($all_volunteers_data); ?>;
+                },
 
-                    // Add console.log to check data
-                    // console.log("Checking schedule data:");
-                    // for (const group in this.schedule) {
-                    //     for (const role in this.schedule[group]) {
-                    //         for (const event of this.events) {
-                    //         const eventId = event.id;
-                    //         const firstName = this.schedule[group][role]?.[eventId]?.first_name;
-                    //         console.log(`group: ${group}, role: ${role}, event id: ${eventId}, first_name:`, firstName);
-                    //         }
-                    //     }
-                    // }
+                saveVolunteer( scheduleID, selectedVolunteer, group, role, eventID ) {
+                    // Prepare data to send
+                    const data = {
+                        schedule_id: scheduleID,
+                        volunteer_id: selectedVolunteer,
+                    };
+
+                    // Fetch API with error handling
+                    fetch('/wp-json/bcs/v1/save-volunteer-to-event-role', {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                        console.error('Error saving volunteer:', response.statusText);
+                        return;
+                        }
+                        // Handle successful response (e.g., update UI)
+                        console.log('Volunteer saved successfully!');
+                        this.schedule[group][role][eventID].display_name = this.allVolunteers[group][role][selectedVolunteer].display_name;
+                        this.schedule[group][role][eventID].user_email = this.allVolunteers[group][role][selectedVolunteer].user_email;
+                        this.schedule[group][role][eventID].first_name = this.allVolunteers[group][role][selectedVolunteer].first_name;
+                        this.schedule[group][role][eventID].edit = false; 
+
+                    })
+                    .catch(error => {
+                        console.error('Error saving volunteer:', error);
+                    });
                 }
-
-                // eventColName(event) {
-                //     return event.data + '<br>' + event.name;
-                // }
             }
         }
     </script>

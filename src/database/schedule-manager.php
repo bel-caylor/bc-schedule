@@ -102,14 +102,19 @@ class BCS_Schedule_Manager {
             foreach ($roles_by_group as $role) {
                 //Get Volunteers
                 $volunteers = $wpdb->get_results( "
-                    SELECT v.wp_user_id, u.display_name, r.group_name, r.role, v.id
+                    SELECT v.wp_user_id, u.display_name, u.user_email, r.group_name, r.role, v.id,
+                    COALESCE(m.meta_value, '') AS first_name
                     FROM {$wpdb->prefix}bcs_volunteers v
                     JOIN {$wpdb->prefix}users u ON v.wp_user_id = u.ID
                     JOIN {$wpdb->prefix}bcs_roles r ON v.role_id = r.id
+                    LEFT JOIN {$wpdb->prefix}usermeta m ON u.ID = m.user_id AND m.meta_key = 'first_name'
                     WHERE v.role_id = '$role->id'; 
                     " );
                 // Handle potential empty results from the schedule query
-                $data["allVolunteers"][$group->group_name][$role->role_name] = $volunteers ? $volunteers : [];
+                // $data["allVolunteers"][$group->group_name][$role->role_name] = $volunteers ? $volunteers : [];
+                foreach ($volunteers as $volunteer) {    
+                    $data["allVolunteers"][$group->group_name][$role->role_name][$volunteer->id] = $volunteer ? $volunteer : [];
+                }
 
                 //GET Schedule
                 $schedule = $wpdb->get_results ( "
@@ -125,9 +130,25 @@ class BCS_Schedule_Manager {
                     ");
                 foreach ($schedule as $schedule_row) {    
                     $data["schedule"][$group->group_name][$role->role_name][$schedule_row->event_id] = $schedule_row;
+                    $data["schedule"][$group->group_name][$role->role_name][$schedule_row->event_id]->selectedVolunteer = '';
+                    $data["schedule"][$group->group_name][$role->role_name][$schedule_row->event_id]->edit = false;
                 }
             }
         }
         return $data;
+    }
+
+    public function save_volunteer( $schedule_id, $volunteer_id ) {
+        global $wpdb;
+
+        $result = $wpdb->update(
+            $this->schedule_table,
+            array(
+                'volunteer_id' => $volunteer_id,
+            ),
+            array(
+                'id' => $schedule_id,
+            )
+        );
     }
 }
