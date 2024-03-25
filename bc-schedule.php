@@ -14,10 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'BC_SCHEDULE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BC_SCHEDULE_URL', plugin_dir_url(__FILE__) );
 
-require_once BC_SCHEDULE_PATH . '/src/database/table-setup.php';
 require_once BC_SCHEDULE_PATH . '/src/database/api/routes.php';
 require_once BC_SCHEDULE_PATH . 'admin-functions.php';
 require_once BC_SCHEDULE_PATH . '/src/frontend/form_handler.php';
+
+register_activation_hook(__FILE__, 'bc_schedule_create_tables');
+
+function bc_schedule_create_tables() {
+    require_once BC_SCHEDULE_PATH . '/src/database/table-setup.php';
+}
 
 /**
  * Enqueue scripts and styles for the admin area

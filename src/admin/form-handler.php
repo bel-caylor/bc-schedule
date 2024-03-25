@@ -77,9 +77,6 @@ function BCS_form_submission_handler() {
 
     //** Edit team **//
     if (isset($_POST['edit_team'])) {
-        echo '<pre>';
-        var_dump($_POST);
-        echo '</pre>';
         $selected_volunteers_json = stripslashes($_POST['selected_volunteers']);
         // Verify the nonce
         check_admin_referer('bcs_nonce');
@@ -89,10 +86,6 @@ function BCS_form_submission_handler() {
         $group_name = sanitize_text_field($_POST['group-select']);
         $team_name = sanitize_text_field($_POST['team']);
         $volunteers = sanitize_text_field($selected_volunteers_json);
-        
-        //Delete team from table.
-        // $db_manager = new BCS_db_Manager();
-        // $db_manager->delete_row_from_tbl( $team_id , 'wp_bcs_teams');
         
         $teams_manager = new BCS_Teams_Manager();
         // Insert data into wp_bcs_teams only if the combination doesn't exist
@@ -107,6 +100,30 @@ function BCS_form_submission_handler() {
             exit;
         } else {
             wp_safe_redirect(admin_url('admin.php?page=volunteer-schedule&tab=teams&message=duplicate'));
+            exit;
+        }
+    }
+
+    //** Schedule team **//
+    if (isset($_POST['add_schedule'])) {
+        $event_date = sanitize_text_field($_POST['event-date']);
+        $event_name = sanitize_text_field($_POST['event-name']);
+        $group_name = sanitize_text_field($_POST['group-select']);
+        $team_id = sanitize_text_field($_POST['team-select']);
+        
+        $schedule_manager = new BCS_Schedule_Manager();
+        // Insert data into wp_bcs_events & wp_bcs_scheule only if the combination doesn't exist
+        $result = $schedule_manager->insert_schedule_date( $event_date, $event_name, $group_name, $team_id );
+        if ($result) {
+            // Redirect to the specified page
+            wp_safe_redirect(admin_url('admin.php?page=volunteer-schedule&tab=events&message=success'));
+            exit;
+        } elseif ($result == 'duplicate'){
+            // Combination already exists, handle accordingly (e.g., display an error message)
+            wp_safe_redirect(admin_url('admin.php?page=volunteer-schedule&tab=events&message=duplicate'));
+            exit;
+        } else {
+            wp_safe_redirect(admin_url('admin.php?page=volunteer-schedule&tab=events&message=error'));
             exit;
         }
     }

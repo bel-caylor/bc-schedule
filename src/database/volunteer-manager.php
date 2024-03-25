@@ -13,7 +13,7 @@ class BCS_Volunteers_Manager {
 
         $existing_row = $wpdb->get_row(
             $wpdb->prepare(
-                "SELECT * FROM $this->table_name WHERE role_id = %s AND wp_user_id = %s",
+                "SELECT * FROM $this->table_name WHERE role_id = %s AND {$wpdb->prefix}user_id = %s",
                 $role_id ,
                 $volunteer_id
             )
@@ -23,7 +23,7 @@ class BCS_Volunteers_Manager {
                 $this->table_name,
                 array(
                     'role_id'   => $role_id,
-                    'wp_user_id'=> $volunteer_id,
+                    '{$wpdb->prefix}user_id'=> $volunteer_id,
                 )
             );
         } else {
@@ -36,17 +36,17 @@ class BCS_Volunteers_Manager {
         global $wpdb;
         return $wpdb->get_results( "
             SELECT
-                wp_BCS_volunteers.wp_user_id,
-                wp_users.display_name,
-                wp_BCS_roles.group_name,
-                wp_BCS_roles.role,
-                wp_BCS_volunteers.id
+                {$wpdb->prefix}BCS_volunteers.{$wpdb->prefix}user_id,
+                {$wpdb->prefix}users.display_name,
+                {$wpdb->prefix}BCS_roles.group_name,
+                {$wpdb->prefix}BCS_roles.role,
+                {$wpdb->prefix}BCS_volunteers.id
             FROM
-                wp_BCS_volunteers
+                {$wpdb->prefix}BCS_volunteers
             JOIN
-                wp_users ON wp_BCS_volunteers.wp_user_id = wp_users.ID
+                {$wpdb->prefix}users ON {$wpdb->prefix}BCS_volunteers.{$wpdb->prefix}user_id = {$wpdb->prefix}users.ID
             JOIN
-                wp_BCS_roles ON wp_BCS_volunteers.role_id = wp_BCS_roles.id;
+                {$wpdb->prefix}BCS_roles ON {$wpdb->prefix}BCS_volunteers.role_id = {$wpdb->prefix}BCS_roles.id;
 
         " );
     }

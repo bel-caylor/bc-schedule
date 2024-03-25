@@ -1,5 +1,6 @@
 <?php
 require_once BC_SCHEDULE_PATH . '/src/database/roles-manager.php';
+require_once BC_SCHEDULE_PATH . '/src/database/api/delete_role.php';
 
 function render_roles_add_form() {
     ?>

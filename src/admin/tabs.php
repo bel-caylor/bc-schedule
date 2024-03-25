@@ -1,13 +1,11 @@
 <?php
+require_once BC_SCHEDULE_PATH . '/src/admin/views/schedule.php';
+require_once BC_SCHEDULE_PATH . '/src/admin/views/event.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/views/roles.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/views/volunteer.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/views/teams.php';
-require_once BC_SCHEDULE_PATH . '/src/database/teams-manager.php';
-require_once BC_SCHEDULE_PATH . '/src/database/db-manager.php';
-require_once BC_SCHEDULE_PATH . '/src/database/volunteer-manager.php';
-require_once BC_SCHEDULE_PATH . '/src/database/roles-manager.php';
-require_once BC_SCHEDULE_PATH . '/src/database/api/delete_role.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/message.php';
+require_once BC_SCHEDULE_PATH . '/src/database/db-manager.php';
 
 // Add admin page to the menu
 add_action('admin_menu', 'add_schedule_admin_page');
@@ -50,6 +48,7 @@ function render_schedule_admin_page() {
         <a href="?page=volunteer-schedule&tab=roles" class="nav-tab <?php if ($tab === 'roles') : ?>nav-tab-active<?php endif; ?>">Roles</a>
         <a href="?page=volunteer-schedule&tab=volunteers" class="nav-tab <?php if ($tab === 'volunteers') : ?>nav-tab-active<?php endif; ?>">Volunteers</a>
         <a href="?page=volunteer-schedule&tab=teams" class="nav-tab <?php if ($tab === 'teams') : ?>nav-tab-active<?php endif; ?>">Teams</a>
+        <a href="?page=volunteer-schedule&tab=events" class="nav-tab <?php if ($tab === 'events') : ?>nav-tab-active<?php endif; ?>">Events</a>
     </nav>
                 
     <div class="tab-content">
@@ -70,8 +69,11 @@ function render_schedule_admin_page() {
                 render_team_add_form();
                 // render_team_admin_table();
                 break;
+            case 'events':
+                render_schedule_add_form();
+                break;
             default:
-                echo 'Schedule'; // Put your HTML here
+                render_schedule_admin_table();
                 break;
         }
         ?>
