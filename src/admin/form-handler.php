@@ -42,7 +42,6 @@ function BCS_form_submission_handler() {
             // Insert data into your custom table (wp_BCS_volunteers) only if the combination doesn't exist
             $result = $volunteers_manager->insert_volunteer( $volunteer, $role_id );
         }
-
         wp_safe_redirect(admin_url('admin.php?page=volunteer-schedule&tab=volunteers&message=success'));
         exit;
     }

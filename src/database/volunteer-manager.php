@@ -13,7 +13,7 @@ class BCS_Volunteers_Manager {
 
         $existing_row = $wpdb->get_row(
             $wpdb->prepare(
-                "SELECT * FROM $this->table_name WHERE role_id = %s AND {$wpdb->prefix}user_id = %s",
+                "SELECT * FROM $this->table_name WHERE role_id = %s AND wp_user_id = %s",
                 $role_id ,
                 $volunteer_id
             )
@@ -23,12 +23,13 @@ class BCS_Volunteers_Manager {
                 $this->table_name,
                 array(
                     'role_id'   => $role_id,
-                    '{$wpdb->prefix}user_id'=> $volunteer_id,
+                    'wp_user_id'=> $volunteer_id,
                 )
             );
         } else {
             return 'duplicate';
         }
+        
         return $result;
     }
 
