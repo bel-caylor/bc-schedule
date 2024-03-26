@@ -69,3 +69,17 @@ function enqueue_bcs_frontend_scripts() {
     wp_localize_script('bcs-frontend', 'bcs_frontend_data', $bcs_frontend_data);
 }
 add_action('wp_enqueue_scripts', 'enqueue_bcs_frontend_scripts');
+
+/**
+ * Create role for volunteer.
+ */
+function create_volunteer_role() {
+    add_role(
+      'volunteer',
+      array(
+        // Define capabilities for the Volunteer role here
+      )
+    );
+  }
+  
+  add_action( 'init', 'create_volunteer_role' );

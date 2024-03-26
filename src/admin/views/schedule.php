@@ -11,76 +11,91 @@ function render_schedule_admin_table() {
     $schedule_manager = new BCS_Schedule_Manager();
     $all_schedule = $schedule_manager->get_schedule();
     $all_events = $all_schedule['events'];
-    $all_schedule_roles = $all_schedule['schedule'];
-    // $all_roles = $all_schedule['allRoles'];
-    $all_volunteers_data = $all_schedule['allVolunteers'];
     // echo '<pre>';
-    // var_dump($all_volunteers_data);
+    // var_dump($all_events);
     // echo '</pre>';
-
-    // Display volunteer in an HTML table
-    echo '<div class="wrap">';
-    echo '<h1>Manage schedule</h1>';
-    ?>
-    <div x-data="table()" x-init="init()">
-        <div class="px-4 sm:px-6 lg:px-8">
-            <div class="mt-8 flow-root">
-            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <table class="min-w-full">
-                    <thead class="bg-white">
-                        <tr>
-                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">Role</th>
-                            <template x-for="event in events">
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                    <div x-text="event.date"></div>
-                                    <div x-text="event.name"></div>
-                                </th>
-                            </template>
-                        </tr>
-                    </thead>
-                    <template x-for="group in Object.keys(schedule)" :key="group">
-                        <tbody class="bg-white">
-                            <tr class="border-t border-gray-200">
-                                <th colspan="5" scope="colgroup" class="bg-gray-50 py-2 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3" x-text="group"></th>
-                            </tr>
-                            <!-- Row -->
-                            <template x-for="role in Object.keys(schedule[group])" :key="role">
-                            <!-- <template x-for="role in schedule[group]"> -->
-                                <tr>
-                                    <td x-text="role" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"></td>
-                                    <!-- Detail -->
-                                    <template x-for="event in events">
-                                        <td x-data-event-id="event.id" x-data-role="role">
-                                            <!-- Selected Volunteer -->
-                                            <div x-show="schedule[group][role][event.id]?.first_name  && schedule[group][role][event.id].edit == false ">
-                                                <span x-bind:class="{'bg-pink-50': isDuplicateVolunteer( schedule[group][role][event.id].volunteer_id, event.id, role, schedule[group][role][event.id].wp_user_id ) }" 
-                                                      x-text="schedule[group][role][event.id]?.first_name ? schedule[group][role][event.id].first_name : ''"></span>
-                                                <button class="dashicons dashicons-edit text-blue-400" @click="schedule[group][role][event.id].edit = true;"></button>
-                                            </div>
-                                            <!-- Voluteer Dropdown -->
-                                            <div x-show="!schedule[group][role][event.id]?.first_name || schedule[group][role][event.id].edit == true ">
-                                                <select x-model="schedule[group][role][event.id].selectedVolunteer" x-data-event-id="event.id" x-data-role="role">
-                                                    <option value="">Select Volunteer</option>
-                                                    <template x-for="volunteer in Object.keys(allVolunteers[group][role])" :key="volunteer">
-                                                    <option :value="volunteer" x-text="allVolunteers[group][role][volunteer].display_name"></option>
-                                                    </template>
-                                                </select>
-                                                <span x-show="schedule[group][role][event.id]?.selectedVolunteer !== ''" 
-                                                      @click="saveVolunteer( schedule[group][role][event.id].schedule_id, schedule[group][role][event.id].selectedVolunteer, group, role, event.id )" 
-                                                      class="dashicons dashicons-saved text-blue-400">
-                                                </span>
-                                            </div>
-
-                                        </td>
-                                    </template>
-                                 </tr>
-                            </template>
-                        </tbody>
-                    </template>
-                </table>
-                </div>
+    
+    if ($all_events) {
+        $all_schedule_roles = $all_schedule['schedule'];
+        $all_volunteers_data = $all_schedule['allVolunteers'];
+        render_table();
+    } else {
+        ?>
+            <div class="wrap">
+                <h1>Welcome to Your Team Schedule</h1>
+                <p>Start by adding Roles, Volunteers, Teams and Events.</p>
             </div>
+        <?php
+    }
+
+}
+
+
+function render_table() {
+    ?>
+    // Display volunteer in an HTML table
+    ?>
+    <div class="wrap">
+        <h1>Manage schedule</h1>
+        <div x-data="table()" x-init="init()">
+            <div class="px-4 sm:px-6 lg:px-8">
+                <div class="mt-8 flow-root">
+                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="min-w-full">
+                        <thead class="bg-white">
+                            <tr>
+                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">Role</th>
+                                <template x-for="event in events">
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        <div x-text="event.date"></div>
+                                        <div x-text="event.name"></div>
+                                    </th>
+                                </template>
+                            </tr>
+                        </thead>
+                        <template x-for="group in Object.keys(schedule)" :key="group">
+                            <tbody class="bg-white">
+                                <tr class="border-t border-gray-200">
+                                    <th colspan="5" scope="colgroup" class="bg-gray-50 py-2 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3" x-text="group"></th>
+                                </tr>
+                                <!-- Row -->
+                                <template x-for="role in Object.keys(schedule[group])" :key="role">
+                                <!-- <template x-for="role in schedule[group]"> -->
+                                    <tr>
+                                        <td x-text="role" class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"></td>
+                                        <!-- Detail -->
+                                        <template x-for="event in events">
+                                            <td x-data-event-id="event.id" x-data-role="role">
+                                                <!-- Selected Volunteer -->
+                                                <div x-show="schedule[group][role][event.id]?.first_name  && schedule[group][role][event.id].edit == false ">
+                                                    <span x-bind:class="{'bg-pink-50': isDuplicateVolunteer( schedule[group][role][event.id].volunteer_id, event.id, role, schedule[group][role][event.id].wp_user_id ) }" 
+                                                        x-text="schedule[group][role][event.id]?.first_name ? schedule[group][role][event.id].first_name : ''"></span>
+                                                    <button class="dashicons dashicons-edit text-blue-400" @click="schedule[group][role][event.id].edit = true;"></button>
+                                                </div>
+                                                <!-- Voluteer Dropdown -->
+                                                <div x-show="!schedule[group][role][event.id]?.first_name || schedule[group][role][event.id].edit == true ">
+                                                    <select x-model="schedule[group][role][event.id].selectedVolunteer" x-data-event-id="event.id" x-data-role="role">
+                                                        <option value="">Select Volunteer</option>
+                                                        <template x-for="volunteer in Object.keys(allVolunteers[group][role])" :key="volunteer">
+                                                        <option :value="volunteer" x-text="allVolunteers[group][role][volunteer].display_name"></option>
+                                                        </template>
+                                                    </select>
+                                                    <span x-show="schedule[group][role][event.id]?.selectedVolunteer !== ''" 
+                                                        @click="saveVolunteer( schedule[group][role][event.id].schedule_id, schedule[group][role][event.id].selectedVolunteer, group, role, event.id )" 
+                                                        class="dashicons dashicons-saved text-blue-400">
+                                                    </span>
+                                                </div>
+
+                                            </td>
+                                        </template>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </template>
+                    </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

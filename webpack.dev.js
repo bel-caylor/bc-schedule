@@ -48,7 +48,7 @@ module.exports = {
     }),
     new BrowserSyncPlugin(
       {
-        proxy: 'http://hope-church.local/wp-admin/', // Point to your local WordPress site
+        proxy: 'https://hopeisreal.localdev/wp-admin/', // Point to your local WordPress site
         files: ["**/*.php", "**/*.css", "**/*.js"],
       },
       {
