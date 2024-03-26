@@ -54,9 +54,9 @@ function render_schedule_admin_table() {
                                         <td x-data-event-id="event.id" x-data-role="role">
                                             <!-- Selected Volunteer -->
                                             <div x-show="schedule[group][role][event.id]?.first_name  && schedule[group][role][event.id].edit == false ">
-                                                <span x-text="schedule[group][role][event.id]?.first_name ? schedule[group][role][event.id].first_name : ''"></span>
-                                                <button class="dashicons dashicons-edit" @click="schedule[group][role][event.id].edit = true;"></button>
-                                                <!-- <button class="dashicons dashicons-edit" @click="console.log('Test')"></button> -->
+                                                <span x-bind:class="{'bg-pink-50': isDuplicateVolunteer( schedule[group][role][event.id].volunteer_id, event.id, role, schedule[group][role][event.id].wp_user_id ) }" 
+                                                      x-text="schedule[group][role][event.id]?.first_name ? schedule[group][role][event.id].first_name : ''"></span>
+                                                <button class="dashicons dashicons-edit text-blue-600" @click="schedule[group][role][event.id].edit = true;"></button>
                                             </div>
                                             <!-- Voluteer Dropdown -->
                                             <div x-show="!schedule[group][role][event.id]?.first_name || schedule[group][role][event.id].edit == true ">
@@ -129,6 +129,24 @@ function render_schedule_admin_table() {
                     .catch(error => {
                         console.error('Error saving volunteer:', error);
                     });
+                },
+
+                isDuplicateVolunteer( volunteerID, eventID, roleInput, userIDInput ) {
+                    var duplicate = false;
+                    //Loop through Groups and Roles and return true if volunteerID is a duplicate.
+                    // console.log('START ' + volunteerID + ' ' + eventID + ' ' + roleInput + ' ' + userIDInput );
+                    for (const group in this.schedule) {
+                        for (const role in this.schedule[group]) {
+                            if (roleInput !== role) {
+                                // console.log('eventID ' + eventID +' -- group ' + group + ' -- role ' + role + ' wp_user_id ' + this.schedule[group][role][eventID].wp_user_id);
+                                    if (userIDInput == this.schedule[group][role][eventID].wp_user_id) {
+                                        duplicate = true;
+                                    }
+                            }
+                        }
+                    }
+                    // console.log('END' );
+                    return duplicate; 
                 }
             }
         }

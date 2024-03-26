@@ -118,7 +118,7 @@ class BCS_Schedule_Manager {
 
                 //GET Schedule
                 $schedule = $wpdb->get_results ( "
-                    SELECT s.id AS schedule_id, s.event_id,
+                    SELECT s.id AS schedule_id, s.event_id, s.volunteer_id, u.ID AS wp_user_id,
                     COALESCE(u.display_name, '') AS display_name,
                     COALESCE(u.user_email, '') AS user_email,
                     COALESCE(m.meta_value, '') AS first_name
