@@ -81,3 +81,27 @@ function render_schedule_add_form() {
     </div>
     <?php
 }
+
+function render_events_table() {
+    global $wpdb;
+    $wp_pre = $wpdb->prefix;
+
+    // Retrieve roles from the database
+    $exclude_date_manager = new BCS_Exclude_Date_Manager();
+    $dates = $exclude_date_manager->get_exclude_dates();
+    echo '<h2 class="text-lg font-bold">Excluded Dates for Volunteers</h2>';
+    echo '<table class="table-admin">';
+    echo '<thead><tr><th>ID</th><th>Date</th><th>Name</th><th>Trash</th></tr></thead>';
+    echo '<tbody>';
+    foreach ($dates as $date) {
+        echo '<tr id="row-' . esc_html($date->id) . '">';
+        echo '<td>' . esc_html($date->id) . '</td>';
+        echo '<td>' . esc_html($date->date) . '</td>';
+        echo '<td>' . esc_html($date->display_name) . '</td>';
+        echo '<td><i class="dashicons dashicons-trash" data-table="' . $wp_pre . 'bcs_exclude_dates" data-row-id="' . esc_html($date->id) . '"></i></td>';
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    echo '</table>';
+    echo '</div>';
+}
