@@ -76,6 +76,7 @@ function render_schedule_admin_page() {
                 break;
             case 'exclude-dates':
                 render_exclude_dates_form();
+                render_exclude_dates_table();
                 break;
             default:
                 render_schedule_admin_table();

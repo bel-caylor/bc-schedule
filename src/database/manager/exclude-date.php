@@ -36,5 +36,16 @@ class BCS_Exclude_Date_Manager {
         global $wpdb;
         return $wpdb->get_results( "SELECT ID, display_name FROM {$wpdb->prefix}users" );
     }
+
+    public function get_exclude_dates() {
+        global $wpdb;
+        return $wpdb->get_results( "
+            SELECT x.id, u.display_name, x.date 
+            FROM {$wpdb->prefix}bcs_exclude_dates x
+            JOIN {$wpdb->prefix}users u ON x.user_id = u.ID
+            WHERE date >= CURDATE()
+            ORDER BY date ASC;
+        " );
+    }
 }
 
