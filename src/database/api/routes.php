@@ -7,6 +7,18 @@ function my_custom_rest_endpoint() {
         'callback' => 'bcs_delete_row_callback',
         // 'permission_callback' => 'my_check_permissions',
     ));
+
+    register_rest_route('bcs/v1', '/process-bcs-add-excluded-dates', array(
+        'methods' => 'POST',
+        'callback' => 'process_bcs_add_excluded_dates_callback',
+        'permission_callback' => '__return_true', // Adjust permissions as needed
+    ));
+
+    register_rest_route('bcs/v1', '/save-volunteer-to-event-role', array(
+        'methods' => 'POST',
+        'callback' => 'process_bcs_save_volunteer_to_event_role',
+        'permission_callback' => '__return_true', // Adjust permissions as needed
+    ));
 }
 add_action('rest_api_init', 'my_custom_rest_endpoint');
 

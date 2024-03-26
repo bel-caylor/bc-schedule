@@ -1,5 +1,5 @@
 <?php
-require_once BC_SCHEDULE_PATH . '/src/database/volunteer-manager.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/volunteer.php';
 
 function render_volunteer_add_form() {
     $volunteers_manager = new BCS_Roles_Manager();

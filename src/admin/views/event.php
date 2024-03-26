@@ -1,7 +1,7 @@
 <?php
-require_once BC_SCHEDULE_PATH . '/src/database/volunteer-manager.php';
-require_once BC_SCHEDULE_PATH . '/src/database/teams-manager.php';
-require_once BC_SCHEDULE_PATH . '/src/database/roles-manager.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/volunteer.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/teams.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/roles.php';
 
 function render_schedule_add_form() {
     $volunteers_manager = new BCS_Roles_Manager();

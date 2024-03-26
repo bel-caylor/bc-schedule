@@ -1,8 +1,8 @@
 <?php
-require_once BC_SCHEDULE_PATH . '/src/database/schedule-manager.php';
-require_once BC_SCHEDULE_PATH . '/src/database/volunteer-manager.php';
-require_once BC_SCHEDULE_PATH . '/src/database/teams-manager.php';
-require_once BC_SCHEDULE_PATH . '/src/database/roles-manager.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/schedule.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/volunteer.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/teams.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/roles.php';
 
 function render_schedule_admin_table() {
     global $wpdb;
@@ -56,7 +56,7 @@ function render_schedule_admin_table() {
                                             <div x-show="schedule[group][role][event.id]?.first_name  && schedule[group][role][event.id].edit == false ">
                                                 <span x-bind:class="{'bg-pink-50': isDuplicateVolunteer( schedule[group][role][event.id].volunteer_id, event.id, role, schedule[group][role][event.id].wp_user_id ) }" 
                                                       x-text="schedule[group][role][event.id]?.first_name ? schedule[group][role][event.id].first_name : ''"></span>
-                                                <button class="dashicons dashicons-edit text-blue-600" @click="schedule[group][role][event.id].edit = true;"></button>
+                                                <button class="dashicons dashicons-edit text-blue-400" @click="schedule[group][role][event.id].edit = true;"></button>
                                             </div>
                                             <!-- Voluteer Dropdown -->
                                             <div x-show="!schedule[group][role][event.id]?.first_name || schedule[group][role][event.id].edit == true ">
@@ -68,7 +68,7 @@ function render_schedule_admin_table() {
                                                 </select>
                                                 <span x-show="schedule[group][role][event.id]?.selectedVolunteer !== ''" 
                                                       @click="saveVolunteer( schedule[group][role][event.id].schedule_id, schedule[group][role][event.id].selectedVolunteer, group, role, event.id )" 
-                                                      class="dashicons dashicons-saved">
+                                                      class="dashicons dashicons-saved text-blue-400">
                                                 </span>
                                             </div>
 

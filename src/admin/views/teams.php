@@ -1,5 +1,5 @@
 <?php
-require_once BC_SCHEDULE_PATH . '/src/database/teams-manager.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/teams.php';
 
 function render_team_add_form() {
     $roles_manager = new BCS_Roles_Manager();

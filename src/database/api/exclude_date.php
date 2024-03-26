@@ -1,27 +1,4 @@
 <?php
-require_once BC_SCHEDULE_PATH . '/src/database/exclude-date-manager.php';
-/**
- * Process the BCS form submission
- */
-
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
-}
-
-add_action('init', 'bcs_create_custom_endpoint');
-
-function bcs_create_custom_endpoint() {
-    register_rest_route('bcs/v1', '/process-bcs-add-excluded-dates', array(
-        'methods' => 'POST',
-        'callback' => 'process_bcs_add_excluded_dates_callback',
-        'permission_callback' => '__return_true', // Adjust permissions as needed
-    ));
-    register_rest_route('bcs/v1', '/save-volunteer-to-event-role', array(
-        'methods' => 'POST',
-        'callback' => 'process_bcs_save_volunteer_to_event_role',
-        'permission_callback' => '__return_true', // Adjust permissions as needed
-    ));
-}
 
 function process_bcs_add_excluded_dates_callback(WP_REST_Request $request) {
     $rawData = file_get_contents('php://input');
@@ -64,24 +41,6 @@ function process_bcs_add_excluded_dates_callback(WP_REST_Request $request) {
             return new WP_REST_Response($result->get_error_messages(), 400); 
         }
     }
-
-    $response = new WP_REST_Response(array('message' => $processed));
-    $response->set_status(200);
-    return $response;
-}
-
-
-function process_bcs_save_volunteer_to_event_role(WP_REST_Request $request) {
-    $rawData = file_get_contents('php://input');
-    $data = json_decode($rawData, true); // Decode JSON into an associative array
-
-    // Access data from the decoded object
-    $schedule_id = $data['schedule_id'];
-    $volunteer_id = $data['volunteer_id'];
-
-    $schedule_manager = new BCS_Schedule_Manager();
-
-    $result = $schedule_manager->save_volunteer( $schedule_id, $volunteer_id );
 
     $response = new WP_REST_Response(array('message' => $processed));
     $response->set_status(200);

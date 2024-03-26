@@ -4,8 +4,9 @@ require_once BC_SCHEDULE_PATH . '/src/admin/views/event.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/views/roles.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/views/volunteer.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/views/teams.php';
+require_once BC_SCHEDULE_PATH . '/src/admin/views/exclude-dates.php';
 require_once BC_SCHEDULE_PATH . '/src/admin/message.php';
-require_once BC_SCHEDULE_PATH . '/src/database/db-manager.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/database.php';
 
 // Add admin page to the menu
 add_action('admin_menu', 'add_schedule_admin_page');
@@ -71,6 +72,9 @@ function render_schedule_admin_page() {
                 break;
             case 'events':
                 render_schedule_add_form();
+                break;
+            case 'exclude-dates':
+                render_exclude_dates_form();
                 break;
             default:
                 render_schedule_admin_table();
