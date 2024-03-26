@@ -50,6 +50,7 @@ function render_schedule_admin_page() {
         <a href="?page=volunteer-schedule&tab=volunteers" class="nav-tab <?php if ($tab === 'volunteers') : ?>nav-tab-active<?php endif; ?>">Volunteers</a>
         <a href="?page=volunteer-schedule&tab=teams" class="nav-tab <?php if ($tab === 'teams') : ?>nav-tab-active<?php endif; ?>">Teams</a>
         <a href="?page=volunteer-schedule&tab=events" class="nav-tab <?php if ($tab === 'events') : ?>nav-tab-active<?php endif; ?>">Events</a>
+        <a href="?page=volunteer-schedule&tab=exclude-dates" class="nav-tab <?php if ($tab === 'exclude-dates') : ?>nav-tab-active<?php endif; ?>">Exclude Dates</a>
     </nav>
                 
     <div class="tab-content">

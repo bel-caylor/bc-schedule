@@ -19,6 +19,12 @@ function my_custom_rest_endpoint() {
         'callback' => 'process_bcs_save_volunteer_to_event_role',
         'permission_callback' => '__return_true', // Adjust permissions as needed
     ));
+
+    register_rest_route('bcs/v1', '/users', array(
+        'methods' => 'GET',
+        'callback' => 'bcs_get_users',
+        'permission_callback' => '__return_true', // Adjust permissions as needed
+    ));
 }
 add_action('rest_api_init', 'my_custom_rest_endpoint');
 

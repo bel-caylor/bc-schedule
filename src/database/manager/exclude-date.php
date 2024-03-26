@@ -31,5 +31,10 @@ class BCS_Exclude_Date_Manager {
         }
         return $result;
     }
+
+    public function get_users() {
+        global $wpdb;
+        return $wpdb->get_results( "SELECT ID, display_name FROM {$wpdb->prefix}users" );
+    }
 }
 
