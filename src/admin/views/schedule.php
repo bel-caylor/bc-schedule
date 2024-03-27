@@ -3,6 +3,7 @@ require_once BC_SCHEDULE_PATH . '/src/database/manager/schedule.php';
 require_once BC_SCHEDULE_PATH . '/src/database/manager/volunteer.php';
 require_once BC_SCHEDULE_PATH . '/src/database/manager/teams.php';
 require_once BC_SCHEDULE_PATH . '/src/database/manager/roles.php';
+require_once BC_SCHEDULE_PATH . '/src/database/api/save_volunteer_to_event_role.php';
 
 function render_schedule_admin_table() {
     global $wpdb;
@@ -114,8 +115,9 @@ function render_schedule_admin_table() {
                         })
                         .then(response => {
                             if (!response.ok) {
-                            console.error('Error saving volunteer:', response.statusText);
-                            return;
+                                console.log(response);
+                                console.error('Error saving volunteer:', response.statusText);
+                                return;
                             }
                             // Handle successful response (e.g., update UI)
                             console.log('Volunteer saved successfully!');
