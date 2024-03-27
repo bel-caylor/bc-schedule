@@ -8,5 +8,6 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  prefix: "bcs-", // Add your prefix here
 }
 

@@ -1,18 +1,22 @@
 .table-admin {
     * {
-        @apply p-2
+        @apply bcs-p-2
     }
     thead {
-        @apply bg-blue-100
+        @apply bcs-bg-blue-100
     }
     tbody > * {
-        @apply border border-gray-300;
+        @apply bcs-border bcs-border-gray-300;
     }
     i.dashicons {
         &:before {
-            @apply top-0 absolute
+            @apply bcs-top-0 bcs-absolute
         }
-        @apply relative
+        @apply bcs-relative
     }
-    @apply table-auto whitespace-nowrap border border-gray-300 bg-white
+    select {
+        @apply bcs-pl-2 bcs-pr-6 bcs-border bcs-border-gray-300
+    }
+
+    @apply bcs-table-auto bcs-whitespace-nowrap bcs-border bcs-border-gray-300 bcs-bg-white
 }

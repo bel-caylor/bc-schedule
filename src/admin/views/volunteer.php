@@ -6,7 +6,7 @@ function render_volunteer_add_form() {
     $all_roles_data = $volunteers_manager->get_roles_data();
     $users = get_users();
     ?>
-    <div class="wrap">
+    <div class="wrap bcs">
         <h1>Add New Volunteer</h1>
         <form method="post" action="admin-post.php">
             <?php wp_nonce_field('bcs_nonce'); ?>
@@ -14,7 +14,7 @@ function render_volunteer_add_form() {
 
             <!-- Alpine.js app for dropdown boxes. -->
             <div x-data="dropdown()" x-init="init()">
-                <div class="flex">
+                <div class="bcs-flex">
                     <!-- Group select -->
                     <div>
                         <label for="group-select">Select a Group:</label>
@@ -27,7 +27,7 @@ function render_volunteer_add_form() {
                     </div>
     
                     <!-- Role select -->
-                    <div class="pl-2" x-show="selectedGroup">
+                    <div class="bcs-pl-2" x-show="selectedGroup">
                         <label for="role-select">Select a Role:</label>
                         <select id="role-select" x-model="selectedRole"  @change="setSelectedRoleID()" name="role-select">
                             <option value="">All Roles</option>
@@ -37,14 +37,14 @@ function render_volunteer_add_form() {
                         </select>
                     </div>
                 </div>
-                <div class="flex my-4" x-show="selectedRole">
+                <div class="bcs-flex bcs-my-4" x-show="selectedRole">
                     <h2 for="volunteers" class="mr-4">Select Volunteers:</h2>
                     <div class="columns-3">
                         <?php
                         foreach ($users as $user) {
                             // Display a checkbox for each user
-                            echo '<label class="flex items-center !pl-0">';
-                            echo '<input type="checkbox" name="volunteers[]" value="' . esc_attr($user->ID) . '" class="mr-2">';
+                            echo '<label class="bcs-flex bcs-items-center !bcs-pl-0">';
+                            echo '<input type="checkbox" name="volunteers[]" value="' . esc_attr($user->ID) . '" class="bcs-mr-2">';
                             echo esc_html($user->display_name);
                             echo '</label>';
                         }

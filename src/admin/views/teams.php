@@ -19,11 +19,11 @@ function render_team_add_form() {
                 <h1 x-show="!selectedGroup && !selectedTeamID">Add/Edit Team</h1>
                 <h1 x-show="selectedGroup  && !selectedTeamID">Add Team</h1>
                 <h1 x-show="selectedTeamID">Edit Team</h1>
-                <div class="flex my-2" x-show="!selectedTeamID">
+                <div class="bcs-flex bcs-my-2" x-show="!selectedTeamID">
 
                     <!-- Group select -->
-                    <div>
-                        <label for="group-select">Add NEW Team:</label>
+                    <div class="bcs-mb-2">
+                        <label for="group-select">Group:</label>
                         <select id="group-select" x-model="selectedGroup" @change="displayTeamRoles()" name="group-select">
                             <option value="">Select Group</option>
                             <template x-for="group in uniqueGroups">
@@ -32,13 +32,13 @@ function render_team_add_form() {
                         </select>
                     </div>
                     <!-- Create new Team -->
-                    <div class="pl-4" x-show="selectedGroup">
-                        <label for="team">Create New Team:</label>
+                    <div class="bcs-pl-4 bcs-pb-2" x-show="selectedGroup">
+                        <label for="team">New Team Name:</label>
                         <input type="text" id="team" name="team" x-model="teamName">
                     </div>
 
                 </div>
-                <h2 class="font-bold mb-2" x-show="!selectedTeamID && !selectedGroup">OR</h2>
+                <h2 class="bcs-font-bold bcs-mb-2" x-show="!selectedTeamID && !selectedGroup">OR</h2>
 
                 <!-- Edit Existing Team -->
                 <div x-show="!selectedGroup  || selectedTeamID">
@@ -52,7 +52,7 @@ function render_team_add_form() {
                 </div>
 
                 <!-- Team Members -->
-                <table class="table-admin my-6" x-show="teamName || selectedTeamID">
+                <table class="table-admin bcs-my-6" x-show="teamName || selectedTeamID">
                     <thead>
                         <tr>
                             <th>Role</th>

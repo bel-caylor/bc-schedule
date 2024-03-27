@@ -1,11 +1,15 @@
 <?php
 
 class BCS_Volunteers_Manager {
-    private $table_name;
+    private $volunteers;
+    private $users;
+    private $roles;
 
     public function __construct() {
         global $wpdb;
-        $this->table_name = $wpdb->prefix . 'bcs_volunteers';
+        $this->volunteers = $wpdb->prefix . 'bcs_volunteers';
+        $this->users = $wpdb->prefix . 'users';
+        $this->roles = $wpdb->prefix . 'bcs_roles';
     }
 
     public function insert_volunteer( $volunteer_id, $role_id ) {
@@ -13,14 +17,14 @@ class BCS_Volunteers_Manager {
 
         $existing_row = $wpdb->get_row(
             $wpdb->prepare(
-                "SELECT * FROM $this->table_name WHERE role_id = %s AND wp_user_id = %s",
+                "SELECT * FROM $this->volunteers WHERE role_id = %s AND wp_user_id = %s",
                 $role_id ,
                 $volunteer_id
             )
         );
         if (!$existing_row) {
             $result = $wpdb->insert(
-                $this->table_name,
+                $this->volunteers,
                 array(
                     'role_id'   => $role_id,
                     'wp_user_id'=> $volunteer_id,
@@ -37,17 +41,17 @@ class BCS_Volunteers_Manager {
         global $wpdb;
         return $wpdb->get_results( "
             SELECT
-                {$wpdb->prefix}BCS_volunteers.{$wpdb->prefix}user_id,
-                {$wpdb->prefix}users.display_name,
-                {$wpdb->prefix}BCS_roles.group_name,
-                {$wpdb->prefix}BCS_roles.role,
-                {$wpdb->prefix}BCS_volunteers.id
+                v.wp_user_id,
+                u.display_name,
+                r.group_name,
+                r.role,
+                v.id
             FROM
-                {$wpdb->prefix}BCS_volunteers
+                $this->volunteers v
             JOIN
-                {$wpdb->prefix}users ON {$wpdb->prefix}BCS_volunteers.{$wpdb->prefix}user_id = {$wpdb->prefix}users.ID
+                $this->users u ON v.wp_user_id = u.ID
             JOIN
-                {$wpdb->prefix}BCS_roles ON {$wpdb->prefix}BCS_volunteers.role_id = {$wpdb->prefix}BCS_roles.id;
+                $this->roles r ON v.role_id = r.id;
 
         " );
     }

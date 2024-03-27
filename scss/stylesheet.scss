@@ -1,13 +1,12 @@
-.bcs {
-    @import 'tailwindcss/base';
-    @import 'tailwindcss/components';
-    @import 'tailwindcss/utilities';
-    
-    @import 'variables';
-    @import 'table';
-    @import 'forms';
-    
-    .dashicons-trash {
-        color: $color-error;
-    }
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import 'variables';
+@import 'table';
+@import 'forms';
+@import 'base';
+
+.dashicons-trash {
+    color: $color-error;
 }
