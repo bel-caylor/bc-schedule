@@ -1,7 +1,8 @@
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./scss/stylesheet.scss ***!
   \*****************************************************************************************************************************************************************************************************************/
-/*
+.bcs {
+  /*
 ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -395,318 +396,610 @@ video {
 [hidden] {
   display: none;
 }
-
-*, ::before, ::after {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position:  ;
-  --tw-gradient-via-position:  ;
-  --tw-gradient-to-position:  ;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
+  *, ::before, ::after {
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x:  ;
+    --tw-pan-y:  ;
+    --tw-pinch-zoom:  ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-gradient-from-position:  ;
+    --tw-gradient-via-position:  ;
+    --tw-gradient-to-position:  ;
+    --tw-ordinal:  ;
+    --tw-slashed-zero:  ;
+    --tw-numeric-figure:  ;
+    --tw-numeric-spacing:  ;
+    --tw-numeric-fraction:  ;
+    --tw-ring-inset:  ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur:  ;
+    --tw-brightness:  ;
+    --tw-contrast:  ;
+    --tw-grayscale:  ;
+    --tw-hue-rotate:  ;
+    --tw-invert:  ;
+    --tw-saturate:  ;
+    --tw-sepia:  ;
+    --tw-drop-shadow:  ;
+    --tw-backdrop-blur:  ;
+    --tw-backdrop-brightness:  ;
+    --tw-backdrop-contrast:  ;
+    --tw-backdrop-grayscale:  ;
+    --tw-backdrop-hue-rotate:  ;
+    --tw-backdrop-invert:  ;
+    --tw-backdrop-opacity:  ;
+    --tw-backdrop-saturate:  ;
+    --tw-backdrop-sepia:  ;
+  }
+  ::backdrop {
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x:  ;
+    --tw-pan-y:  ;
+    --tw-pinch-zoom:  ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-gradient-from-position:  ;
+    --tw-gradient-via-position:  ;
+    --tw-gradient-to-position:  ;
+    --tw-ordinal:  ;
+    --tw-slashed-zero:  ;
+    --tw-numeric-figure:  ;
+    --tw-numeric-spacing:  ;
+    --tw-numeric-fraction:  ;
+    --tw-ring-inset:  ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur:  ;
+    --tw-brightness:  ;
+    --tw-contrast:  ;
+    --tw-grayscale:  ;
+    --tw-hue-rotate:  ;
+    --tw-invert:  ;
+    --tw-saturate:  ;
+    --tw-sepia:  ;
+    --tw-drop-shadow:  ;
+    --tw-backdrop-blur:  ;
+    --tw-backdrop-brightness:  ;
+    --tw-backdrop-contrast:  ;
+    --tw-backdrop-grayscale:  ;
+    --tw-backdrop-hue-rotate:  ;
+    --tw-backdrop-invert:  ;
+    --tw-backdrop-opacity:  ;
+    --tw-backdrop-saturate:  ;
+    --tw-backdrop-sepia:  ;
+  }
+  .-mx-4 {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+  .-my-2 {
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+  }
+  .my-2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .my-4 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .my-6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .\!mb-4 {
+    margin-bottom: 1rem !important;
+  }
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  .mr-2 {
+    margin-right: 0.5rem;
+  }
+  .mr-4 {
+    margin-right: 1rem;
+  }
+  .mt-8 {
+    margin-top: 2rem;
+  }
+  .inline-block {
+    display: inline-block;
+  }
+  .flex {
+    display: flex;
+  }
+  .table {
+    display: table;
+  }
+  .flow-root {
+    display: flow-root;
+  }
+  .hidden {
+    display: none;
+  }
+  .min-w-full {
+    min-width: 100%;
+  }
+  .columns-3 {
+    -moz-columns: 3;
+         columns: 3;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+  .whitespace-nowrap {
+    white-space: nowrap;
+  }
+  .border-t {
+    border-top-width: 1px;
+  }
+  .border-gray-200 {
+    --tw-border-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  }
+  .bg-gray-50 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  }
+  .bg-pink-50 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(253 242 248 / var(--tw-bg-opacity));
+  }
+  .bg-white {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+  .px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+  .py-3\.5 {
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+  }
+  .py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .\!pl-0 {
+    padding-left: 0px !important;
+  }
+  .pb-1 {
+    padding-bottom: 0.25rem;
+  }
+  .pl-2 {
+    padding-left: 0.5rem;
+  }
+  .pl-4 {
+    padding-left: 1rem;
+  }
+  .pr-1 {
+    padding-right: 0.25rem;
+  }
+  .pr-3 {
+    padding-right: 0.75rem;
+  }
+  .pt-10 {
+    padding-top: 2.5rem;
+  }
+  .pt-4 {
+    padding-top: 1rem;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .align-middle {
+    vertical-align: middle;
+  }
+  .text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  .font-bold {
+    font-weight: 700;
+  }
+  .font-medium {
+    font-weight: 500;
+  }
+  .font-semibold {
+    font-weight: 600;
+  }
+  .text-blue-400 {
+    --tw-text-opacity: 1;
+    color: rgb(96 165 250 / var(--tw-text-opacity));
+  }
+  .text-gray-900 {
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+  }
+  .filter {
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  }
 }
-
-::backdrop {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position:  ;
-  --tw-gradient-via-position:  ;
-  --tw-gradient-to-position:  ;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
-}
-.-mx-4 {
-  margin-left: -1rem;
-  margin-right: -1rem;
-}
-.-my-2 {
-  margin-top: -0.5rem;
-  margin-bottom: -0.5rem;
-}
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-.my-6 {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-.mr-2 {
-  margin-right: 0.5rem;
-}
-.mr-4 {
-  margin-right: 1rem;
-}
-.mt-8 {
-  margin-top: 2rem;
-}
-.mb-4 {
-  margin-bottom: 1rem;
-}
-.\!mb-4 {
-  margin-bottom: 1rem !important;
-}
-.inline-block {
-  display: inline-block;
-}
-.flex {
-  display: flex;
-}
-.table {
-  display: table;
-}
-.flow-root {
-  display: flow-root;
-}
-.hidden {
-  display: none;
-}
-.min-w-full {
-  min-width: 100%;
-}
-.columns-3 {
-  -moz-columns: 3;
-       columns: 3;
-}
-.items-center {
-  align-items: center;
-}
-.overflow-x-auto {
-  overflow-x: auto;
-}
-.whitespace-nowrap {
-  white-space: nowrap;
-}
-.border-t {
-  border-top-width: 1px;
-}
-.border-gray-200 {
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
-}
-.bg-gray-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-}
-.bg-pink-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(253 242 248 / var(--tw-bg-opacity));
-}
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-.py-3\.5 {
-  padding-top: 0.875rem;
-  padding-bottom: 0.875rem;
-}
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-.\!pl-0 {
-  padding-left: 0px !important;
-}
-.pl-2 {
-  padding-left: 0.5rem;
-}
-.pl-4 {
-  padding-left: 1rem;
-}
-.pr-3 {
-  padding-right: 0.75rem;
-}
-.pr-2 {
-  padding-right: 0.5rem;
-}
-.pr-1 {
-  padding-right: 0.25rem;
-}
-.pb-4 {
-  padding-bottom: 1rem;
-}
-.pt-4 {
-  padding-top: 1rem;
-}
-.pb-1 {
-  padding-bottom: 0.25rem;
-}
-.pt-10 {
-  padding-top: 2.5rem;
-}
-.text-left {
-  text-align: left;
-}
-.align-middle {
-  vertical-align: middle;
-}
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-.font-bold {
-  font-weight: 700;
-}
-.font-medium {
-  font-weight: 500;
-}
-.font-semibold {
-  font-weight: 600;
-}
-.text-blue-400 {
-  --tw-text-opacity: 1;
-  color: rgb(96 165 250 / var(--tw-text-opacity));
-}
-.text-gray-900 {
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-.filter {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-:root {
-  --color-error: rgb(200, 1, 1);
-}
-
-.table-admin {
+.bcs .table-admin {
   table-layout: auto;
   white-space: nowrap;
-  border-width: 0px;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
-.table-admin * {
-  padding: 0.75rem;
+ {
+  /*
+! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+/*
+Add the correct font size in all browsers.
+*/
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+/*
+Reset default styling for dialogs.
+*/
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+/*
+Set the default cursor for buttons.
+*/
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+  .bcs .table-admin {
+    white-space: nowrap;
+  }
+  /*
+! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+/*
+Add the correct font size in all browsers.
+*/
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+/*
+Reset default styling for dialogs.
+*/
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+/*
+Set the default cursor for buttons.
+*/
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+  .bcs .table-admin {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
 }
-.table-admin thead {
+.bcs .table-admin * {
+  padding: 0.5rem;
+}
+.bcs .table-admin thead {
   --tw-bg-opacity: 1;
   background-color: rgb(219 234 254 / var(--tw-bg-opacity));
 }
-.table-admin tbody > * {
+.bcs .table-admin tbody > * {
   border-width: 1px;
   --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
-.table-admin i.dashicons {
+.bcs .table-admin i.dashicons {
   position: relative;
 }
-.table-admin i.dashicons:before {
+.bcs .table-admin i.dashicons:before {
   position: absolute;
   top: 0px;
 }
-
-form input[type=submit] {
+.bcs form input[type=submit] {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   border-radius: 0.375rem;
@@ -722,30 +1015,493 @@ form input[type=submit] {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
-form label:not(:first-of-type) {
+ {
+  /*
+! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+/*
+Add the correct font size in all browsers.
+*/
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+/*
+Reset default styling for dialogs.
+*/
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+/*
+Set the default cursor for buttons.
+*/
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+  .bcs form input[type=submit] {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  /*
+! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+/*
+Add the correct font size in all browsers.
+*/
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+/*
+Reset default styling for dialogs.
+*/
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+/*
+Set the default cursor for buttons.
+*/
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+  .bcs form input[type=submit] {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+.bcs form label:not(:first-of-type) {
   padding-left: 0.5rem;
 }
-form .columns-3 {
+ {
+  /*
+! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+/*
+Add the correct font size in all browsers.
+*/
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+/*
+Reset default styling for dialogs.
+*/
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+/*
+Set the default cursor for buttons.
+*/
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+  .bcs form label:not(:first-of-type) {
+    padding-left: 0.5rem;
+  }
+}
+.bcs form .columns-3 {
   -moz-columns: 3 auto;
        columns: 3 auto;
 }
 @media (max-width: 767px) {
-  form .columns-3 {
+  .bcs form .columns-3 {
     -moz-columns: 1 auto;
          columns: 1 auto;
   }
 }
 @media (min_width: 1023px) and (max-width: 767px) {
-  form .columns-3 {
+  .bcs form .columns-3 {
     -moz-columns: 2 auto;
          columns: 2 auto;
   }
 }
-
-.dashicons-trash {
-  color: var(--color-error);
+.bcs .dashicons-trash {
+  color: rgb(200, 1, 1);
 }
-
 @media (min-width: 640px) {
 
   .sm\:-mx-6 {
@@ -762,7 +1518,6 @@ form .columns-3 {
     padding-left: 0.75rem;
   }
 }
-
 @media (min-width: 1024px) {
 
   .lg\:-mx-8 {
@@ -776,4 +1531,4 @@ form .columns-3 {
   }
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9kaXN0L3N0eWxlc2hlZXQuY3NzIiwibWFwcGluZ3MiOiI7OztBQUFBOztDQUFBOzs7Q0FBQTs7QUFBQTs7O0VBQUE7RUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7RUFBQTtBQUFBOztBQUFBOzs7Ozs7OztDQUFBOztBQUFBOztFQUFBO0VBQUE7RUFBQTtFQUFBO0tBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7OztDQUFBOztBQUFBO0VBQUE7RUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7RUFBQTtVQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7Ozs7OztFQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7RUFBQTtBQUFBOztBQUFBOzs7OztDQUFBOztBQUFBOzs7O0VBQUE7RUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0VBQUE7RUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTtFQUFBO0FBQUE7O0FBQUE7RUFBQTtBQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7RUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7OztDQUFBOztBQUFBOzs7OztFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBOztDQUFBOztBQUFBOztFQUFBO0FBQUE7O0FBQUE7OztDQUFBOztBQUFBOzs7O0VBQUE7RUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7RUFBQTtBQUFBOztBQUFBOztDQUFBOztBQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0VBQUE7QUFBQTs7QUFBQTs7O0NBQUE7O0FBQUE7RUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7RUFBQTtBQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7Ozs7Ozs7Ozs7Ozs7RUFBQTtBQUFBOztBQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBO0VBQUE7QUFBQTs7QUFBQTs7O0VBQUE7RUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7QUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7RUFBQTtBQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7RUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTtBQUFBO0VBQUE7QUFBQTs7QUFBQTs7OztDQUFBOztBQUFBOzs7Ozs7OztFQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7RUFBQTtFQUFBO0FBQUE7O0FBQUE7QUFBQTtFQUFBO0FBQUE7O0FBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0FBQUE7O0FBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0FBQUE7QUNBQTtFQUFBO0VBQUE7QUFBQTtBQUFBO0VBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBO0VBQUE7QUFBQTtBQUFBO0VBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtPQUFBO0FBQUE7QUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBO0VBQUE7QUFBQTtBQUFBO0VBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBO0VBQUE7QUFBQTtBQUFBO0VBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBO0VBQUE7QUFBQTtBQUFBO0VBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBO0VBQUE7QUFBQTtBQUFBO0VBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBO0VBQUE7QUFBQTtBQUFBO0VBQUE7QUFBQTtBQUFBO0VBQUE7QUFBQTtBQUFBO0VBQUE7QUFBQTtBQUFBO0VBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBO0FBQUE7QUNBQTtFQUNJO0FDSUo7O0FDV0k7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0FBQUE7QUFkSTtFQUFBO0FBQUE7QUFHQTtFQUFBO0VBQUE7QUFBQTtBQUdBO0VBQUE7RUFBQTtFQUFBO0FBQUE7QUFNQTtFQUFBO0FBQUE7QUFGSTtFQUFBO0VBQUE7QUFBQTs7QUNWSjtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7QUFBQTtBQUdBO0VBQUE7QUFBQTtBQUVKO0VBQ0k7T0FBQTtBRjBCUjtBRXpCUTtFQUZKO0lBR1E7U0FBQTtFRjRCVjtBQUNGO0FFM0JRO0VBTEo7SUFNUTtTQUFBO0VGOEJWO0FBQ0Y7O0FBcENBO0VBQ0k7QUF1Q0o7O0FIaERBOztFQUFBO0lBQUEsb0JHZ0RDO0lIaEREO0VHZ0RDOztFSGhERDtJQUFBLG9CR2dEQztJSGhERDtFR2dEQzs7RUhoREQ7SUFBQTtFR2dEQztBQUFBOztBSGhERDs7RUFBQTtJQUFBLGtCR2dEQztJSGhERDtFR2dEQzs7RUhoREQ7SUFBQSxrQkdnREM7SUhoREQ7RUdnREM7QUFBQSxDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vYmMtc2NoZWR1bGUvLi9ub2RlX21vZHVsZXMvdGFpbHdpbmRjc3MvYmFzZS5jc3MiLCJ3ZWJwYWNrOi8vYmMtc2NoZWR1bGUvLi9ub2RlX21vZHVsZXMvdGFpbHdpbmRjc3MvdXRpbGl0aWVzLmNzcyIsIndlYnBhY2s6Ly9iYy1zY2hlZHVsZS8uL3Njc3MvdmFyaWFibGVzLnNjc3MiLCJ3ZWJwYWNrOi8vYmMtc2NoZWR1bGUvLi9zY3NzL3N0eWxlc2hlZXQuc2NzcyIsIndlYnBhY2s6Ly9iYy1zY2hlZHVsZS8uL3Njc3MvdGFibGUuc2NzcyIsIndlYnBhY2s6Ly9iYy1zY2hlZHVsZS8uL3Njc3MvZm9ybXMuc2NzcyJdLCJzb3VyY2VzQ29udGVudCI6WyJAdGFpbHdpbmQgYmFzZTtcbiIsIkB0YWlsd2luZCB1dGlsaXRpZXM7XG4iLCI6cm9vdCB7XHJcbiAgICAtLWNvbG9yLWVycm9yOiByZ2IoMjAwLCAxLCAxKTtcclxufSIsIkBpbXBvcnQgJ3RhaWx3aW5kY3NzL2Jhc2UnO1xyXG5AaW1wb3J0ICd0YWlsd2luZGNzcy9jb21wb25lbnRzJztcclxuQGltcG9ydCAndGFpbHdpbmRjc3MvdXRpbGl0aWVzJztcclxuXHJcbkBpbXBvcnQgJ3ZhcmlhYmxlcyc7XHJcbkBpbXBvcnQgJ3RhYmxlJztcclxuQGltcG9ydCAnZm9ybXMnO1xyXG5cclxuLmRhc2hpY29ucy10cmFzaCB7XHJcbiAgICBjb2xvcjogdmFyKC0tY29sb3ItZXJyb3IpO1xyXG59IiwiLnRhYmxlLWFkbWluIHtcclxuICAgICoge1xyXG4gICAgICAgIEBhcHBseSBwLTNcclxuICAgIH1cclxuICAgIHRoZWFkIHtcclxuICAgICAgICBAYXBwbHkgYmctYmx1ZS0xMDBcclxuICAgIH1cclxuICAgIHRib2R5ID4gKiB7XHJcbiAgICAgICAgQGFwcGx5IGJvcmRlciBib3JkZXItZ3JheS0yMDA7XHJcbiAgICB9XHJcbiAgICBpLmRhc2hpY29ucyB7XHJcbiAgICAgICAgJjpiZWZvcmUge1xyXG4gICAgICAgICAgICBAYXBwbHkgdG9wLTAgYWJzb2x1dGVcclxuICAgICAgICB9XHJcbiAgICAgICAgQGFwcGx5IHJlbGF0aXZlXHJcbiAgICB9XHJcbiAgICBAYXBwbHkgdGFibGUtYXV0byB3aGl0ZXNwYWNlLW5vd3JhcCBib3JkZXItMCBiZy13aGl0ZVxyXG59IiwiZm9ybSB7XHJcbiAgICBpbnB1dFt0eXBlPSdzdWJtaXQnXSB7XHJcbiAgICAgICAgQGFwcGx5IG14LTIgYm9yZGVyIGJvcmRlci1ncmF5LTMwMCBiZy1ibHVlLTYwMCB0ZXh0LXdoaXRlIHB4LTQgcHktMiByb3VuZGVkLW1kXHJcbiAgICB9XHJcbiAgICBsYWJlbDpub3QoOmZpcnN0LW9mLXR5cGUpIHtcclxuICAgICAgICBAYXBwbHkgcGwtMlxyXG4gICAgfVxyXG4gICAgLmNvbHVtbnMtMyB7XHJcbiAgICAgICAgY29sdW1uczogMyBhdXRvO1xyXG4gICAgICAgIEBtZWRpYSAobWF4LXdpZHRoOiA3NjdweCkge1xyXG4gICAgICAgICAgICBjb2x1bW5zOiAxIGF1dG87XHJcbiAgICAgICAgfVxyXG4gICAgICAgIEBtZWRpYSAobWluX3dpZHRoOiAxMDIzcHgpIGFuZCAobWF4LXdpZHRoOiA3NjdweCkge1xyXG4gICAgICAgICAgICBjb2x1bW5zOiAyIGF1dG87XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG59Il0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9*/
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9kaXN0L3N0eWxlc2hlZXQuY3NzIiwibWFwcGluZ3MiOiI7OztBQUFBO0VDQUE7O0NBQUE7OztDQUFBOztBQUFBOzs7RUFBQTtFQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBOztFQUFBO0FBQUE7O0FBQUE7Ozs7Ozs7O0NBQUE7O0FBQUE7O0VBQUE7RUFBQTtFQUFBO0VBQUE7S0FBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0FBQUE7O0FBQUE7OztDQUFBOztBQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7RUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTtFQUFBO1VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Ozs7O0VBQUE7RUFBQTtBQUFBOztBQUFBOztDQUFBOztBQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBOztDQUFBOztBQUFBOztFQUFBO0FBQUE7O0FBQUE7Ozs7O0NBQUE7O0FBQUE7Ozs7RUFBQTtFQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBOztDQUFBOztBQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7RUFBQTtFQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBO0VBQUE7QUFBQTs7QUFBQTtFQUFBO0FBQUE7O0FBQUE7Ozs7Q0FBQTs7QUFBQTtFQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7Ozs7O0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0VBQUE7QUFBQTs7QUFBQTs7O0NBQUE7O0FBQUE7Ozs7RUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTtFQUFBO0FBQUE7O0FBQUE7O0NBQUE7O0FBQUE7RUFBQTtBQUFBOztBQUFBOztDQUFBOztBQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7RUFBQTtBQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTtFQUFBO0FBQUE7O0FBQUE7OztDQUFBOztBQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBOztDQUFBOztBQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Ozs7Ozs7Ozs7OztFQUFBO0FBQUE7O0FBQUE7RUFBQTtFQUFBO0FBQUE7O0FBQUE7RUFBQTtBQUFBOztBQUFBOzs7RUFBQTtFQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTtBQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTtFQUFBO0FBQUE7O0FBQUE7OztDQUFBOztBQUFBO0VBQUE7RUFBQTtBQUFBOztBQUFBOztFQUFBO0VBQUE7QUFBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7RUFBQTtBQUFBOztBQUFBOztDQUFBO0FBQUE7RUFBQTtBQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7Ozs7Ozs7O0VBQUE7RUFBQTtBQUFBOztBQUFBOztDQUFBOztBQUFBOztFQUFBO0VBQUE7QUFBQTs7QUFBQTtBQUFBO0VBQUE7QUFBQTtFQUFBO0lDS1E7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtFRExSO0VBQUE7SUNLUTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0lBQUE7SUFBQTtJQUFBO0VETFI7RUVBQTtJQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtTQUFBO0VBQUE7RUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO0lBQUE7RUFBQTtFQUFBO0lBQUE7SUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0FISUE7QUlZSTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBOztDQUFBOzs7Q0FBQTs7QUFBQTs7Ozs7Ozs7Q0FBQTs7QUFBQTs7O0NBQUE7O0FBQUE7Ozs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Ozs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7OztDQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7OztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7OztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7RUFBQTtJQUFBO0VBQUE7RUFBQTs7Q0FBQTs7O0NBQUE7O0FBQUE7Ozs7Ozs7O0NBQUE7O0FBQUE7OztDQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7Ozs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7Ozs7Q0FBQTs7QUFBQTs7OztDQUFBOztBQUFBOztDQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7OztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7OztDQUFBOztBQUFBOztDQUFBOztBQUFBO0VBQUE7SUFBQTtJQUFBO0VBQUE7QUFBQTtBQWRJO0VBQUE7QUFBQTtBQUdBO0VBQUE7RUFBQTtBQUFBO0FBR0E7RUFBQTtFQUFBO0VBQUE7QUFBQTtBQU1BO0VBQUE7QUFBQTtBQUZJO0VBQUE7RUFBQTtBQUFBO0FGVko7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0FBQUE7QUFBQTtFQUFBOztDQUFBOzs7Q0FBQTs7QUFBQTs7Ozs7Ozs7Q0FBQTs7QUFBQTs7O0NBQUE7O0FBQUE7Ozs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Ozs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7OztDQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7OztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7OztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7RUFBQTtJQUFBO0lBQUE7RUFBQTtFQUFBOztDQUFBOzs7Q0FBQTs7QUFBQTs7Ozs7Ozs7Q0FBQTs7QUFBQTs7O0NBQUE7O0FBQUE7Ozs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Ozs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7OztDQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7OztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7OztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7RUFBQTtJQUFBO0lBQUE7RUFBQTtBQUFBO0FBR0E7RUFBQTtBQUFBO0FBQUE7RUFBQTs7Q0FBQTs7O0NBQUE7O0FBQUE7Ozs7Ozs7O0NBQUE7O0FBQUE7OztDQUFBOztBQUFBOzs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7Ozs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7Ozs7Q0FBQTs7QUFBQTs7OztDQUFBOztBQUFBOztDQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7O0NBQUE7O0FBQUE7O0NBQUE7O0FBQUE7OztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOztDQUFBOztBQUFBOzs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7Q0FBQTs7QUFBQTs7OztDQUFBOztBQUFBOztDQUFBOztBQUFBO0VBQUE7SUFBQTtFQUFBO0FBQUE7QUFFSjtFQUNJO09BQUE7QUZ1QlI7QUV0QlE7RUFGSjtJQUdRO1NBQUE7RUZ5QlY7QUFDRjtBRXhCUTtFQUxKO0lBTVE7U0FBQTtFRjJCVjtBQUNGO0FBaENJO0VBQ0kscUJLVk07QUw0Q2Q7QUE1Q0E7O0VBQUE7SUFBQSxvQkE0Q0M7SUE1Q0Q7RUE0Q0M7O0VBNUNEO0lBQUEsb0JBNENDO0lBNUNEO0VBNENDOztFQTVDRDtJQUFBO0VBNENDO0FBQUE7QUE1Q0Q7O0VBQUE7SUFBQSxrQkE0Q0M7SUE1Q0Q7RUE0Q0M7O0VBNUNEO0lBQUEsa0JBNENDO0lBNUNEO0VBNENDO0FBQUEsQyIsInNvdXJjZXMiOlsid2VicGFjazovL2JjLXNjaGVkdWxlLy4vc2Nzcy9zdHlsZXNoZWV0LnNjc3MiLCJ3ZWJwYWNrOi8vYmMtc2NoZWR1bGUvLi9ub2RlX21vZHVsZXMvdGFpbHdpbmRjc3MvYmFzZS5jc3MiLCJ3ZWJwYWNrOi8vYmMtc2NoZWR1bGUvLi9zY3NzL2Zvcm1zLnNjc3MiLCJ3ZWJwYWNrOi8vYmMtc2NoZWR1bGUvLi9ub2RlX21vZHVsZXMvdGFpbHdpbmRjc3MvdXRpbGl0aWVzLmNzcyIsIndlYnBhY2s6Ly9iYy1zY2hlZHVsZS8uL3Njc3MvdGFibGUuc2NzcyIsIndlYnBhY2s6Ly9iYy1zY2hlZHVsZS8uL3Njc3MvdmFyaWFibGVzLnNjc3MiXSwic291cmNlc0NvbnRlbnQiOlsiLmJjcyB7XHJcbiAgICBAaW1wb3J0ICd0YWlsd2luZGNzcy9iYXNlJztcclxuICAgIEBpbXBvcnQgJ3RhaWx3aW5kY3NzL2NvbXBvbmVudHMnO1xyXG4gICAgQGltcG9ydCAndGFpbHdpbmRjc3MvdXRpbGl0aWVzJztcclxuICAgIFxyXG4gICAgQGltcG9ydCAndmFyaWFibGVzJztcclxuICAgIEBpbXBvcnQgJ3RhYmxlJztcclxuICAgIEBpbXBvcnQgJ2Zvcm1zJztcclxuICAgIFxyXG4gICAgLmRhc2hpY29ucy10cmFzaCB7XHJcbiAgICAgICAgY29sb3I6ICRjb2xvci1lcnJvcjtcclxuICAgIH1cclxufSIsIkB0YWlsd2luZCBiYXNlO1xuIiwiZm9ybSB7XHJcbiAgICBpbnB1dFt0eXBlPSdzdWJtaXQnXSB7XHJcbiAgICAgICAgQGFwcGx5IG14LTIgYm9yZGVyIGJvcmRlci1ncmF5LTMwMCBiZy1ibHVlLTYwMCB0ZXh0LXdoaXRlIHB4LTQgcHktMiByb3VuZGVkLW1kXHJcbiAgICB9XHJcbiAgICBsYWJlbDpub3QoOmZpcnN0LW9mLXR5cGUpIHtcclxuICAgICAgICBAYXBwbHkgcGwtMlxyXG4gICAgfVxyXG4gICAgLmNvbHVtbnMtMyB7XHJcbiAgICAgICAgY29sdW1uczogMyBhdXRvO1xyXG4gICAgICAgIEBtZWRpYSAobWF4LXdpZHRoOiA3NjdweCkge1xyXG4gICAgICAgICAgICBjb2x1bW5zOiAxIGF1dG87XHJcbiAgICAgICAgfVxyXG4gICAgICAgIEBtZWRpYSAobWluX3dpZHRoOiAxMDIzcHgpIGFuZCAobWF4LXdpZHRoOiA3NjdweCkge1xyXG4gICAgICAgICAgICBjb2x1bW5zOiAyIGF1dG87XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG59IiwiQHRhaWx3aW5kIHV0aWxpdGllcztcbiIsIi50YWJsZS1hZG1pbiB7XHJcbiAgICAqIHtcclxuICAgICAgICBAYXBwbHkgcC0yXHJcbiAgICB9XHJcbiAgICB0aGVhZCB7XHJcbiAgICAgICAgQGFwcGx5IGJnLWJsdWUtMTAwXHJcbiAgICB9XHJcbiAgICB0Ym9keSA+ICoge1xyXG4gICAgICAgIEBhcHBseSBib3JkZXIgYm9yZGVyLWdyYXktMzAwO1xyXG4gICAgfVxyXG4gICAgaS5kYXNoaWNvbnMge1xyXG4gICAgICAgICY6YmVmb3JlIHtcclxuICAgICAgICAgICAgQGFwcGx5IHRvcC0wIGFic29sdXRlXHJcbiAgICAgICAgfVxyXG4gICAgICAgIEBhcHBseSByZWxhdGl2ZVxyXG4gICAgfVxyXG4gICAgQGFwcGx5IHRhYmxlLWF1dG8gd2hpdGVzcGFjZS1ub3dyYXAgYm9yZGVyIGJvcmRlci1ncmF5LTMwMCBiZy13aGl0ZVxyXG59IiwiJGNvbG9yLWVycm9yOiByZ2IoMjAwLCAxLCAxKTsiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/

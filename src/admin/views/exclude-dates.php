@@ -5,7 +5,7 @@ require_once BC_SCHEDULE_PATH . '/src/database/api/users.php';
 
 function render_exclude_dates_form() {
     ?>
-    <div class="wrap">
+    <div class="wrap bcs">
         <h1 class="!mb-4">Add Excluded Date for User</h1>
         <!-- Alpine.js app for dropdown boxes. -->
         <div x-data="form()" x-init="init()">

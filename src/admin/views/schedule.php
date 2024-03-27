@@ -19,7 +19,7 @@ function render_schedule_admin_table() {
         $all_schedule_roles = $all_schedule['schedule'];
         $all_volunteers_data = $all_schedule['allVolunteers'];
         ?>
-        <div class="wrap">
+        <div class="wrap bcs">
             <h1>Manage schedule</h1>
             <div x-data="table()" x-init="init()">
                 <div class="px-4 sm:px-6 lg:px-8">

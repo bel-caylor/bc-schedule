@@ -9,7 +9,7 @@ function render_team_add_form() {
     $teams_manager = new BCS_Teams_Manager();
     $all_teams_data = $teams_manager->get_teams();
     ?>
-    <div class="wrap">
+    <div class="wrap bcs">
         <form method="post" action="admin-post.php">
             <?php wp_nonce_field('bcs_nonce'); ?>
             <!-- <input type="hidden" name="action" value="add_team_action"> -->

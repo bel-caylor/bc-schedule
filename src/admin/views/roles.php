@@ -28,7 +28,7 @@ function render_roles_admin_table() {
     $all_roles = $roles_manager->get_roles();
 
     // Display roles in an HTML table
-    echo '<div class="wrap">';
+    echo '<div class="wrap bcs">';
     echo '<h1>Manage Roles</h1>';
     echo '<table class="table-admin">';
     echo '<thead><tr><th>ID</th><th>Group</th><th>Role</th><th>Trash</th></tr></thead>';

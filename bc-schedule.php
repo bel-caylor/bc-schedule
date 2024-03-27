@@ -3,7 +3,7 @@
  * 
  * Plugin Name: Schedule Manager
  * Description: Church Volunteer Schedule.
- * Version: 1.0
+ * Version: 1.1.1
  * Author: Belinda Caylor
 */
 
@@ -31,9 +31,19 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
     wp_enqueue_script(
         'bc-schedule-admin-main',
         BC_SCHEDULE_URL . 'dist/admin.js',
+        // BC_SCHEDULE_URL . 'dist/admin.min.js',
         array(),
-        filemtime( BC_SCHEDULE_PATH . 'dist/admin.js' ),
+        '1.0.0',
         true
+    );
+
+    // Enqueue the bundled CSS file
+    wp_enqueue_style(
+        'bc-schedule-admin-styles',
+        BC_SCHEDULE_URL . 'dist/stylesheet.css',
+        // BC_SCHEDULE_URL . 'dist/stylesheet.min.14c027aa176f61a1061a.css',
+        array(),
+        '1.0.0'
     );
 
     // Enqueue alpine.js
@@ -46,13 +56,6 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
         true
     );
 
-    // Enqueue the bundled CSS file
-    wp_enqueue_style(
-        'bc-schedule-admin-styles',
-        BC_SCHEDULE_URL . 'dist/stylesheet.css',
-        array(),
-        filemtime( BC_SCHEDULE_PATH . 'dist/stylesheet.css' )
-    );
 }
 add_action( 'admin_enqueue_scripts', 'bc_schedule_enqueue_admin_assets' );
 
@@ -69,17 +72,3 @@ function enqueue_bcs_frontend_scripts() {
     wp_localize_script('bcs-frontend', 'bcs_frontend_data', $bcs_frontend_data);
 }
 add_action('wp_enqueue_scripts', 'enqueue_bcs_frontend_scripts');
-
-/**
- * Create role for volunteer.
- */
-function create_volunteer_role() {
-    add_role(
-      'volunteer',
-      array(
-        // Define capabilities for the Volunteer role here
-      )
-    );
-  }
-  
-  add_action( 'init', 'create_volunteer_role' );

@@ -26,6 +26,21 @@ class BCS_Exclude_Date_Manager {
                     'date'    => $date,
                 )
             );
+
+            // TODO: Determine if the volunteer is already schedule for the date
+            // and remove user from the schedule.
+            // $delete = $wpdb->delete( 
+            //     $this->table_name, 
+            //     array( 'event_id' => $date ), 
+            //     array( '%s' ), 
+            //     "EXISTS (
+            //       SELECT 1
+            //       FROM {$wpdb->prefix}bcs_volunteers AS v
+            //       WHERE v.wp_user_id = %d
+            //       AND s.volunteer_id = v.id
+            //     )" , $user_id
+            // );
+              
         } else {
             return 'duplicate';
         }
