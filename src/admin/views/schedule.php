@@ -19,6 +19,7 @@ function render_schedule_admin_table() {
     if ($all_events) {
         $all_schedule_roles = $all_schedule['schedule'];
         $all_volunteers_data = $all_schedule['allVolunteers'];
+        $exclude_dates = $all_schedule['excludeDates'];
         ?>
         <div class="wrap bcs">
             <h1>Manage schedule</h1>
@@ -63,7 +64,8 @@ function render_schedule_admin_table() {
                                                         <select x-model="schedule[group][role][event.id].selectedVolunteer" x-data-event-id="event.id" x-data-role="role">
                                                             <option value="">Select Volunteer</option>
                                                             <template x-for="volunteer in Object.keys(allVolunteers[group][role])" :key="volunteer">
-                                                            <option :value="volunteer" x-text="allVolunteers[group][role][volunteer].display_name"></option>
+                                                                <option x-show="!((excludeDates[allVolunteers[group][role][volunteer].wp_user_id] || []).includes(event.date))" 
+                                                                    :value="volunteer" x-text="allVolunteers[group][role][volunteer].display_name" x-data-date="event.date" x-data-userid="volunteer.wp_user_id"></option>
                                                             </template>
                                                         </select>
                                                         <span x-show="schedule[group][role][event.id]?.selectedVolunteer !== ''" 
@@ -91,11 +93,13 @@ function render_schedule_admin_table() {
                     events: [],
                     schedule: [],
                     allVolunteers: [],
+                    excludeDates: [],
     
                     init () {
                         this.events = <?php echo json_encode($all_events); ?>;
                         this.schedule = <?php echo json_encode($all_schedule_roles); ?>;
                         this.allVolunteers = <?php echo json_encode($all_volunteers_data); ?>;
+                        this.excludeDates = <?php echo json_encode($exclude_dates); ?>;
                     },
     
                     saveVolunteer( scheduleID, selectedVolunteer, group, role, eventID ) {

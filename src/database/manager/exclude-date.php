@@ -1,11 +1,13 @@
 <?php
 
 class BCS_Exclude_Date_Manager {
-    private $table_name;
+    private $exclude_dates;
+    private $schedule;
 
     public function __construct() {
         global $wpdb;
-        $this->table_name = $wpdb->prefix . 'bcs_exclude_dates';
+        $this->exclude_dates = $wpdb->prefix . 'bcs_exclude_dates';
+        $this->schedule = $wpdb->prefix . 'bcs_schedule';
     }
 
     public function insert_date( $user_id, $date ) {
@@ -13,34 +15,46 @@ class BCS_Exclude_Date_Manager {
 
         $existing_row = $wpdb->get_row(
             $wpdb->prepare(
-                "SELECT * FROM $this->table_name WHERE user_id = %s AND date = %s",
+                "SELECT * FROM $this->exclude_dates 
+                WHERE user_id = %s AND date = %s",
                 $user_id,
                 $date
             )
         );
         if (!$existing_row) {
             $result = $wpdb->insert(
-                $this->table_name,
+                $this->exclude_dates,
                 array(
                     'user_id' => $user_id,
                     'date'    => $date,
                 )
             );
 
-            // TODO: Determine if the volunteer is already schedule for the date
-            // and remove user from the schedule.
-            // $delete = $wpdb->delete( 
-            //     $this->table_name, 
-            //     array( 'event_id' => $date ), 
-            //     array( '%s' ), 
-            //     "EXISTS (
-            //       SELECT 1
-            //       FROM {$wpdb->prefix}bcs_volunteers AS v
-            //       WHERE v.wp_user_id = %d
-            //       AND s.volunteer_id = v.id
-            //     )" , $user_id
-            // );
-              
+            // Determine if the volunteer is already scheduled for the date and de
+            $volunteer_ids = $wpdb->get_results( "
+                SELECT v.id
+                FROM {$wpdb->prefix}bcs_volunteers v
+                WHERE v.wp_user_id = $user_id;
+            " );
+            $event  = $wpdb->get_results( "
+                SELECT *
+                FROM {$wpdb->prefix}bcs_events e
+                WHERE DATE(e.date) = '$date';
+            " );
+            $result_ary = [];
+            foreach ($volunteer_ids as $volunteer_id) {
+                $result = $wpdb->update(
+                    $this->schedule,
+                    array(
+                        'volunteer_id' => NULL,
+                    ),
+                    array(
+                        'volunteer_id' => $volunteer_id->id,
+                        'event_id' => $event[0]->id,
+                        )
+                    );
+            }
+            return true;
         } else {
             return 'duplicate';
         }
@@ -49,7 +63,11 @@ class BCS_Exclude_Date_Manager {
 
     public function get_users() {
         global $wpdb;
-        return $wpdb->get_results( "SELECT ID, display_name FROM {$wpdb->prefix}users" );
+        return $wpdb->get_results( "
+            SELECT ID, display_name 
+            FROM {$wpdb->prefix}users
+            ORDER BY display_name ASC;
+        " );
     }
 
     public function get_exclude_dates() {

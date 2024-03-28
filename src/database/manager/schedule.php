@@ -100,6 +100,23 @@ class BCS_Schedule_Manager {
         global $wpdb;
         $data = [];
         
+        //GET Excluded dates
+        $exclude_dates = $wpdb->get_results( "
+            SELECT * FROM {$wpdb->prefix}bcs_exclude_dates
+            WHERE date >= CURDATE()
+            ORDER BY user_id ASC;
+        ");
+        $exclude_dates_by_users_id = [];
+        foreach ($exclude_dates as $row) {
+            $user_id = $row->user_id; 
+            if (!isset($exclude_dates_by_users_id[$user_id])) {
+                $exclude_dates_by_users_id[$user_id] = [];
+            }
+            $exclude_dates_by_users_id[$user_id][] = $row->date;
+        }
+        $data["excludeDates"] = $exclude_dates_by_users_id;
+        // $data["excludeDates"] = $exclude_dates;
+
         //GET Events
         $events = $wpdb->get_results( "
             SELECT * FROM {$wpdb->prefix}bcs_events

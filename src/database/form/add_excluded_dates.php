@@ -7,8 +7,6 @@ function BCS_form_add_excluded_dates() {
     // Sanitize and validate input
     $user_id = sanitize_text_field($_POST['user-select']);
     $dates = explode(',', sanitize_text_field($_POST['dates'])); // Explode comma-separated dates
-    // echo $dates;
-    // echo $user_select;
 
     // Insert data into your custom table (wp_BCS_roles) only if the combination doesn't exist
     foreach ($dates as $date) {
