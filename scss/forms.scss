@@ -1,9 +1,9 @@
 form {
     input[type='submit'] {
-        @apply bcs-mx-2 bcs-border bcs-border-gray-300 bcs-bg-blue-600 bcs-text-white bcs-px-4 bcs-py-2 bcs-rounded-md
+        @apply mx-2 border border-gray-300 bg-blue-600 text-white px-4 py-2 rounded-md
     }
     label:not(:first-of-type) {
-        @apply bcs-pl-2
+        @apply pl-2
     }
     .columns-3 {
         columns: 3 auto;
@@ -15,7 +15,7 @@ form {
         }
     }
     select {
-        @apply bcs-pl-2 bcs-pr-6 bcs-border bcs-border-gray-300
+        @apply pl-2 pr-6 border border-gray-300
     }
-    @apply bcs-text-base
+    @apply text-base
 }

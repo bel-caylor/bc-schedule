@@ -67,6 +67,14 @@ add_action( 'admin_enqueue_scripts', 'bc_schedule_enqueue_admin_assets' );
  * Enqueue scripts and styles for the front end
  */
 function enqueue_bcs_frontend_scripts() {
+    wp_enqueue_style(
+        'bc-schedule-styles',
+        BC_SCHEDULE_URL . 'dist/stylesheet.css',
+        // BC_SCHEDULE_URL . 'dist/stylesheet.min.c43c4ed7d541ca047393.css',
+        array(),
+        '1.0.0'
+    );
+
     $bcs_frontend_data = array(
         'ajax_url' => admin_url('admin-ajax.php')
     );
@@ -75,3 +83,16 @@ function enqueue_bcs_frontend_scripts() {
     wp_localize_script('bcs-frontend', 'bcs_frontend_data', $bcs_frontend_data);
 }
 add_action('wp_enqueue_scripts', 'enqueue_bcs_frontend_scripts');
+
+
+/**
+ * Render the schedule on the frontend using a shortcode
+ */
+require_once BC_SCHEDULE_PATH . '/src/frontend/schedule.php';
+function render_schedule_shortcode($atts) {
+    ob_start();
+    render_schedule_frontend();
+    $output = ob_get_clean();
+    return $output;
+}
+add_shortcode('bcs_schedule', 'render_schedule_shortcode');

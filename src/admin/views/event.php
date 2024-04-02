@@ -17,7 +17,7 @@ function render_schedule_add_form() {
 
             <!-- Alpine.js app for dropdown boxes. -->
             <div x-data="dropdown()" x-init="init()">
-                <div class="bcs-flex bcs-mb-2">
+                <div class="flex mb-2">
                     <!-- Group select -->
                     <div>
                         <label for="event-date">Select Date:</label>
@@ -35,9 +35,9 @@ function render_schedule_add_form() {
                     </div>
     
                 </div>
-                <div class="bcs-flex">
+                <div class="flex">
                     <!-- Team select -->
-                    <div class="bcs-pl-2" x-show="selectedGroup">
+                    <div class="pl-2" x-show="selectedGroup">
                         <label for="team-select">Select a Team:</label>
                         <select id="team-select" x-model="selectedTeam" name="team-select">
                             <option value="">Select Team</option>
@@ -89,7 +89,7 @@ function render_events_table() {
     // Retrieve roles from the database
     $exclude_date_manager = new BCS_Exclude_Date_Manager();
     $dates = $exclude_date_manager->get_exclude_dates();
-    echo '<h2 class="bcs-text-lg bcs-font-bold">Excluded Dates for Volunteers</h2>';
+    echo '<h2 class="text-lg font-bold">Excluded Dates for Volunteers</h2>';
     echo '<table class="table-admin">';
     echo '<thead><tr><th>ID</th><th>Date</th><th>Name</th><th>Trash</th></tr></thead>';
     echo '<tbody>';
