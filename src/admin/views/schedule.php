@@ -15,6 +15,13 @@ function render_schedule_admin_table() {
     // echo '<pre>';
     // var_dump($all_events);
     // echo '</pre>';
+
+    // Fetch capabilities of the logged-in user
+    $current_user = wp_get_current_user();
+    $current_user_capabilities = $current_user->allcaps;
+    $is_subscriber = count(array_diff_key($current_user_capabilities, array('read' => true, 'level_0' => true, 'subscriber' => true))) === 0;
+    $current_user_id = $current_user->ID;
+
     
     if ($all_events) {
         $all_schedule_roles = $all_schedule['schedule'];
@@ -24,7 +31,7 @@ function render_schedule_admin_table() {
         <div class="wrap bcs">
             <h1>Manage schedule</h1>
             <div x-data="table()" x-init="init()">
-                <div class="px-4 sm:px-6 lg:px-8">
+                <div class="">
                     <div class="mt-8 flow-root">
                     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -34,7 +41,7 @@ function render_schedule_admin_table() {
                                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">Role</th>
                                     <template x-for="event in events">
                                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            <div x-text="event.date"></div>
+                                            <div x-text="formatDate(event.date)"></div>
                                             <div x-text="event.name"></div>
                                         </th>
                                     </template>
@@ -43,7 +50,7 @@ function render_schedule_admin_table() {
                             <template x-for="group in Object.keys(schedule)" :key="group">
                                 <tbody class="bg-white">
                                     <tr class="border-t border-gray-200">
-                                        <th colspan="5" scope="colgroup" class="bg-gray-50 py-2 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3" x-text="group"></th>
+                                        <th x-text="group" :colspan="getEventLength() + 1" scope="colgroup" class="bg-gray-50 py-2 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3"></th>
                                     </tr>
                                     <!-- Row -->
                                     <template x-for="role in Object.keys(schedule[group])" :key="role">
@@ -57,21 +64,23 @@ function render_schedule_admin_table() {
                                                     <div x-show="schedule[group][role][event.id]?.first_name  && schedule[group][role][event.id].edit == false ">
                                                         <span x-bind:class="{'bg-pink-50': isDuplicateVolunteer( schedule[group][role][event.id].volunteer_id, event.id, role, schedule[group][role][event.id].wp_user_id ) }" 
                                                             x-text="schedule[group][role][event.id]?.first_name ? schedule[group][role][event.id].first_name : ''"></span>
-                                                        <button class="dashicons dashicons-edit text-blue-400" @click="schedule[group][role][event.id].edit = true;"></button>
+                                                        <button x-show="editCapability(schedule[group][role][event.id].wp_user_id)" class="dashicons dashicons-edit text-blue-400" @click="schedule[group][role][event.id].edit = true;"></button>
                                                     </div>
                                                     <!-- Voluteer Dropdown -->
                                                     <div x-show="!schedule[group][role][event.id]?.first_name || schedule[group][role][event.id].edit == true ">
-                                                        <select x-model="schedule[group][role][event.id].selectedVolunteer" x-data-event-id="event.id" x-data-role="role">
-                                                            <option value="">Select Volunteer</option>
-                                                            <template x-for="volunteer in Object.keys(allVolunteers[group][role])" :key="volunteer">
-                                                                <option x-show="!((excludeDates[allVolunteers[group][role][volunteer].wp_user_id] || []).includes(event.date))" 
-                                                                    :value="volunteer" x-text="allVolunteers[group][role][volunteer].display_name" x-data-date="event.date" x-data-userid="volunteer.wp_user_id"></option>
-                                                            </template>
-                                                        </select>
-                                                        <span x-show="schedule[group][role][event.id]?.selectedVolunteer !== ''" 
-                                                            @click="saveVolunteer( schedule[group][role][event.id].schedule_id, schedule[group][role][event.id].selectedVolunteer, group, role, event.id )" 
-                                                            class="dashicons dashicons-saved text-blue-400">
-                                                        </span>
+                                                        <template x-if="currentUserHasRole( group, role )">
+                                                            <select x-model="schedule[group][role][event.id].selectedVolunteer" x-data-event-id="event.id" x-data-role="role">
+                                                                <option value="">Select</option>
+                                                                <template x-for="volunteer in Object.keys(allVolunteers[group][role])" :key="volunteer">
+                                                                    <option x-show="!((excludeDates[allVolunteers[group][role][volunteer].wp_user_id] || []).includes(event.date))" 
+                                                                        :value="volunteer" x-text="allVolunteers[group][role][volunteer].first_name" x-data-date="event.date" x-data-userid="volunteer.wp_user_id"></option>
+                                                                </template>
+                                                            </select>
+                                                            <span x-show="schedule[group][role][event.id]?.selectedVolunteer !== ''" 
+                                                                @click="saveVolunteer( schedule[group][role][event.id].schedule_id, schedule[group][role][event.id].selectedVolunteer, group, role, event.id )" 
+                                                                class="dashicons dashicons-saved text-blue-400">
+                                                            </span>
+                                                        </template>
                                                     </div>
     
                                                 </td>
@@ -94,6 +103,8 @@ function render_schedule_admin_table() {
                     schedule: [],
                     allVolunteers: [],
                     excludeDates: [],
+                    is_subscriber: <?php echo json_encode($is_subscriber); ?>,
+                    current_user_id: <?php echo json_encode($current_user_id); ?>,
     
                     init () {
                         this.events = <?php echo json_encode($all_events); ?>;
@@ -152,7 +163,44 @@ function render_schedule_admin_table() {
                         }
                         // console.log('END' );
                         return duplicate; 
-                    }
+                    },
+
+                    getEventLength() {
+                        return this.events.length;
+                    },
+
+                    formatDate(dateString) {
+                        const date = new Date(dateString);
+                        const options = { month: 'short', day: 'numeric' };
+                        return date.toLocaleDateString('en-US', options);
+                    },
+
+                    editCapability( userID ) {
+                        if ( this.is_subscriber ) {
+                            if ( userID == this.current_user_id ) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                        return true;
+                    },
+
+                    currentUserHasRole(group, role) {
+                        if (this.is_subscriber) {
+                            const volunteersForRole = this.allVolunteers[group][role]; // Object
+                            if (typeof volunteersForRole === 'object' && volunteersForRole !== null) { // Check for valid object
+                                for (const [volunteerId, volunteerInfo] of Object.entries(volunteersForRole)) {
+                                    if (volunteerInfo.wp_user_id == this.current_user_id) {
+                                        return true; // Found a match
+                                        break;
+                                    }
+                                }
+                            }
+                            return false; // No match or invalid object
+                        }
+                        return true; // Default can be adjusted based on your logic
+                        }
                 }
             }
         </script>

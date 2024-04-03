@@ -20,3 +20,24 @@
 
     @apply table-auto whitespace-nowrap border border-gray-300 bg-white
 }
+.table-wrapper {
+    overflow-x: auto;
+    td, th {
+        @apply p-1;
+    }
+    th.col-1, td.col-1 {
+        @apply bg-white
+    }
+    tr:nth-child(even) {
+        th.col-1, td.col-1 {
+            @apply  bg-gray-100
+        }
+        @apply bg-gray-100; /* Light gray background for even rows */
+    }
+    tr:nth-child(odd) {
+        th.col-1, td.col-1 {
+            @apply  bg-white
+        }
+        @apply bg-white; /* White background for odd rows */
+    }
+}
