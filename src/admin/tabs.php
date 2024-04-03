@@ -22,12 +22,12 @@ function add_schedule_admin_page() {
         'dashicons-calendar', // Icon (optional)
         10 // Position (set to 1 for first section)
     );
-    $nonce = wp_create_nonce('bcs_nonce');
-    echo '<input type="hidden" id="bcs_nonce" value="' . esc_attr($nonce) . '">';
 }
 
 // Admin page HTML callback
 function render_schedule_admin_page() {
+    $bcs_nonce = wp_create_nonce('bcs_nonce');
+    echo '<input type="hidden" id="bcs_nonce" value="' . esc_attr($bcs_nonce) . '">';
     // Get the active tab from the $_GET parameter
     $default_tab = null;
     $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
