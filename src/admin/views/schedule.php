@@ -61,7 +61,7 @@ function render_schedule_admin_table() {
                                                     <td x-text="role" class="col-1 sticky top-0 left-0 whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"></td>
                                                     <!-- Detail -->
                                                     <template x-for="event in events">
-                                                        <td x-data-event-id="event.id" x-data-role="role">
+                                                        <td x-data-event-id="event.id" x-data-role="role" class="whitespace-nowrap">
                                                             <!-- Selected Volunteer -->
                                                             <div x-show="schedule[group][role][event.id]?.first_name  && schedule[group][role][event.id].edit == false ">
                                                                 <span x-bind:class="{'bg-pink-50': isDuplicateVolunteer( schedule[group][role][event.id].volunteer_id, event.id, role, schedule[group][role][event.id].wp_user_id ) }" 
