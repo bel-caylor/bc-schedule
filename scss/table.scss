@@ -21,18 +21,23 @@
     @apply table-auto whitespace-nowrap border border-gray-300 bg-white
 }
 .table-wrapper {
+    position: relative;
     overflow-x: auto;
+    .table-width {
+        max-width: 100%;
+        min-width: 100%;
+    }
     td, th {
         @apply p-1;
     }
     th.col-1, td.col-1 {
-        @apply bg-white
+        @apply bg-white z-10;
     }
     tr:nth-child(even) {
         th.col-1, td.col-1 {
-            @apply  bg-gray-100
+            @apply  bg-blue-50
         }
-        @apply bg-gray-100; /* Light gray background for even rows */
+        @apply bg-blue-50; /* Light gray background for even rows */
     }
     tr:nth-child(odd) {
         th.col-1, td.col-1 {
