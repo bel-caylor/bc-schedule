@@ -5,33 +5,37 @@ require_once BC_SCHEDULE_PATH . '/src/database/api/users.php';
 require_once BC_SCHEDULE_PATH . '/src/database/api/exclude_date.php';
 
 function render_exclude_dates_form() {
+
+    $exclude_date_manager = new BCS_Exclude_Date_Manager();
+    $event_dates = $exclude_date_manager->get_event_dates();
     ?>
-    <div class="wrap bcs">
-        <h1 class="!mb-4">Add Excluded Date for User</h1>
+    <div class="wrap bcs bg-white shadow-md p-6 mb-10 w-auto" style="width:fit-content">
+        <h1 class="!mb-4">Add Excluded Date for Volunteer</h1>
         <!-- Alpine.js app for dropdown boxes. -->
         <div x-data="form()" x-init="init()">
             <form method="post" action="admin-post.php">
                 <?php wp_nonce_field('bcs_nonce'); ?>
                 <input type="hidden" name="action" value="exclude_date_for_user">
-                <div class="flex items-center">
-                    <select id="user-select" x-model="selectedUserID" name="user-select" @change="clearExcludeDates()">
-                        <option value="">Select volunteer</option>
-                        <template x-for="user in users">
-                            <option :value="user.ID" x-text="user.display_name"></option>
-                        </template>
-                    </select>
-                    <label for="exclude_date" class="pl-4 pr-1">Add Exclude Date:</label>
-                    <input x-model="selectedDate" type="date" id="exclude_date" name="exclude_date" @change="addDate()" 
-                           onkeydown="return event.key === 'Tab' || event.key === 'Escape';" >
-                    
-                </div>
-                <h2 x-show="excludedDates.length > 0" class="pt-4 pb-1 font-bold" x-cloak>Exclude Dates</h2>
-                <template x-for="date in excludedDates">
-                    <div class="py-2">
-                        <span x-text="date"></span>
-                        <button class="dashicons dashicons-remove text-blue-400" @click.prevent="removeDate()"></button>
+                <div class="flex items-top gap-5">
+                    <div>
+                        <p class="text-lg pb-2 font-semibold">Select volunteer</p>
+                        <select id="user-select" x-model="selectedUserID" name="user-select" @change="clearExcludeDates()">
+                            <option value="">Select volunteer</option>
+                            <template x-for="user in users">
+                                <option :value="user.ID" x-text="user.display_name"></option>
+                            </template>
+                        </select>
                     </div>
-                </template>
+                    <div x-show="selectedUserID">
+                        <h2 class="pl-4 pr-1 pb-2 text-lg font-semibold" x-cloak>Add Exclude Dates</h2>
+                        <template x-for="eventDate in eventDates">
+                            <div class="flex items-center pl-4">
+                                <input type="checkbox" :id="eventDate.date" :value="eventDate.date" @click="toggleExcludedDate(eventDate.date)">
+                                <label :for="eventDate.date" x-text="eventDate.date" class="pb-1"></label>
+                            </div>
+                        </template>
+                    </div>
+                </div>
                 <input name="dates" type="hidden" x-model="formattedExcludedDates()">
                 <div class="pt-10" x-cloak>
                     <input x-show="selectedUserID && excludedDates.length > 0" type="submit" name="exclude_date_for_user" value="Add Exclude Date(s)">
@@ -44,6 +48,7 @@ function render_exclude_dates_form() {
                             users: [],
                             selectedDate: '',
                             excludedDates: [],
+                            eventDates: <?php echo json_encode($event_dates); ?>,
 
                             init() {
                                 this.fetchUsers();
@@ -79,17 +84,20 @@ function render_exclude_dates_form() {
                             },
 
                             formattedExcludedDates() {
-                                return this.excludedDates.join(', ')
+                                return this.excludedDates.length > 0 ? this.excludedDates.join(', ') : '';
+                            },
+
+                            toggleExcludedDate(date) {
+                                const index = this.excludedDates.indexOf(date);
+                                if (index === -1) {
+                                    this.excludedDates.push(date);
+                                } else {
+                                    this.excludedDates.splice(index, 1);
+                                }
                             },
                         };
                     }
                 </script>
-
-                <style>
-                    [x-cloak] { 
-                        display: none; 
-                    }
-                </style>
             </form>
         </div>
     </div>

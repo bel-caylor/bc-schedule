@@ -80,5 +80,14 @@ class BCS_Exclude_Date_Manager {
             ORDER BY date ASC;
         " );
     }
+
+    public function get_event_dates() {
+        global $wpdb;
+        return $wpdb->get_results( "
+            SELECT * FROM {$wpdb->prefix}bcs_events
+            WHERE date >= CURDATE()
+            ORDER BY date ASC;
+        " );
+    }
 }
 
