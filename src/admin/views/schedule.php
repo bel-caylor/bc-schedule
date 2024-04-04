@@ -11,9 +11,10 @@ function render_schedule_admin_table() {
     // Retrieve schedule from the database
     $schedule_manager = new BCS_Schedule_Manager();
     $all_schedule = $schedule_manager->get_schedule();
+    $all_exclude_dates = $schedule_manager->get_exclude_dates_by_date();
     $all_events = $all_schedule['events'];
     // echo '<pre>';
-    // var_dump($all_events);
+    // var_dump($all_exclude_dates);
     // echo '</pre>';
 
     // Fetch capabilities of the logged-in user
@@ -27,6 +28,7 @@ function render_schedule_admin_table() {
         $all_schedule_roles = $all_schedule['schedule'];
         $all_volunteers_data = $all_schedule['allVolunteers'];
         $exclude_dates = $all_schedule['excludeDates'];
+        // $exclude_dates_by_date = $all_exclude_dates;
         ?>
         <div class="wrap bcs">
             <h1>Manage schedule</h1>
@@ -56,7 +58,6 @@ function render_schedule_admin_table() {
                                             </tr>
                                             <!-- Row -->
                                             <template x-for="role in Object.keys(schedule[group])" :key="role">
-                                            <!-- <template x-for="role in schedule[group]"> -->
                                                 <tr>
                                                     <td x-text="role" class="col-1 sticky top-0 left-0 whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"></td>
                                                     <!-- Detail -->
@@ -71,24 +72,41 @@ function render_schedule_admin_table() {
                                                             <!-- Voluteer Dropdown -->
                                                             <div x-show="!schedule[group][role][event.id]?.first_name || schedule[group][role][event.id].edit == true ">
                                                                 <template x-if="currentUserHasRole( group, role )">
-                                                                    <select x-model="schedule[group][role][event.id].selectedVolunteer" x-data-event-id="event.id" x-data-role="role">
-                                                                        <option value="">Select</option>
-                                                                        <template x-for="volunteer in Object.keys(allVolunteers[group][role])" :key="volunteer">
-                                                                            <option x-show="!((excludeDates[allVolunteers[group][role][volunteer].wp_user_id] || []).includes(event.date))" 
-                                                                                :value="volunteer" x-text="allVolunteers[group][role][volunteer].first_name" x-data-date="event.date" x-data-userid="volunteer.wp_user_id"></option>
-                                                                        </template>
-                                                                    </select>
-                                                                    <span x-show="schedule[group][role][event.id]?.selectedVolunteer !== ''" 
-                                                                        @click="saveVolunteer( schedule[group][role][event.id].schedule_id, schedule[group][role][event.id].selectedVolunteer, group, role, event.id )" 
-                                                                        class="dashicons dashicons-saved text-blue-400">
-                                                                    </span>
+                                                                    <div>
+                                                                        <select x-model="schedule[group][role][event.id].selectedVolunteer" x-data-event-id="event.id" x-data-role="role">
+                                                                            <option value="">Select</option>
+                                                                            <template x-for="volunteer in Object.keys(allVolunteers[group][role])" :key="volunteer">
+                                                                                <option x-show="!((excludeDates[allVolunteers[group][role][volunteer].wp_user_id] || []).includes(event.date))" 
+                                                                                    :value="volunteer" x-text="allVolunteers[group][role][volunteer].first_name" x-data-date="event.date" x-data-userid="volunteer.wp_user_id"></option>
+                                                                            </template>
+                                                                        </select>
+                                                                        <span x-show="schedule[group][role][event.id]?.selectedVolunteer !== ''" 
+                                                                            @click="saveVolunteer( schedule[group][role][event.id].schedule_id, schedule[group][role][event.id].selectedVolunteer, group, role, event.id )" 
+                                                                            class="dashicons dashicons-saved text-blue-400">
+                                                                        </span>
+                                                                    </div>
                                                                 </template>
                                                             </div>
-            
                                                         </td>
                                                     </template>
                                                 </tr>
                                             </template>
+                                            <tr>
+                                                <td class="font-semibold whitespace-nowrap flex">
+                                                    <!-- <div class=""> -->
+                                                        Exclude
+                                                    <!-- </div> -->
+                                                </td>
+                                                <template x-for="event in events">
+                                                    <td class="whitespace-nowrap vertical-align-top">
+                                                        <div class="vertical-align-top flex flex-wrap items-start">
+                                                            <template x-for="name in excludeDatesbyDate[event.date.slice(0, 10)]">
+                                                                <div x-text="name" class="mr-2 :last-child:not-mr-2"></div>
+                                                            </template>
+                                                        </div>
+                                                    </td>
+                                                </template>
+                                            </tr>
                                         </tbody>
                                     </template>
                                 </table>
@@ -106,6 +124,7 @@ function render_schedule_admin_table() {
                     schedule: [],
                     allVolunteers: [],
                     excludeDates: [],
+                    excludeDatesbyDate: [],
                     is_subscriber: <?php echo json_encode($is_subscriber); ?>,
                     current_user_id: <?php echo json_encode($current_user_id); ?>,
     
@@ -114,6 +133,7 @@ function render_schedule_admin_table() {
                         this.schedule = <?php echo json_encode($all_schedule_roles); ?>;
                         this.allVolunteers = <?php echo json_encode($all_volunteers_data); ?>;
                         this.excludeDates = <?php echo json_encode($exclude_dates); ?>;
+                        this.excludeDatesbyDate = <?php echo json_encode($all_exclude_dates["excludeDatesbyDate"]); ?>;
                     },
     
                     saveVolunteer( scheduleID, selectedVolunteer, group, role, eventID ) {

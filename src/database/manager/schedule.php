@@ -106,6 +106,7 @@ class BCS_Schedule_Manager {
             WHERE date >= CURDATE()
             ORDER BY user_id ASC;
         ");
+        //Setup exclude dates by user id
         $exclude_dates_by_users_id = [];
         foreach ($exclude_dates as $row) {
             $user_id = $row->user_id; 
@@ -115,7 +116,6 @@ class BCS_Schedule_Manager {
             $exclude_dates_by_users_id[$user_id][] = $row->date;
         }
         $data["excludeDates"] = $exclude_dates_by_users_id;
-        // $data["excludeDates"] = $exclude_dates;
 
         //GET Events
         $events = $wpdb->get_results( "
@@ -179,6 +179,35 @@ class BCS_Schedule_Manager {
                 }
             }
         }
+        return $data;
+    }
+
+    public function get_exclude_dates_by_date() {
+        global $wpdb;
+        $data = [];
+        
+        //GET Excluded dates
+        $exclude_dates = $wpdb->get_results( "
+            SELECT x.date, COALESCE(m.meta_value, '') AS first_name 
+            FROM {$wpdb->prefix}bcs_exclude_dates x
+            JOIN {$wpdb->prefix}users u ON x.user_id = u.ID
+            LEFT JOIN {$wpdb->prefix}usermeta m ON u.ID = m.user_id AND m.meta_key = 'first_name'
+            WHERE x.date >= CURDATE()
+            ORDER BY x.date ASC;
+        ");
+        //Setup exclude dates by date
+        $exclude_dates_by_date = [];
+        foreach ($exclude_dates as $row) {
+            $date = $row->date;
+            if (!isset($exclude_dates_by_date[$date])) {
+                $exclude_dates_by_date[$date] = [];
+            }
+            $exclude_dates_by_date[$date][] = $row->first_name;
+        }
+        $data["excludeDatesbyDate"] = $exclude_dates_by_date;
+        // echo '<pre>';
+        // var_dump($data["excludeDatesbyDate"]);
+        // echo '</pre>';
         return $data;
     }
 
