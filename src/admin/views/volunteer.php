@@ -27,7 +27,7 @@ function render_volunteer_add_form() {
                     </div>
     
                     <!-- Role select -->
-                    <div class="pl-2" x-show="selectedGroup">
+                    <div class="pl-2" x-show="selectedGroup" x-cloak>
                         <label for="role-select">Select a Role:</label>
                         <select id="role-select" x-model="selectedRole"  @change="setSelectedRoleID()" name="role-select">
                             <option value="">All Roles</option>
@@ -37,7 +37,7 @@ function render_volunteer_add_form() {
                         </select>
                     </div>
                 </div>
-                <div class="flex my-4" x-show="selectedRole">
+                <div class="flex my-4" x-show="selectedRole" x-cloak>
                     <h2 for="volunteers" class="mr-4">Select Volunteers:</h2>
                     <div class="columns-3">
                         <?php

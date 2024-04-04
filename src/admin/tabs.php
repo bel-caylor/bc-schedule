@@ -63,28 +63,28 @@ function render_schedule_admin_page() {
             <?php
             switch ($tab) {
                 case 'roles':
-                    if (!$is_subscriber) {
+                    if ($is_editor) {
                         display_form_message();
                         render_roles_add_form();
                         render_roles_admin_table();
                     }
                     break;
                 case 'volunteers':
-                    if (!$is_subscriber) {
+                    if ($is_editor) {
                         display_form_message();
                         render_volunteer_add_form();
                         render_volunteer_admin_table();
                     }
                     break;
                 case 'teams':
-                    if (!$is_subscriber) {
+                    if ($is_editor) {
                         display_form_message();
                         render_team_add_form();
                         // render_team_admin_table();
                     }
                     break;
                 case 'events':
-                    if (!$is_subscriber) {
+                    if ($is_editor) {
                         render_schedule_add_form();
                     }
                     break;

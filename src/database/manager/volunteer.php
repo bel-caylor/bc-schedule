@@ -51,8 +51,10 @@ class BCS_Volunteers_Manager {
             JOIN
                 $this->users u ON v.wp_user_id = u.ID
             JOIN
-                $this->roles r ON v.role_id = r.id;
-
+                $this->roles r ON v.role_id = r.id
+            ORDER BY
+                r.group_name ASC,
+                r.role ASC;
         " );
     }
 }
