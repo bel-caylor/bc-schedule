@@ -124,6 +124,13 @@ class BCS_Schedule_Manager {
             ORDER BY date ASC;
         ");
         $data["events"] = $events;
+        //Fix timezone date issue.
+        foreach ($data["events"] as &$event) {
+            $userTimezoneOffset = get_option('gmt_offset') * 60 * 60; // Convert GMT offset to seconds
+            $event->date = new DateTime($event->date . ' UTC');
+            $event->date->modify("+" . $userTimezoneOffset . " seconds");
+            $event->date = $event->date->format('Y-m-d H:i:s');
+          }
 
         //GET Groups
         $groups = $wpdb->get_results( "SELECT DISTINCT group_name FROM {$wpdb->prefix}bcs_roles;");
