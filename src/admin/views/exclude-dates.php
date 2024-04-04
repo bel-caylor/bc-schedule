@@ -104,8 +104,9 @@ function render_exclude_dates_table() {
     $exclude_date_manager = new BCS_Exclude_Date_Manager();
     $dates = $exclude_date_manager->get_exclude_dates();
     echo '<h2 class="text-lg font-bold">Excluded Dates for Volunteers</h2>';
+    echo '<div id="exclude-dates-table">';
     echo '<table class="table-admin">';
-    echo '<thead><tr><th>ID</th><th>Date</th><th>Name</th><th>Trash</th></tr></thead>';
+    echo '<thead><tr><th>ID</th><th>Date <span class="sort-icon">&#x25B2;</span></th><th>Name <span class="sort-icon">&#x25B2;</span></th><th>Trash</th></tr></thead>';
     echo '<tbody>';
     foreach ($dates as $date) {
         echo '<tr id="row-' . esc_html($date->id) . '">';
@@ -118,4 +119,37 @@ function render_exclude_dates_table() {
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
+    echo '</div>';
+    echo '<script>
+        const table = document.getElementById("exclude-dates-table");
+        const tbody = table.getElementsByTagName("tbody")[0];
+        const rows = Array.from(tbody.getElementsByTagName("tr"));
+
+        const sortColumn = (columnIndex, isDate = false) => {
+            rows.sort((a, b) => {
+                const valueA = a.getElementsByTagName("td")[columnIndex].innerText.toLowerCase();
+                const valueB = b.getElementsByTagName("td")[columnIndex].innerText.toLowerCase();
+                if (isDate) {
+                    const dateA = new Date(valueA);
+                    const dateB = new Date(valueB);
+                    return dateA - dateB;
+                } else {
+                    if (valueA < valueB) return -1;
+                    if (valueA > valueB) return 1;
+                    return 0;
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        const nameHeader = table.getElementsByTagName("th")[2];
+        const dateHeader = table.getElementsByTagName("th")[1];
+
+        nameHeader.style.cursor = "pointer";
+        dateHeader.style.cursor = "pointer";
+
+        nameHeader.addEventListener("click", () => sortColumn(2));
+        dateHeader.addEventListener("click", () => sortColumn(1, true));
+    </script>';
 }

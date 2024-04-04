@@ -1,6 +1,12 @@
 h1 {
     @apply text-2xl font-semibold mb-1
 }
-#wpcontent {
-    height: unset;
+.toplevel_page_volunteer-schedule {
+    #wpcontent {
+        height: unset;
+    }
+
+    #wpfooter {
+        position: relative;
+    }
 }
