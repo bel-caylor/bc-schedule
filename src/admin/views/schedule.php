@@ -92,16 +92,14 @@ function render_schedule_admin_table() {
                                                 </tr>
                                             </template>
                                             <tr>
-                                                <td class="font-semibold whitespace-nowrap flex">
-                                                    <!-- <div class=""> -->
-                                                        Exclude
-                                                    <!-- </div> -->
+                                                <td class="font-semibold whitespace-nowrap">
+                                                    Exclude
                                                 </td>
                                                 <template x-for="event in events">
                                                     <td class="whitespace-nowrap vertical-align-top">
                                                         <div class="vertical-align-top flex flex-wrap items-start">
                                                             <template x-for="name in excludeDatesbyDate[event.date.slice(0, 10)]">
-                                                                <div x-text="name" class="mr-2 :last-child:not-mr-2"></div>
+                                                                <div x-text="name" class="list-names mr-2 text-xs"></div>
                                                             </template>
                                                         </div>
                                                     </td>

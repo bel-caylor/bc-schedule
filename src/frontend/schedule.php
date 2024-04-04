@@ -9,6 +9,7 @@ function render_schedule_frontend() {
     $schedule_manager = new BCS_Schedule_Manager();
     $all_schedule = $schedule_manager->get_schedule();
     $all_events = $all_schedule['events'];
+    $exclude_events = $schedule_manager->get_exclude_dates_by_date();
 
     if ($all_events) {
         $all_schedule_roles = $all_schedule['schedule'];
@@ -52,6 +53,21 @@ function render_schedule_frontend() {
                                 </tr>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
+                        <tr>
+                            <td class="col-1 sticky top-0 left-0 font-semibold">Exclude</td>
+                            <?php foreach ($all_events as $event) : ?>
+                                <td>
+                                    <div class="flex flex-wrap">
+                                        <?php
+                                            $date = date("Y-m-d", strtotime($event->date));
+                                            foreach  ($exclude_events['excludeDatesbyDate'][$date] as $name) :
+                                                echo '<div class="list-names text-xs pr-2">' . $name . '</div>';
+                                            endforeach;
+                                        ?>
+                                    </div>
+                                </td>
+                            <?php endforeach; ?>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -45,4 +45,7 @@
         }
         @apply bg-white; /* White background for odd rows */
     }
+    .list-names:not(:last-of-type):after {
+        content: ',';
+    }
 }
