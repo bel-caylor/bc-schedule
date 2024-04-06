@@ -75,10 +75,12 @@ function render_schedule_admin_table() {
                                                                     <div>
                                                                         <select x-model="schedule[group][role][event.id].selectedVolunteer" x-data-event-id="event.id" x-data-role="role">
                                                                             <option value="">Select</option>
-                                                                            <template x-for="volunteer in Object.keys(allVolunteers[group][role])" :key="volunteer">
-                                                                                <option x-show="!((excludeDates[allVolunteers[group][role][volunteer].wp_user_id] || []).includes(event.date))" 
-                                                                                    :value="volunteer" x-text="allVolunteers[group][role][volunteer].first_name" x-data-date="event.date" x-data-userid="volunteer.wp_user_id"></option>
-                                                                            </template>
+                                                                                <template x-if="allVolunteers[group] && allVolunteers[group][role]">
+                                                                                    <template x-for="volunteer in Object.keys(allVolunteers[group][role])" :key="volunteer">
+                                                                                        <option x-show="!((excludeDates[allVolunteers[group][role][volunteer].wp_user_id] || []).includes(event.date))" 
+                                                                                            :value="volunteer" x-text="allVolunteers[group][role][volunteer].first_name" x-data-date="event.date" x-data-userid="volunteer.wp_user_id"></option>
+                                                                                    </template>
+                                                                                </template>
                                                                         </select>
                                                                         <span x-show="schedule[group][role][event.id]?.selectedVolunteer !== ''" 
                                                                             @click="saveVolunteer( schedule[group][role][event.id].schedule_id, schedule[group][role][event.id].selectedVolunteer, group, role, event.id )" 

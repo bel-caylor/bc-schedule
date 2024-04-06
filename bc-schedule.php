@@ -3,7 +3,7 @@
  * 
  * Plugin Name: Schedule Manager
  * Description: Church Volunteer Schedule.
- * Version: 1.2.3
+ * Version: 1.2.4
  * Author: Belinda Caylor
 */
 
@@ -41,8 +41,8 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
     // Enqueue the bundled JavaScript file
     wp_enqueue_script(
         'bc-schedule-admin-main',
-        BC_SCHEDULE_URL . 'dist/admin.js',
-        // BC_SCHEDULE_URL . 'dist/admin.min.js',
+        // BC_SCHEDULE_URL . 'dist/admin.js',
+        BC_SCHEDULE_URL . 'dist/admin.min.js',
         array(),
         '1.0.0',
         true
@@ -53,8 +53,8 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
     if ($current_screen->id === 'toplevel_page_volunteer-schedule') {
         wp_enqueue_style(
             'bc-schedule-admin-styles',
-            BC_SCHEDULE_URL . 'dist/stylesheet.css',
-            // BC_SCHEDULE_URL . 'dist/stylesheet.min.9c922cb195f5d880d1db.css',
+            // BC_SCHEDULE_URL . 'dist/stylesheet.css',
+            BC_SCHEDULE_URL . 'dist/stylesheet.min.0787e61bea0d3ebf4aea.css',
             array(),
             '1.0.0'
         );
@@ -70,8 +70,8 @@ add_action( 'admin_enqueue_scripts', 'bc_schedule_enqueue_admin_assets' );
 function enqueue_bcs_frontend_scripts() {
     wp_enqueue_style(
         'bc-schedule-styles',
-        BC_SCHEDULE_URL . 'dist/stylesheet.css',
-        // BC_SCHEDULE_URL . 'dist/stylesheet.min.9c922cb195f5d880d1db.css',
+        // BC_SCHEDULE_URL . 'dist/stylesheet.css',
+        BC_SCHEDULE_URL . 'dist/stylesheet.min.0787e61bea0d3ebf4aea.css',
         array(),
         '1.0.0'
     );

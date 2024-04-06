@@ -2,10 +2,12 @@
 
 class BCS_Roles_Manager {
     private $table_name;
+    private $schedule_table;
 
     public function __construct() {
         global $wpdb;
         $this->table_name = $wpdb->prefix . 'bcs_roles';
+        $this->schedule_table = $wpdb->prefix . 'bcs_schedule';
     }
 
     public function insert_role( $group, $role ) {
@@ -26,10 +28,33 @@ class BCS_Roles_Manager {
                     'role'       => $role,
                 )
             );
+
+            $this->add_new_roles_to_schedule($wpdb->insert_id);
+
         } else {
             return 'duplicate';
         }
         return $result;
+    }
+
+    public function add_new_roles_to_schedule($role_id) {
+        global $wpdb;
+
+        $events = $wpdb->get_results( "
+            SELECT * FROM {$wpdb->prefix}bcs_events
+            WHERE date >= CURDATE();
+        ");
+
+        foreach ($events as $event) {
+            $result = $wpdb->insert(
+                $this->schedule_table,
+                array(
+                    'event_id'      => $event->id,
+                    'role_id'       => $role_id,
+                    'volunteer_id'  => NULL,
+                    )
+                );
+        }
     }
 
     public function get_roles() {
@@ -52,5 +77,25 @@ class BCS_Roles_Manager {
     
         return $roles_data;
     }
+
+    public function delete_schedule_events($role_id) {
+        global $wpdb;
+
+        $sql = $wpdb->prepare("DELETE FROM {$wpdb->prefix}bcs_schedule
+                                WHERE role_id = %d", $role_id);
+        $wpdb->query($sql);
+
+        // return $wpdb->last_error;
+    }
+
+    public function delete_volunteers($role_id) {
+        global $wpdb;
+
+        $sql = $wpdb->prepare("DELETE FROM {$wpdb->prefix}bcs_volunteers
+                                WHERE role_id = %d", $role_id);
+        $wpdb->query($sql);
+
+        // return $wpdb->last_error;
+    }    
 }
 

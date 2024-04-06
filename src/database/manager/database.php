@@ -10,8 +10,8 @@ class BCS_db_Manager {
     public function delete_row_from_tbl( $row_id, $table_name ) {
         global $wpdb;
         $result = $wpdb->delete( $table_name, array( 'id' => $row_id ) );
-        // return $result;
-        return $wpdb->last_error;
+        return $result;
+        // return $wpdb->last_error;
     }
 
 }
