@@ -6,8 +6,6 @@ require_once BC_SCHEDULE_PATH . '/src/database/manager/roles.php';
 function render_schedule_add_form() {
     $volunteers_manager = new BCS_Roles_Manager();
     $all_roles_data = $volunteers_manager->get_roles_data();
-    $teams_manager = new BCS_Teams_Manager();
-    $all_teams_data = $teams_manager->get_teams();
     ?>
     <div class="wrap bcs">
         <h1>Add New Date</h1>
@@ -35,19 +33,7 @@ function render_schedule_add_form() {
                     </div>
     
                 </div>
-                <div class="flex">
-                    <!-- Team select -->
-                    <div class="pl-2" x-show="selectedGroup">
-                        <label for="team-select">Select a Team:</label>
-                        <select id="team-select" x-model="selectedTeam" name="team-select">
-                            <option value="">Select Team</option>
-                            <template x-for="team in filteredTeams">
-                                <option :value="team.id" x-text="team.name"></option>
-                            </template>
-                        </select>
-                    </div>
-                    <input type="submit" name="add_schedule" value="Add schedule" x-show="selectedTeam && date">
-                </div>
+                <input type="submit" name="add_schedule" value="Add schedule" x-show="date">
             </div>
 
 
@@ -56,15 +42,12 @@ function render_schedule_add_form() {
                     return {
                         date: '',
                         selectedGroup: '',
-                        selectedTeam: '',
                         groups: [],
                         filteredTeams: [],
-                        allTeams: [],
                         allRoles: [],
 
                         init() {
                             this.allRoles = <?php echo json_encode($all_roles_data); ?>;
-                            this.allTeams = <?php echo json_encode($all_teams_data); ?>;
                             // Populate unique groups
                             this.groups = [...new Set(this.allRoles.map(item => item.group))];
                         },

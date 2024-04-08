@@ -57,8 +57,10 @@ function render_schedule_admin_table() {
                                             <template x-for="event in events">
                                                 <td class="whitespace-nowrap vertical-align-top">
                                                     <div class="vertical-align-top flex flex-wrap items-start">
-                                                        <template x-for="name in excludeDatesbyDate[event.date.slice(0, 10)]">
-                                                            <div x-text="name" class="list-names mr-2 text-xs"></div>
+                                                        <template x-if="excludeDatesbyDate[event.date.slice(0, 10)]"> 
+                                                            <template x-for="name in excludeDatesbyDate[event.date.slice(0, 10)]">
+                                                                <div x-text="name" class="list-names mr-2 text-xs"></div>
+                                                            </template>
                                                         </template>
                                                     </div>
                                                 </td>

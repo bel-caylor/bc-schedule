@@ -15,7 +15,7 @@ class BCS_Schedule_Manager {
         $this->teams_table = $wpdb->prefix . 'bcs_teams';
     }
 
-    public function insert_schedule_date( $event_date, $event_name, $group_name, $team_id ) {
+    public function insert_schedule_date( $event_date, $event_name, $group_name ) {
         global $wpdb;
 
         //Check for duplicate.
@@ -35,66 +35,75 @@ class BCS_Schedule_Manager {
                     'date' => $event_date,
                 )
             );
-            // Check if insert was successful (returns false on error)
-            if (false !== $insert_result) {
-                $event_id = $wpdb->insert_id;
-            } else {
-                echo "Failed to insert event: " . $wpdb->last_error;
-            }
+            $event_id = $wpdb->insert_id;
 
-            // Add volunteers to event date.
-            $team_volunteers = $wpdb->get_row(
-                $wpdb->prepare(
-                    "SELECT volunteers FROM $this->teams_table WHERE group_name = %s AND id = %s",
-                    $group_name,
-                    $team_id
-                )
+            //Add roles to schedule table
+            $group_roles = $wpdb->get_results(
+                    "SELECT * FROM $this->roles_table"
             );
-            if ($team_volunteers) {
-                $team_volunteers = json_decode($team_volunteers->volunteers);
-            } else {
-                return 'Select a team';
-            }
-            //Loop through $roles add line for each role to bcs_schedule table.
-            //If there was a team selected add the volunteer_id.
-            foreach ($team_volunteers as $key => $volunteer) {
-                $volunteer_id = ($volunteer->volunteerID === '') ? NULL : $volunteer->volunteerID;
-
-                //Get wp_user_id for $volunteer_id
-                $user = $wpdb->get_row(
-                    $wpdb->prepare(
-                        "SELECT wp_user_id FROM {$wpdb->prefix}bcs_volunteers WHERE id = %s",
-                        $volunteer_id
-                    )
-                );
-                //Check exclude_dates to see if the volunteer is available.
-                $available = $wpdb->get_row(
-                    $wpdb->prepare(
-                        "SELECT * FROM {$wpdb->prefix}bcs_exclude_dates WHERE date = %s AND user_id = %s",
-                        $event_date,
-                        $user->wp_user_id
-                    )
-                );
-                if ($available) {
-                    $volunteer_id = NULL;
-                }
-
+            foreach ($group_roles as $role) {
                 $result = $wpdb->insert(
                     $this->schedule_table,
                     array(
                         'event_id'      => $event_id,
-                        'role_id'       => $key,
-                        'volunteer_id'  => $volunteer_id,
+                        'role_id'       => $role->id,
+                        'volunteer_id'  => NULL,
                         )
                     );
-                }
-            } else {
-                $insert_result = $existing_event->id;
-                //Loop through existing insert_result and role_id and add new role_id/volunteer_id if they don't exist.
             }
+        }
+
         return true;
     }
     
+    public function add_team_to_event() {
+        // Add volunteers to event date.
+        $team_volunteers = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT volunteers FROM $this->teams_table WHERE group_name = %s AND id = %s",
+                $group_name,
+                $team_id
+            )
+        );
+        if ($team_volunteers) {
+            $team_volunteers = json_decode($team_volunteers->volunteers);
+        } else {
+            return 'Select a team';
+        }
+        //Loop through $roles add line for each role to bcs_schedule table.
+        //If there was a team selected add the volunteer_id.
+        foreach ($team_volunteers as $key => $volunteer) {
+            $volunteer_id = ($volunteer->volunteerID === '') ? NULL : $volunteer->volunteerID;
+
+            //Get wp_user_id for $volunteer_id
+            $user = $wpdb->get_row(
+                $wpdb->prepare(
+                    "SELECT wp_user_id FROM {$wpdb->prefix}bcs_volunteers WHERE id = %s",
+                    $volunteer_id
+                )
+            );
+            //Check exclude_dates to see if the volunteer is available.
+            $available = $wpdb->get_row(
+                $wpdb->prepare(
+                    "SELECT * FROM {$wpdb->prefix}bcs_exclude_dates WHERE date = %s AND user_id = %s",
+                    $event_date,
+                    $user->wp_user_id
+                )
+            );
+            if ($available) {
+                $volunteer_id = NULL;
+            }
+
+            $result = $wpdb->insert(
+                $this->schedule_table,
+                array(
+                    'event_id'      => $event_id,
+                    'role_id'       => $key,
+                    'volunteer_id'  => $volunteer_id,
+                    )
+                );
+        }
+    }
         
     public function get_schedule() {
         global $wpdb;
