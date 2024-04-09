@@ -80,11 +80,21 @@ class BCS_Teams_Manager {
         }
     }
 
-
     public function get_teams() {
         global $wpdb;
         return $wpdb->get_results( "SELECT * FROM $this->table_name" );
     }
 
+    public function get_empty_events_by_group() {
+        global $wpdb;
+        return $wpdb->get_results( "
+            SELECT s.event_id, r.group_name, e.date
+            FROM {$wpdb->prefix}bcs_schedule s
+            JOIN {$wpdb->prefix}bcs_roles r ON r.id = s.role_id
+            JOIN {$wpdb->prefix}bcs_events e ON e.id = s.event_id
+            GROUP BY s.event_id, r.group_name
+            HAVING COUNT(DISTINCT s.volunteer_id) = 0;
+        " );
+    }
 }
 
