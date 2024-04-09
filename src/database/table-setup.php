@@ -13,6 +13,7 @@ $table_users = $wpdb->prefix . 'users';
 // Create Roles table
 $sql_roles = "CREATE TABLE $table_roles (
     id INT NOT NULL AUTO_INCREMENT,
+    event_name VARCHAR(255) NOT NULL,
     group_name VARCHAR(255) NOT NULL,
     role VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)

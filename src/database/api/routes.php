@@ -2,6 +2,12 @@
 
 // Register the custom endpoints
 function my_custom_rest_endpoint() {
+    register_rest_route('bcs/v1', '/save_role/', array(
+        'methods' => 'POST',
+        'callback' => 'bcs_save_new_role_callback',
+        // 'permission_callback' => 'my_check_permissions',
+    ));
+
     register_rest_route('bcs/v1', '/delete_row/(?P<role_id>\d+)', array(
         'methods' => 'DELETE',
         'callback' => 'bcs_delete_row_callback',

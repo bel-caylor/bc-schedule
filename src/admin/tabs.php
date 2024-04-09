@@ -65,8 +65,9 @@ function render_schedule_admin_page() {
                 case 'roles':
                     if ($is_editor) {
                         display_form_message();
-                        render_roles_add_form();
-                        render_roles_admin_table();
+                        render_roles_page();
+                        // render_roles_add_form();
+                        // render_roles_admin_table();
                     }
                     break;
                 case 'volunteers':

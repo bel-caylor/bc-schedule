@@ -19,3 +19,10 @@ form {
     }
     @apply text-base
 }
+
+#wpbody-content .input-area {
+    width: fit-content;
+    .button {
+        @apply bg-blue-700 text-white
+    }
+}

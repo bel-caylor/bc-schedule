@@ -1,5 +1,4 @@
 <?php
-require_once BC_SCHEDULE_PATH . '/src/database/form/add_role.php';
 require_once BC_SCHEDULE_PATH . '/src/database/form/add_volunteer.php';
 require_once BC_SCHEDULE_PATH . '/src/database/form/add_team.php';
 require_once BC_SCHEDULE_PATH . '/src/database/form/edit_team.php';
@@ -7,11 +6,6 @@ require_once BC_SCHEDULE_PATH . '/src/database/form/add_schedule.php';
 require_once BC_SCHEDULE_PATH . '/src/database/form/add_excluded_dates.php';
 
 function BCS_form_submission_handler() {
-
-    //** Add role **//
-    if (isset($_POST['add_role'])) {
-        BCS_form_add_role();
-    }
 
     //** Add volunteer **//
     if (isset($_POST['add_volunteer'])) {
