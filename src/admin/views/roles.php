@@ -14,21 +14,37 @@ function render_roles_page() {
         <div class="input-area p-4 border border-gray-300 bg-white my-4">
             <h1 class="!pt-0">Add New Role</h1>
             <div class="flex flex-col gap-4">
-                <div class="flex flex-wrap gap-4">
+                <div class="flex items-center">
                     <label for="eventName-select" class="pr-2">Event Type:</label>
                     <select id="eventName-select" x-model="selectedEventName" name="eventName-select">
                         <option value="">Select</option>
                         <template x-for="eventName in allEventNames">
                             <option :value="eventName.event_name" x-text="eventName.event_name"></option>
                         </template>
+                        <option value="new">--Create New--</option>
                     </select>
+                    <template x-if="selectedEventName == 'new'">
+                        <div class="ml-4">
+                            <label for="newEventName" class="pr-2">New Event Type:</label>
+                            <input type="text" id="newEventName" name="newEventName" x-model="newEventName">
+                        </div>
+                    </template>
+                </div>
+                <div class="flex items-center">
                     <label for="group-select" class="pl-6 pr-2">Group:</label>
                     <select id="group-select" x-model="selectedGroup" name="group-select" x-bind:disabled="disabledGroup()">
                         <option value="">Select</option>
                         <template x-for="group in allGroups">
                             <option :value="group.group_name" x-text="group.group_name"></option>
                         </template>
+                        <option value="new">--Create New--</option>
                     </select>
+                    <template x-if="selectedGroup == 'new'">
+                        <div class="ml-4">
+                            <label for="newGroupName" class="pr-2">New Group Type:</label>
+                            <input type="text" id="newGroupName" name="newGroupName" x-model="newGroupName">
+                        </div>
+                    </template>
                 </div>
                 <div class="flex flex-wrap justify-between">
                     <div>
@@ -84,7 +100,9 @@ function render_roles_page() {
                 allGroups: [],
                 allRoles: [],
                 selectedEventName: '',
+                newEventName: '',
                 selectedGroup: '',
+                newGroupName: '',
                 roleName: '',
                 roleDuplicate: '',
                 tableRole: '',
@@ -118,6 +136,14 @@ function render_roles_page() {
                     }
 
                     // Prepare data to send
+                    if ( this.selectedEventName == 'new' ) {
+                        this.selectedEventName = this.newEventName;
+                        this.allEventNames.push({event_name: this.newEventName});
+                    }
+                    if ( this.selectedGroup == 'new' ) {
+                        this.selectedGroup = this.newGroupName;
+                        this.allGroups.push({group_name: this.newGroupName});
+                    }
                     const data = {
                         event_name: this.selectedEventName,
                         group_name: this.selectedGroup,
@@ -144,6 +170,11 @@ function render_roles_page() {
                     .catch(error => {
                         console.error('Error saving volunteer:', error);
                     });
+                    this.selectedEventName = '';
+                    this.newEventName = '';
+                    this.selectedGroup = '';
+                    this.newGroupName = '';
+                    this.roleName = '';
                 }
             }
         }
