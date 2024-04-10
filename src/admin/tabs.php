@@ -66,15 +66,12 @@ function render_schedule_admin_page() {
                     if ($is_editor) {
                         display_form_message();
                         render_roles_page();
-                        // render_roles_add_form();
-                        // render_roles_admin_table();
                     }
                     break;
                 case 'volunteers':
                     if ($is_editor) {
                         display_form_message();
-                        render_volunteer_add_form();
-                        render_volunteer_admin_table();
+                        render_volunteer_page();
                     }
                     break;
                 case 'teams':

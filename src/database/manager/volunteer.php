@@ -1,9 +1,9 @@
 <?php
 
 class BCS_Volunteers_Manager {
-    private $volunteers;
-    private $users;
-    private $roles;
+    // private $volunteers;
+    // private $users;
+    // private $roles;
 
     public function __construct() {
         global $wpdb;
@@ -15,26 +15,43 @@ class BCS_Volunteers_Manager {
     public function insert_volunteer( $volunteer_id, $role_id ) {
         global $wpdb;
 
-        $existing_row = $wpdb->get_row(
-            $wpdb->prepare(
-                "SELECT * FROM $this->volunteers WHERE role_id = %s AND wp_user_id = %s",
-                $role_id ,
-                $volunteer_id
+        $result = $wpdb->insert(
+            $this->volunteers,
+            array(
+                'role_id'   => $role_id,
+                'wp_user_id'=> $volunteer_id,
             )
         );
-        if (!$existing_row) {
-            $result = $wpdb->insert(
-                $this->volunteers,
-                array(
-                    'role_id'   => $role_id,
-                    'wp_user_id'=> $volunteer_id,
-                )
-            );
-        } else {
-            return 'duplicate';
-        }
         
         return $result;
+    }
+
+    public function get_volunteer_page_data() {
+        global $wpdb;
+        $data = [];
+
+        //GET All Roles
+        $roles_manager = new BCS_Roles_Manager();
+        $data["allRoles"] = $roles_manager->get_all_roles();
+
+        //Get Users
+        $data["allUsers"] = $this->get_users();
+
+        //Get Volunteers
+        $data["allVolunteers"] = $this->get_volunteers();
+
+        return $data;
+    }
+
+    public function get_users() {
+        global $wpdb;
+        return $wpdb->get_results( "
+            SELECT u.ID, u.display_name, 
+            COALESCE(m.meta_value, '') AS last_name
+            FROM {$wpdb->prefix}users u
+            LEFT JOIN {$wpdb->prefix}usermeta m ON u.ID = m.user_id AND m.meta_key = 'last_name'
+            ORDER BY last_name ASC;
+        " );
     }
 
     public function get_volunteers() {
@@ -43,8 +60,10 @@ class BCS_Volunteers_Manager {
             SELECT
                 v.wp_user_id,
                 u.display_name,
+                r.event_name,
                 r.group_name,
                 r.role,
+                v.role_id,
                 v.id
             FROM
                 $this->volunteers v

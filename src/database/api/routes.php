@@ -2,9 +2,15 @@
 
 // Register the custom endpoints
 function my_custom_rest_endpoint() {
-    register_rest_route('bcs/v1', '/save_role/', array(
+    register_rest_route('bcs/v1', '/add_role/', array(
         'methods' => 'POST',
         'callback' => 'bcs_save_new_role_callback',
+        // 'permission_callback' => 'my_check_permissions',
+    ));
+
+    register_rest_route('bcs/v1', '/add_volunteer/', array(
+        'methods' => 'POST',
+        'callback' => 'bcs_add_volunteer_callback',
         // 'permission_callback' => 'my_check_permissions',
     ));
 

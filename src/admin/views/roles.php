@@ -1,7 +1,7 @@
 <?php
 require_once BC_SCHEDULE_PATH . '/src/database/manager/roles.php';
 require_once BC_SCHEDULE_PATH . '/src/database/api/delete_role.php';
-require_once BC_SCHEDULE_PATH . '/src/database/api/save_role.php';
+require_once BC_SCHEDULE_PATH . '/src/database/api/add_role.php';
 
 function render_roles_page() {
     $roles_manager = new BCS_Roles_Manager();
@@ -124,7 +124,7 @@ function render_roles_page() {
                         role: this.roleName,
                     };
                     // Fetch API with error handling
-                    fetch('/wp-json/bcs/v1/save_role', {
+                    fetch('/wp-json/bcs/v1/add_role', {
                         method: 'POST',
                         headers: {
                         'Content-Type': 'application/json',

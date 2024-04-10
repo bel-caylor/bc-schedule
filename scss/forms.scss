@@ -1,17 +1,35 @@
-form {
+form, #wpbody-content .input-area {
     input[type='submit'] {
         @apply mx-2 border border-gray-300 bg-blue-600 text-white px-4 py-2 rounded-md
     }
     label:not(:first-of-type) {
         @apply pl-2
     }
-    .columns-3 {
-        columns: 3 auto;
-        @media (max-width: 767px) {
-            columns: 1 auto;
+    .columns {
+        columns: 9 auto;
+        @media (min-width: 1601px) and (max-width: 1700px) {
+            columns: 8 auto;
         }
-        @media (min_width: 1023px) and (max-width: 767px) {
+        @media (min-width: 1501px) and (max-width: 1600px) {
+            columns: 7 auto;
+        }
+        @media (min-width: 1401px) and (max-width: 1500px) {
+            columns: 6 auto;
+        }
+        @media (min-width: 1251px) and (max-width: 1400px) {
+            columns: 5 auto;
+        }    
+        @media (min-width: 1001px) and (max-width: 1250px) {
+            columns: 4 auto;
+        }                   
+        @media (min-width: 668px) and (max-width: 1000px) {
+            columns: 3 auto;
+        }
+        @media (min-width: 450px) and (max-width: 667px) {
             columns: 2 auto;
+        }        
+        @media (max-width: 449px) {
+            columns: 1 auto;
         }
     }
     select {

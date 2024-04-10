@@ -1,6 +1,6 @@
 <?php
 
-// Callback function for saving new role
+// Callback function for adding new role
 function bcs_save_new_role_callback($request) {
     global $wpdb;
     

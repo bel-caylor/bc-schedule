@@ -84,14 +84,14 @@ class BCS_Roles_Manager {
         return $wpdb->last_error;
     }
 
-    public function get_roles() {
-        global $wpdb;
-        return $wpdb->get_results( "SELECT * FROM $this->roles_table$roles_table" );
-    }
+    // public function get_roles() {
+    //     global $wpdb;
+    //     return $wpdb->get_results( "SELECT * FROM $this->roles_table" );
+    // }
 
     public function get_roles_data() {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM $this->roles_table$roles_table", ARRAY_A);
+        $results = $wpdb->get_results("SELECT * FROM $this->roles_table", ARRAY_A);
     
         $roles_data = [];
         foreach ($results as $row) {
