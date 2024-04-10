@@ -4,9 +4,9 @@ require_once BC_SCHEDULE_PATH . '/src/database/api/add_volunteer.php';
 require_once BC_SCHEDULE_PATH . '/src/database/manager/roles.php';
 
 function render_volunteer_page() {
+    global $wpdb;
     $volunteer_manager = new BCS_Volunteers_Manager();
     $all_volunteer_page_data = $volunteer_manager->get_volunteer_page_data();
-    global $wpdb;
     $table_volunteer = $wpdb->prefix . 'bcs_volunteers';
     ?>
     <div x-data="volunteers()" x-init="init()" class="wrap">

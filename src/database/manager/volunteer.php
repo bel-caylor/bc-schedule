@@ -1,9 +1,6 @@
 <?php
 
 class BCS_Volunteers_Manager {
-    // private $volunteers;
-    // private $users;
-    // private $roles;
 
     public function __construct() {
         global $wpdb;

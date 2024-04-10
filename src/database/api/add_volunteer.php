@@ -11,7 +11,7 @@ function bcs_add_volunteer_callback($request) {
     foreach( $user_ids as $user_id ) {
         $result = $db_manager->insert_volunteer( $user_id, $role_id );
     }
-    if (!$result) {
+    if ($result) {
         $data['allVolunteers'] = $db_manager->get_volunteers();
         $response = new WP_REST_Response(array('allVolunteers' =>  $data['allVolunteers']));
         $response->set_status(200);
