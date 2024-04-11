@@ -123,6 +123,11 @@ function render_roles_page() {
                 },
 
                 saveRole() {
+                    //Check for values
+                    if ( this.selectedEventName === '' || this.selectedGroup === '' || this.roleName === '' ) {
+                        return;
+                    }
+
                     //See if role exists
                     const duplicate = this.allRoles.filter(
                         item => item.group_name === this.event_name 
@@ -164,7 +169,6 @@ function render_roles_page() {
                         return response.json();
                     })
                     .then(data => {
-                        console.log(data.allRoles);
                         this.allRoles = data.allRoles;
                     })
                     .catch(error => {
