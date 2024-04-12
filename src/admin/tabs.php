@@ -78,8 +78,6 @@ function render_schedule_admin_page() {
                     if ($is_editor) {
                         display_form_message();
                         render_teams_page();
-                        // render_team_add_form();
-                        // render_team_admin_table();
                     }
                     break;
                 case 'events':

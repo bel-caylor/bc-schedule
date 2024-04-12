@@ -32,41 +32,6 @@ class BCS_Teams_Manager {
         return $result;
     }
 
-    // public function edit_team( $group_name, $team_name, $volunteers ) {
-    //     global $wpdb;
-
-    //     // Check if the team exists.
-    //     $existing_row = $wpdb->get_row(
-    //         $wpdb->prepare(
-    //             "SELECT * FROM $this->team_table WHERE group_name = %s AND name = %s",
-    //             $group_name,
-    //             $team_name
-    //         )
-    //     );
-
-    //     if ( $existing_row ) {
-    //         // Update the team's information.
-    //         $result = $wpdb->update(
-    //             $this->team_table,
-    //             array(
-    //                 'volunteers' => $volunteers,
-    //             ),
-    //             array(
-    //                 'group_name' => $group_name,
-    //                 'name'       => $team_name,
-    //             )
-    //         );
-
-    //         if ( false !== $result ) {
-    //             return 'success';
-    //         } else {
-    //             return 'error updating team';
-    //         }
-    //     } else {
-    //         return 'team not found';
-    //     }
-    // }
-
     public function get_team_page_data() {
 
         //GET All Roles
@@ -85,6 +50,9 @@ class BCS_Teams_Manager {
         $data["allTeams"] = $table_data['allTeams'];
         $data["allVolunteers"] = $table_data['allVolunteers'];
         $data["teamsByEvent"] = $this->get_teams_by_event();
+
+        //Get Dates that need teams
+        $data["emptyEvents"] = $this->get_empty_events_by_group();
 
         return $data;
     }
@@ -193,7 +161,7 @@ class BCS_Teams_Manager {
     public function get_empty_events_by_group() {
         global $wpdb;
         return $wpdb->get_results( "
-            SELECT s.event_id, r.group_name, e.date
+            SELECT s.event_id, e.name AS event_name, r.group_name, e.date
             FROM {$wpdb->prefix}bcs_schedule s
             JOIN {$wpdb->prefix}bcs_roles r ON r.id = s.role_id
             JOIN {$wpdb->prefix}bcs_events e ON e.id = s.event_id

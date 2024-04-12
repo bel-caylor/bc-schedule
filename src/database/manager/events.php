@@ -34,7 +34,7 @@ class BCS_Events_Manager {
                 );
             }
         }
-        return $result;
+        return $this->get_all_events();
     }
 
     public function get_roles($event) {

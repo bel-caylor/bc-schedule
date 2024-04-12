@@ -14,6 +14,7 @@ function render_schedule_add_form() {
     <div x-data="event()" x-init="init()">
         <div class="wrap bcs input-area p-4 border border-gray-300 bg-white my-4">
             <h1>Add New Event Date</h1>
+            <p x-show="error" x-text="error" class="text-red-600 font-bold"></p>
             <?php wp_nonce_field('bcs_nonce'); ?>
             <input type="hidden" name="action" value="add_volunteer_action">
 
@@ -64,13 +65,13 @@ function render_schedule_add_form() {
             //* WP Data *//
             const allRoles = <?php echo json_encode($all_event_data["allRoles"]); ?>;
             const allEvents = <?php echo json_encode($all_event_data["allEvents"]); ?>;
-            console.log(allRoles);
             function event() {
                 return {
                     date: '',
                     selectedEvent: '',
                     allRoles: [],
                     allEvents: [],
+                    error: '',
 
                     init() {
                         this.allRoles = allRoles;
@@ -78,10 +79,22 @@ function render_schedule_add_form() {
                     },
 
                     saveEvent() {
+                        this.error = "";
                         //Check for values
                         if ( this.selectedEvent === '' || this.date === '' ) {
                             return;
                         }
+                        //Check for duplicate.
+                        const duplicate = this.allEvents.filter(
+                            item => item.name === this.selectedEvent 
+                            && item.date === this.date 
+                            );
+                        if (duplicate.length > 0) {
+                            this.error = "Duplicate Event";
+                            this.resetForm();
+                            return;
+                        }
+
                         const data = {
                             event_name: this.selectedEvent,
                             event_date: this.date,
@@ -101,13 +114,18 @@ function render_schedule_add_form() {
                             return response.json();
                         })
                         .then(data => {
-                            //Rest input
-                            this.selectedEvent = '';
-                            this.date = '';
+                            console.log(data);
+                            this.allEvents = data.data;
+                            this.resetForm();
                         })
                         .catch(error => {
                             console.error('Error saving event:', error);
                         });
+                    },
+                    
+                    resetForm() {
+                        this.selectedEvent = '';
+                        this.date = '';
                     },
 
                     deleteEvent(eventId) {
