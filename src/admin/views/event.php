@@ -2,65 +2,95 @@
 require_once BC_SCHEDULE_PATH . '/src/database/manager/volunteer.php';
 require_once BC_SCHEDULE_PATH . '/src/database/manager/teams.php';
 require_once BC_SCHEDULE_PATH . '/src/database/manager/roles.php';
+require_once BC_SCHEDULE_PATH . '/src/database/manager/events.php';
+require_once BC_SCHEDULE_PATH . '/src/database/api/add_event.php';
 
 function render_schedule_add_form() {
-    $volunteers_manager = new BCS_Roles_Manager();
-    $all_roles_data = $volunteers_manager->get_roles_data();
+    $roles_manager = new BCS_Roles_Manager();
+    $all_roles_data = $roles_manager->get_roles_data();
     ?>
-    <div class="wrap bcs">
-        <h1>Add New Date</h1>
-        <form method="post" action="admin-post.php">
-            <?php wp_nonce_field('bcs_nonce'); ?>
-            <input type="hidden" name="action" value="add_volunteer_action">
+    <div class="wrap bcs input-area p-4 border border-gray-300 bg-white my-4">
+        <h1>Add New Event Date</h1>
+        <?php wp_nonce_field('bcs_nonce'); ?>
+        <input type="hidden" name="action" value="add_volunteer_action">
 
-            <!-- Alpine.js app for dropdown boxes. -->
-            <div x-data="dropdown()" x-init="init()">
-                <div class="flex mb-2">
-                    <!-- Group select -->
-                    <div>
-                        <label for="event-date">Select Date:</label>
-                        <input type="date" name="event-date" id="event-date" x-model="date">
-                        <label for="event-name">Event Name:</label>
-                        <input type="text" name="event-name" id="event-name" value="Worship">
-
-                        <label for="group-select">Select a Group:</label>
-                        <select id="group-select" x-model="selectedGroup" @change="filterTeams()" name="group-select">
-                            <option value="">Select Group</option>
-                            <template x-for="group in groups">
-                                <option :value="group" x-text="group"></option>
-                            </template>
-                        </select>
-                    </div>
-    
+        <!-- Alpine.js app for Add Events. -->
+        <div x-data="event()" x-init="init()">
+            <div class="flex flex-col gap-3">
+                <div>
+                    <label for="event-date">Select Date:</label>
+                    <input type="date" name="event-date" id="event-date" x-model="date">
                 </div>
-                <input type="submit" name="add_schedule" value="Add schedule" x-show="date">
+                <div>
+                    <label for="event-name">Select Event Type:</label>
+                    <select id="event-select" x-model="selectedEvent" name="event-select">
+                        <option value="">Select Event</option>
+                        <template x-for="event in uniqueEventNames">
+                            <option :value="event" x-text="event"></option>
+                        </template>
+                    </select>
+                </div>
+                <input  @click="saveEvent()" type="submit" :disabled="disabledSubmit()" class="button max-w-28 !mx-auto !mt-3">
             </div>
 
+        </div>
 
-            <script>
-                function dropdown() {
-                    return {
-                        date: '',
-                        selectedGroup: '',
-                        groups: [],
-                        filteredTeams: [],
-                        allRoles: [],
 
-                        init() {
-                            this.allRoles = <?php echo json_encode($all_roles_data); ?>;
-                            // Populate unique groups
-                            this.groups = [...new Set(this.allRoles.map(item => item.group))];
-                        },
+        <script>
+            function event() {
+                return {
+                    date: '',
+                    selectedEvent: '',
+                    allRoles: [],
 
-                        filterTeams() {
-                            this.filteredTeams = this.allTeams.filter(item => item.group_name == this.selectedGroup)
-                        },
+                    init() {
+                        this.allRoles = <?php echo json_encode($all_roles_data); ?>;
+                    },
 
-                    };
-                }
-            </script>
-        </form>
+                    saveEvent() {
+                        //Check for values
+                        if ( this.selectedEvent === '' || this.date === '' ) {
+                            return;
+                        }
+                        const data = {
+                            event_name: this.selectedEvent,
+                            event_date: this.date,
+                        };
+                        console.log(data);
+                        fetch('/wp-json/bcs/v1/add_event', {
+                            method: 'POST',
+                            headers: {
+                            'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data),
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            //Rest input
+                            this.selectedEvent = '';
+                            this.date = '';
+                        })
+                        .catch(error => {
+                            console.error('Error saving event:', error);
+                        });
+                    },
+                    
+                    get uniqueEventNames() {
+                        return [...new Set(this.allRoles.map(obj => obj.event_name))];
+                    },
 
+                    disabledSubmit() {
+                        return this.date != '' && this.selectedEvent != '' ? false : true;
+                    },
+
+                };
+            }
+        </script>
     </div>
     <?php
 }

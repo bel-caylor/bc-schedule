@@ -84,25 +84,13 @@ class BCS_Roles_Manager {
         return $wpdb->last_error;
     }
 
-    // public function get_roles() {
-    //     global $wpdb;
-    //     return $wpdb->get_results( "SELECT * FROM $this->roles_table" );
-    // }
-
     public function get_roles_data() {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM $this->roles_table", ARRAY_A);
+        $results = $wpdb->get_results("
+            SELECT * FROM $this->roles_table
+        ", ARRAY_A);
     
-        $roles_data = [];
-        foreach ($results as $row) {
-            $roles_data[] = [
-                'id' => $row['id'],
-                'group' => $row['group_name'],
-                'role' => $row['role']
-            ];
-        }
-    
-        return $roles_data;
+        return $results;
     }
 
     public function delete_schedule_events($role_id) {
