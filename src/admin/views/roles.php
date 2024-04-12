@@ -78,7 +78,7 @@ function render_roles_page() {
                             <td x-text="role.role"></td>
                             <td><i x-bind:data-table="tableRole" 
                                    x-bind:data-row-id="role.id" 
-                                   class="dashicons dashicons-trash"></i>
+                                   class="dashicons dashicons-trash jquery-delete"></i>
                             </td>
                         </tr>
                     </template>

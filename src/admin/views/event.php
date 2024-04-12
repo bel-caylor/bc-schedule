@@ -4,47 +4,77 @@ require_once BC_SCHEDULE_PATH . '/src/database/manager/teams.php';
 require_once BC_SCHEDULE_PATH . '/src/database/manager/roles.php';
 require_once BC_SCHEDULE_PATH . '/src/database/manager/events.php';
 require_once BC_SCHEDULE_PATH . '/src/database/api/add_event.php';
+require_once BC_SCHEDULE_PATH . '/src/database/api/delete_event.php';
 
 function render_schedule_add_form() {
-    $roles_manager = new BCS_Roles_Manager();
-    $all_roles_data = $roles_manager->get_roles_data();
+    $events_manager = new BCS_Events_Manager();
+    $all_event_data = $events_manager->get_event_data();
     ?>
-    <div class="wrap bcs input-area p-4 border border-gray-300 bg-white my-4">
-        <h1>Add New Event Date</h1>
-        <?php wp_nonce_field('bcs_nonce'); ?>
-        <input type="hidden" name="action" value="add_volunteer_action">
+    <!-- Alpine.js app for Events. -->
+    <div x-data="event()" x-init="init()">
+        <div class="wrap bcs input-area p-4 border border-gray-300 bg-white my-4">
+            <h1>Add New Event Date</h1>
+            <?php wp_nonce_field('bcs_nonce'); ?>
+            <input type="hidden" name="action" value="add_volunteer_action">
 
-        <!-- Alpine.js app for Add Events. -->
-        <div x-data="event()" x-init="init()">
-            <div class="flex flex-col gap-3">
-                <div>
-                    <label for="event-date">Select Date:</label>
-                    <input type="date" name="event-date" id="event-date" x-model="date">
+                <div class="flex flex-col gap-3">
+                    <div>
+                        <label for="event-date">Select Date:</label>
+                        <input type="date" name="event-date" id="event-date" x-model="date">
+                    </div>
+                    <div>
+                        <label for="event-name">Select Event Type:</label>
+                        <select id="event-select" x-model="selectedEvent" name="event-select">
+                            <option value="">Select Event</option>
+                            <template x-for="event in uniqueEventNames">
+                                <option :value="event" x-text="event"></option>
+                            </template>
+                        </select>
+                    </div>
+                    <input  @click="saveEvent()" type="submit" :disabled="disabledSubmit()" class="button max-w-28 !mx-auto !mt-3">
                 </div>
-                <div>
-                    <label for="event-name">Select Event Type:</label>
-                    <select id="event-select" x-model="selectedEvent" name="event-select">
-                        <option value="">Select Event</option>
-                        <template x-for="event in uniqueEventNames">
-                            <option :value="event" x-text="event"></option>
-                        </template>
-                    </select>
-                </div>
-                <input  @click="saveEvent()" type="submit" :disabled="disabledSubmit()" class="button max-w-28 !mx-auto !mt-3">
-            </div>
-
         </div>
+        <div>
+        <table class="table-admin table-auto bg-white border border-gray-300">
+                <thead class="">
+                    <tr>
+                        <th>ID</th>
+                        <th>Event Name</th>
+                        <th>Date</th>
+                        <th>Trash</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template x-for="event in allEvents">
+                        <tr x-bind:id="'row-' + event.id">
+                            <td x-text="event.id"></td>
+                            <td x-text="event.name"></td>
+                            <td x-text="event.date"></td>
+                            <td @click="deleteEvent(event.id)"><i class="dashicons dashicons-trash"></i>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 
         <script>
+            //* WP Data *//
+            const allRoles = <?php echo json_encode($all_event_data["allRoles"]); ?>;
+            const allEvents = <?php echo json_encode($all_event_data["allEvents"]); ?>;
+            console.log(allRoles);
             function event() {
                 return {
                     date: '',
                     selectedEvent: '',
                     allRoles: [],
+                    allEvents: [],
 
                     init() {
-                        this.allRoles = <?php echo json_encode($all_roles_data); ?>;
+                        this.allRoles = allRoles;
+                        this.allEvents = allEvents;
                     },
 
                     saveEvent() {
@@ -77,6 +107,27 @@ function render_schedule_add_form() {
                         })
                         .catch(error => {
                             console.error('Error saving event:', error);
+                        });
+                    },
+
+                    deleteEvent(eventId) {
+                        const data = {
+                            event_id: eventId,
+                        };
+                        fetch('/wp-json/bcs/v1/delete_event', {
+                            method: 'DELETE',
+                            headers: {'Content-Type': 'application/json',},
+                            body: JSON.stringify(data),
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            document.getElementById(`row-${eventId}`).remove();
+                            return;
+                        })
+                        .catch(error => {
+                            console.error('Error deleting event:', error);
                         });
                     },
                     

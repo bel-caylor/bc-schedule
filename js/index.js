@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
     // Attach a click event to your trash icon (assuming it has a specific class or ID)
-    $('.dashicons-trash').on('click', function() {
+    $('.dashicons-trash.jquery-delete').on('click', function() {
         const rowID = $(this).data('row-id'); 
         console.log(rowID);
         const table = $(this).data('table'); 

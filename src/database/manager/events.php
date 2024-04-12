@@ -44,4 +44,38 @@ class BCS_Events_Manager {
             WHERE event_name = '$event';
         ");
     }
+
+    public function delete_event($event_id) {
+        global $wpdb;
+
+        //Delete event from events table
+        $sql = $wpdb->prepare("DELETE FROM {$wpdb->prefix}bcs_events
+                                WHERE id = %d", $event_id);
+        $wpdb->query($sql);
+
+        //Delete event from schedules table
+        $sql = $wpdb->prepare("DELETE FROM {$wpdb->prefix}bcs_schedule
+                                WHERE event_id = %d", $event_id);
+        $wpdb->query($sql);
+
+        return $this->get_all_events();
+    }
+
+    public function get_event_data() {
+        global $wpdb;
+        $roles_manager = new BCS_Roles_Manager();
+        $data['allRoles'] = $roles_manager->get_roles_data();
+
+        $data['allEvents'] = $this->get_all_events();
+        return $data;
+    }
+
+    public function get_all_events() {
+        global $wpdb;
+        $events = $wpdb->get_results( "
+            SELECT * FROM {$wpdb->prefix}bcs_events
+            ORDER BY date ASC;
+        ");
+        return $events;
+    }
 }

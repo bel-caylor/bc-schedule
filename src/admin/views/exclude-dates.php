@@ -121,7 +121,7 @@ function render_exclude_dates_table() {
         echo '<td>' . esc_html($date->id) . '</td>';
         echo '<td>' . esc_html($date->date) . '</td>';
         echo '<td>' . esc_html($date->display_name) . '</td>';
-        echo '<td><i class="dashicons dashicons-trash" data-table="' . $wp_pre . 'bcs_exclude_dates" data-row-id="' . esc_html($date->id) . '"></i></td>';
+        echo '<td><i class="dashicons dashicons-trash jquery-delete" data-table="' . $wp_pre . 'bcs_exclude_dates" data-row-id="' . esc_html($date->id) . '"></i></td>';
         echo '</tr>';
     }
     echo '</tbody>';

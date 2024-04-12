@@ -60,7 +60,7 @@ function render_volunteer_page() {
                             <td x-text="volunteer.event_name"></td>
                             <td><i x-bind:data-table="tableVolunteer" 
                                    x-bind:data-row-id="volunteer.id" 
-                                   class="dashicons dashicons-trash"></i>
+                                   class="dashicons dashicons-trash jquery-delete"></i>
                             </td>
                         </tr>
                     </template>
