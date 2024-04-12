@@ -14,6 +14,12 @@ function my_custom_rest_endpoint() {
         // 'permission_callback' => 'my_check_permissions',
     ));
 
+    register_rest_route('bcs/v1', '/add_team_volunteer/', array(
+        'methods' => 'POST',
+        'callback' => 'bcs_add_team_volunteer_callback',
+        // 'permission_callback' => 'my_check_permissions',
+    ));
+
     register_rest_route('bcs/v1', '/delete_row/(?P<role_id>\d+)', array(
         'methods' => 'DELETE',
         'callback' => 'bcs_delete_row_callback',

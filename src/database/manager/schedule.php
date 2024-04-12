@@ -1,10 +1,10 @@
 <?php
 
 class BCS_Schedule_Manager {
-    private $event_table;
-    private $schedule_table;
-    private $roles_table;
-    private $teams_table;
+    // private $event_table;
+    // private $schedule_table;
+    // private $roles_table;
+    // private $teams_table;
 
     public function __construct() {
         global $wpdb;

@@ -33,8 +33,12 @@ $sql_volunteers = "CREATE TABLE $table_volunteers (
 $sql_teams = "CREATE TABLE $table_teams (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
+    event_name VARCHAR(255) NOT NULL,
     group_name VARCHAR(255) NOT NULL,
-    volunteers LONGTEXT NOT NULL,
+    {$wpdb->prefix}user_id BIGINT UNSIGNED NOT NULL,
+    role_id INT NOT NULL,
+    FOREIGN KEY ({$wpdb->prefix}user_id) REFERENCES $table_users(ID),
+    FOREIGN KEY (role_id) REFERENCES $table_roles(id),
     PRIMARY KEY (id)
 )";
 
