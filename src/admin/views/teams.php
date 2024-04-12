@@ -1,6 +1,7 @@
 <?php
 require_once BC_SCHEDULE_PATH . '/src/database/manager/teams.php';
 require_once BC_SCHEDULE_PATH . '/src/database/api/add_team_volunteer.php';
+require_once BC_SCHEDULE_PATH . '/src/database/api/add_team_to_event.php';
 
 function render_teams_page() {
     $teams_manager = new BCS_Teams_Manager();
@@ -12,15 +13,44 @@ function render_teams_page() {
             <h1>Add Team to Event Date</h1>
             <p x-show="error" x-text="error" class="text-red-600 font-bold"></p>
             <div class="flex flex-col gap-3">
-                <div>
-                    <!-- <label for="role-select" class="pr-2 font-bold">Select Group Type:</label>
-                    <select id="role-select" x-model="selectedRoleId" name="role-select">
-                        <option value="">Select</option>
-                        <template x-for="role in allRoles">
-                            <option :value="role.id" x-text="roleName(role.event_name, role.group_name, role.role)"></option>
-                        </template>
-                    </select> -->
-                </div>
+                <label for="event-select" class="pr-2 font-bold">Select Event Type:</label>
+                <select x-model="selectedEvent" id="event-select">
+                    <option value="">Select</option>
+                    <template x-for="eventType in Object.keys(teamsByEvent)">
+                        <option :value="eventType" x-text="eventType"></option>
+                    </template>
+                </select>
+                <template x-if="selectedEvent">
+                    <div>
+                        <label for="group-select" class="pr-2 font-bold">Select Group:</label>
+                        <select x-model="selectedGroup" id="group-select">
+                            <option value="">Select</option>
+                            <template x-for="group in Object.keys(allTeams[selectedEvent])">
+                                <option :value="group" x-text="group"></option>
+                            </template>
+                        </select>
+                    </div>     
+                </template>
+                <template x-if="selectedGroup">
+                    <div>
+                        <label for="team-select" class="pr-2 font-bold">Select Team:</label>
+                        <select x-model="selectedTeam" id="team-select">
+                            <option value="">Select</option>
+                            <template x-for="team in teamsByEvent[selectedEvent]">
+                                <option :value="team.name" x-text="team.name"></option>
+                            </template>
+                        </select>
+                    </div>     
+                </template>
+                <template x-if="selectedTeam">
+                    <template x-for="event in filterDates">
+                        <div>
+                            <p class="font-bold text-lg">Select dates:</p>
+                            <input type="checkbox" :id="event.date" :value="event.date" @click="toggleDate(event.date)">
+                            <label :for="event.date" x-text="event.date" class="pb-1"></label>
+                        </div>     
+                    </template>
+                </template>              
                 <input  @click="addTeamToEvent()" type="submit" :disabled="disabledSubmit()" class="button max-w-28 !mx-auto !mt-3">
             </div>
         </div>
@@ -94,6 +124,10 @@ function render_teams_page() {
                 allTeams: [],
                 teamsByEvent: {},
                 emptyEvents: [],
+                selectedEvent: '',
+                selectedGroup: '',
+                selectedTeam: '',
+                selectedDates: [],
                 error: '',
 
                 init() {
@@ -104,12 +138,60 @@ function render_teams_page() {
                     this.emptyEvents = emptyEvents;
                 },
 
-                addTeamToEvent() {
+                get filterDates() {
+                    return this.emptyEvents.filter(item => 
+                        item.event_name === this.selectedEvent &&
+                        item.group_name === this.selectedGroup
+                    );
+                },
 
+                toggleDate(date) {
+                    const index = this.selectedDates.indexOf(date);
+                    if (index === -1) {
+                        this.selectedDates.push(date);
+                    } else {
+                        this.selectedDates.splice(date, 1);
+                    }
+                },
+
+                addTeamToEvent() {
+                    this.error = '';
+                    const data = {
+                        team_name: this.selectedTeam,
+                        event_name: this.selectedEvent,
+                        group_name: this.selectedGroup,
+                        dates: [...this.selectedDates],
+                    };
+                    console.log(data);
+                    fetch('/wp-json/bcs/v1/add_team_to_event', {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        //Rest input
+                        this.error = 'Team added.';
+                        this.selectedEvent = '';
+                        this.selectedGroup = '';
+                        this.selectedTeam = '';
+                        this.selectedDates = [];
+                    })
+                    .catch(error => {
+                        console.error('Error saving volunteer:', error);
+                    });
                 },
 
                 disabledSubmit() {
-
+                    return this.selectedEvent && this.selectedGroup && this.selectedTeam && this.selectedDates.length > 0 ? false : true;
                 },
 
                 get uniqueEventNames() {
@@ -117,6 +199,7 @@ function render_teams_page() {
                 },
 
                 saveTeamVolunteer(teamName, eventName, group, role, userID) {
+                    this.error = '';
                     const data = {
                         team_name: teamName,
                         event_name: eventName,
@@ -145,13 +228,13 @@ function render_teams_page() {
                         this.allTeams[eventName][group][role][teamName].first_name = data.user[0].first_name;
                         this.allTeams[eventName][group][role][teamName].edit = false;
                         this.allTeams[eventName][group][role][teamName].selected_user_id = '';
+                        //Rest input
+                        this.selectedUserIds = [];
+                        this.selectedRoleId = '';
                     })
                     .catch(error => {
                         console.error('Error saving volunteer:', error);
                     });
-                    //Rest input
-                    this.selectedUserIds = [];
-                    this.selectedRoleId = '';
                 },
 
                 getVolunteer(eventName, groupName, roleId, teamName) {

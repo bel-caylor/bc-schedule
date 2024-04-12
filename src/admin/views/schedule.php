@@ -46,7 +46,6 @@ function render_schedule_admin_table() {
                                             <template x-for="event in events">
                                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                     <div x-text="formatDate(event.date)"></div>
-                                                    <div x-text="event.name"></div>
                                                 </th>
                                             </template>
                                         </tr>

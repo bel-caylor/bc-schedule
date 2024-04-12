@@ -20,6 +20,12 @@ function my_custom_rest_endpoint() {
         // 'permission_callback' => 'my_check_permissions',
     ));
 
+    register_rest_route('bcs/v1', '/add_team_to_event/', array(
+        'methods' => 'POST',
+        'callback' => 'bcs_add_team_to_event_callback',
+        // 'permission_callback' => 'my_check_permissions',
+    ));
+
     register_rest_route('bcs/v1', '/delete_event/', array(
         'methods' => 'DELETE',
         'callback' => 'bcs_delete_event_callback',

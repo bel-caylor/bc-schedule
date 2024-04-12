@@ -5,6 +5,7 @@ class BCS_Teams_Manager {
     public function __construct() {
         global $wpdb;
         $this->team_table = $wpdb->prefix . 'bcs_teams';
+        $this->schedule_table = $wpdb->prefix . 'bcs_schedule';
     }
 
     public function insert_team_volunteer( $group_name, $team_name, $volunteers ) {
@@ -168,6 +169,46 @@ class BCS_Teams_Manager {
             GROUP BY s.event_id, r.group_name
             HAVING COUNT(DISTINCT s.volunteer_id) = 0;
         " );
+    }
+
+    public function add_team_to_schedule($team_name, $event_name, $group_name, $dates) {
+        global $wpdb;
+        //Query team memeber
+        $team_members = $wpdb->get_results( "
+            SELECT *
+            FROM {$wpdb->prefix}bcs_teams
+            WHERE name = '{$team_name}' AND event_name = '{$event_name}' AND group_name = '{$group_name}'
+        " );
+
+        //Add team members to selected dates.
+        foreach ($dates as $date) {
+            $event_row = $wpdb->get_results( "
+                SELECT *
+                FROM {$wpdb->prefix}bcs_events
+                WHERE name = '{$event_name}' AND date = '{$date}'
+            " );
+            $event_id = $event_row[0]->id;
+            foreach ($team_members as $team_member) {
+                $volunteer_row = $wpdb->get_results( "
+                    SELECT *
+                    FROM {$wpdb->prefix}bcs_volunteers
+                    WHERE role_id = {$team_member->role_id} AND wp_user_id = {$team_member->wp_user_id}
+                " );
+                $volunteer_id = $volunteer_row[0]->id;
+                //Update Schedule record.
+                $result = $wpdb->update(
+                    $this->schedule_table,
+                    array(
+                        'volunteer_id' => $volunteer_id,
+                    ),
+                    array(
+                        'event_id' => $event_id,
+                        'role_id' => $team_member->role_id,
+                    )
+                );
+            }
+        }
+        return true;
     }
 }
 
