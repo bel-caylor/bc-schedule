@@ -3,7 +3,7 @@
  * 
  * Plugin Name: Schedule Manager
  * Description: Church Volunteer Schedule.
- * Version: 2.0.2
+ * Version: 2.0.3
  * Author: Belinda Caylor
 */
 
@@ -44,7 +44,7 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
         // BC_SCHEDULE_URL . 'dist/admin.js',
         BC_SCHEDULE_URL . 'dist/admin.min.js',
         array(),
-        '2.0.2',
+        '2.0.3',
         true
     );
 
@@ -54,9 +54,9 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
         wp_enqueue_style(
             'bc-schedule-admin-styles',
             // BC_SCHEDULE_URL . 'dist/stylesheet.css',
-            BC_SCHEDULE_URL . 'dist/stylesheet.min.e368a3072ad276391cb7.css',
+            BC_SCHEDULE_URL . 'dist/stylesheet.min.2ce99200e29b042f7db0.css',
             array(),
-            '2.0.2'
+            '2.0.3'
         );
     }
 
@@ -71,9 +71,9 @@ function enqueue_bcs_frontend_scripts() {
     wp_enqueue_style(
         'bc-schedule-styles',
         // BC_SCHEDULE_URL . 'dist/stylesheet.css',
-        BC_SCHEDULE_URL . 'dist/stylesheet.min.e368a3072ad276391cb7.css',
+        BC_SCHEDULE_URL . 'dist/stylesheet.min.2ce99200e29b042f7db0.css',
         array(),
-        '2.0.2'
+        '2.0.3'
     );
 
     $bcs_frontend_data = array(
