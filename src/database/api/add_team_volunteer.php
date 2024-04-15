@@ -33,6 +33,9 @@ function bcs_add_team_volunteer_callback($request) {
     if ($team_volunteer) {
         //Update Row
         $team_row_id = $team_volunteer[0]->id;
+        if ( $user_id === 'None' ) {
+            $user_id = null;
+          }
         $result = $wpdb->update(
             $team_table,
             array(

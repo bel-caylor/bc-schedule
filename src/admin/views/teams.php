@@ -94,6 +94,7 @@ function render_teams_page() {
                                                                         x-text="allVolunteers[eventName][group][role][volunteerID].first_name"></option>
                                                                 </option>
                                                             </template>
+                                                            <option value="None">None</option>
                                                         </select>
                                                     </template>
                                                 </td>
@@ -200,6 +201,7 @@ function render_teams_page() {
 
                 saveTeamVolunteer(teamName, eventName, group, role, userID) {
                     this.error = '';
+                    
                     const data = {
                         team_name: teamName,
                         event_name: eventName,
@@ -223,10 +225,10 @@ function render_teams_page() {
                     })
                     .then(data => {
                         console.log(data);
-                        this.allTeams[eventName][group][role][teamName].wp_user_id = data.user[0].id;
-                        this.allTeams[eventName][group][role][teamName].display_name = data.user[0].display_name;
-                        this.allTeams[eventName][group][role][teamName].first_name = data.user[0].first_name;
-                        this.allTeams[eventName][group][role][teamName].edit = false;
+                        this.allTeams[eventName][group][role][teamName].wp_user_id = data.user?.[0]?.id ?? '';
+                        this.allTeams[eventName][group][role][teamName].display_name = data.user?.[0]?.display_name?? '';
+                        this.allTeams[eventName][group][role][teamName].first_name = data.user?.[0]?.first_name?? '';
+                        this.allTeams[eventName][group][role][teamName].edit = data.user?.length > 0 ? false : true;
                         this.allTeams[eventName][group][role][teamName].selected_user_id = '';
                         //Rest input
                         this.selectedUserIds = [];
