@@ -64,9 +64,10 @@ function render_schedule_admin_table() {
                                                             <td x-data-event-id="event.id" x-data-role="role" class="whitespace-nowrap">
                                                                 <!-- Selected Volunteer -->
                                                                 <div x-show="schedule[eventName][group][role][event.id]?.first_name  && schedule[eventName][group][role][event.id].edit == false ">
-                                                                    <button x-text="schedule[eventName][group][role][event.id]?.first_name ? schedule[eventName][group][role][event.id].first_name : ''"
-                                                                        @click="schedule[eventName][group][role][event.id].edit = true;"
-                                                                        class="!py-[2px] w-full bg-blue-100 hover:text-blue-700 hover:bg-white border border-gray-200 rounded-sm">
+                                                                    <button x-bind:class="{'bg-purple-200': isDuplicateVolunteer( schedule[eventName][group][role][event.id]?.volunteer_id, event.id, role, schedule[eventName][group][role][event.id]?.wp_user_id, eventName ) }" 
+                                                                            x-text="schedule[eventName][group][role][event.id]?.first_name ? schedule[eventName][group][role][event.id].first_name : ''"
+                                                                            @click="schedule[eventName][group][role][event.id].edit = true;"
+                                                                            class="!py-[2px] w-full bg-blue-100 hover:text-blue-700 hover:bg-white border border-gray-200 rounded-sm">
                                                                     </button>
                                                                     <!-- <span x-bind:class="{'bg-pink-50': isDuplicateVolunteer( schedule[eventName][group][role][event.id].volunteer_id, event.id, role, schedule[eventName][group][role][event.id].wp_user_id ) }" 
                                                                         x-text="schedule[eventName][group][role][event.id]?.first_name ? schedule[eventName][group][role][event.id].first_name : ''"></span>
@@ -176,11 +177,11 @@ function render_schedule_admin_table() {
                         });
                     },
     
-                    isDuplicateVolunteer( volunteerID, eventID, roleInput, userIDInput ) {
+                    isDuplicateVolunteer( volunteerID, eventID, roleInput, userIDInput, eventName ) {
                         var duplicate = false;
                         //Loop through Groups and Roles and return true if volunteerID is a duplicate.
                         // console.log('START ' + volunteerID + ' ' + eventID + ' ' + roleInput + ' ' + userIDInput );
-                        for (const group in this.schedule) {
+                        for (const group in this.schedule[eventName]) {
                             for (const role in this.schedule[eventName][group]) {
                                 if (roleInput !== role) {
                                     // console.log('eventID ' + eventID +' -- group ' + group + ' -- role ' + role + ' wp_user_id ' + this.schedule[eventName][group][role][eventID].wp_user_id);
@@ -188,9 +189,9 @@ function render_schedule_admin_table() {
                                             duplicate = true;
                                         }
                                 }
+                                // duplicate = true;
                             }
                         }
-                        // console.log('END' );
                         return duplicate; 
                     },
 
