@@ -1,10 +1,6 @@
 <?php
 
 class BCS_Schedule_Manager {
-    // private $event_table;
-    // private $schedule_table;
-    // private $roles_table;
-    // private $teams_table;
 
     public function __construct() {
         global $wpdb;
@@ -108,7 +104,6 @@ class BCS_Schedule_Manager {
     public function get_schedule() {
         global $wpdb;
         $data = [];
-        
         //GET Excluded dates
         $exclude_dates = $wpdb->get_results( "
             SELECT * FROM {$wpdb->prefix}bcs_exclude_dates
@@ -126,6 +121,8 @@ class BCS_Schedule_Manager {
         }
         $data["excludeDates"] = $exclude_dates_by_users_id;
 
+        //GET Event Types
+        $event_types = $wpdb->get_results( "SELECT DISTINCT event_name FROM {$wpdb->prefix}bcs_roles;");
         //GET Events
         $events = $wpdb->get_results( "
             SELECT * FROM {$wpdb->prefix}bcs_events
@@ -133,58 +130,63 @@ class BCS_Schedule_Manager {
             ORDER BY date ASC;
         ");
         $data["events"] = $events;
-        //Fix timezone date issue.
-        foreach ($data["events"] as &$event) {
-            $userTimezoneOffset = get_option('gmt_offset') * 60 * 60; // Convert GMT offset to seconds
-            $event->date = new DateTime($event->date . ' UTC');
-            $event->date->modify("+" . $userTimezoneOffset . " seconds");
-            $event->date = $event->date->format('Y-m-d H:i:s');
-          }
+        foreach ($event_types as $event_type) {
+            //Fix timezone date issue.
+            foreach ($data["events"] as &$event) {
+                $userTimezoneOffset = get_option('gmt_offset') * 60 * 60; // Convert GMT offset to seconds
+                $event->date = new DateTime($event->date . ' UTC');
+                $event->date->modify("+" . $userTimezoneOffset . " seconds");
+                $event->date = $event->date->format('Y-m-d H:i:s');
+            }
 
-        //GET Groups
-        $groups = $wpdb->get_results( "SELECT DISTINCT group_name FROM {$wpdb->prefix}bcs_roles;");
-        foreach ($groups as $group) {
+            //GET Groups
+            $groups = $wpdb->get_results( "SELECT DISTINCT group_name FROM {$wpdb->prefix}bcs_roles WHERE event_name = '$event_type->event_name';");
+            foreach ($groups as $group) {
 
-            //GET Roles by Group
-            $roles_by_group = $wpdb->get_results( "
-                SELECT id, group_name, role AS role_name FROM {$wpdb->prefix}bcs_roles WHERE group_name = '$group->group_name';
-            ");
-            $data["schedule"][$group->group_name] = [];
-            $data["allVolunteers"][$group->group_name] = [];
+                //GET Roles by Group
+                $roles_by_group = $wpdb->get_results( "
+                    SELECT id, group_name, role AS role_name 
+                    FROM {$wpdb->prefix}bcs_roles 
+                    WHERE group_name = '$group->group_name' AND event_name = '$event_type->event_name';
+                ");
+                $data["schedule"][$event_type->event_name][$group->group_name] = [];
+                $data["allVolunteers"][$event_type->event_name][$group->group_name] = [];
 
-            foreach ($roles_by_group as $role) {
-                //Get Volunteers
-                $volunteers = $wpdb->get_results( "
-                    SELECT v.wp_user_id, u.display_name, u.user_email, r.group_name, r.role, v.id,
-                    COALESCE(m.meta_value, '') AS first_name
-                    FROM {$wpdb->prefix}bcs_volunteers v
-                    JOIN {$wpdb->prefix}users u ON v.wp_user_id = u.ID
-                    JOIN {$wpdb->prefix}bcs_roles r ON v.role_id = r.id
-                    LEFT JOIN {$wpdb->prefix}usermeta m ON u.ID = m.user_id AND m.meta_key = 'first_name'
-                    WHERE v.role_id = '$role->id'; 
-                    " );
-                // Handle potential empty results from the schedule query
-                // $data["allVolunteers"][$group->group_name][$role->role_name] = $volunteers ? $volunteers : [];
-                foreach ($volunteers as $volunteer) {    
-                    $data["allVolunteers"][$group->group_name][$role->role_name][$volunteer->id] = $volunteer ? $volunteer : [];
-                }
+                foreach ($roles_by_group as $role) {
+                    //Get Volunteers
+                    $volunteers = $wpdb->get_results( "
+                        SELECT v.wp_user_id, u.display_name, u.user_email, r.group_name, r.role, v.id,
+                        COALESCE(m.meta_value, '') AS first_name
+                        FROM {$wpdb->prefix}bcs_volunteers v
+                        JOIN {$wpdb->prefix}users u ON v.wp_user_id = u.ID
+                        JOIN {$wpdb->prefix}bcs_roles r ON v.role_id = r.id
+                        LEFT JOIN {$wpdb->prefix}usermeta m ON u.ID = m.user_id AND m.meta_key = 'first_name'
+                        WHERE v.role_id = '$role->id'; 
+                        " );
+                    // Handle potential empty results from the schedule query
+                    // $data["allVolunteers"][$group->group_name][$role->role_name] = $volunteers ? $volunteers : [];
+                    foreach ($volunteers as $volunteer) {    
+                        $data["allVolunteers"][$event_type->event_name][$group->group_name][$role->role_name][$volunteer->id] = $volunteer ? $volunteer : [];
+                    }
 
-                //GET Schedule
-                $schedule = $wpdb->get_results ( "
-                    SELECT s.id AS schedule_id, s.event_id, s.volunteer_id, u.ID AS wp_user_id,
-                    COALESCE(u.display_name, '') AS display_name,
-                    COALESCE(u.user_email, '') AS user_email,
-                    COALESCE(m.meta_value, '') AS first_name
-                    FROM {$wpdb->prefix}bcs_schedule s
-                    LEFT JOIN {$wpdb->prefix}bcs_volunteers v ON s.volunteer_id = v.id
-                    LEFT JOIN {$wpdb->prefix}users u ON v.{$wpdb->prefix}user_id = u.ID
-                    LEFT JOIN {$wpdb->prefix}usermeta m ON u.ID = m.user_id AND m.meta_key = 'first_name'
-                    WHERE s.role_id = '$role->id'
-                    ");
-                foreach ($schedule as $schedule_row) {    
-                    $data["schedule"][$group->group_name][$role->role_name][$schedule_row->event_id] = $schedule_row;
-                    $data["schedule"][$group->group_name][$role->role_name][$schedule_row->event_id]->selectedVolunteer = '';
-                    $data["schedule"][$group->group_name][$role->role_name][$schedule_row->event_id]->edit = false;
+                    //GET Schedule
+                    $schedule = $wpdb->get_results ( "
+                        SELECT s.id AS schedule_id, s.event_id, s.volunteer_id, u.ID AS wp_user_id,
+                        COALESCE(u.display_name, '') AS display_name,
+                        COALESCE(u.user_email, '') AS user_email,
+                        COALESCE(m.meta_value, '') AS first_name
+                        FROM {$wpdb->prefix}bcs_schedule s
+                        LEFT JOIN {$wpdb->prefix}bcs_events e ON s.event_id = e.id
+                        LEFT JOIN {$wpdb->prefix}bcs_volunteers v ON s.volunteer_id = v.id
+                        LEFT JOIN {$wpdb->prefix}users u ON v.{$wpdb->prefix}user_id = u.ID
+                        LEFT JOIN {$wpdb->prefix}usermeta m ON u.ID = m.user_id AND m.meta_key = 'first_name'
+                        WHERE s.role_id = '$role->id' AND e.name = '$event_type->event_name';
+                        ");
+                    foreach ($schedule as $schedule_row) {    
+                        $data["schedule"][$event_type->event_name][$group->group_name][$role->role_name][$schedule_row->event_id] = $schedule_row ? $schedule_row : [];
+                        $data["schedule"][$event_type->event_name][$group->group_name][$role->role_name][$schedule_row->event_id]->selectedVolunteer = '';
+                        $data["schedule"][$event_type->event_name][$group->group_name][$role->role_name][$schedule_row->event_id]->edit = false;
+                    }
                 }
             }
         }
@@ -222,7 +224,9 @@ class BCS_Schedule_Manager {
 
     public function save_volunteer( $schedule_id, $volunteer_id ) {
         global $wpdb;
-
+        if ( $volunteer_id === 'None' ) {
+            $volunteer_id = null;
+        }
         $result = $wpdb->update(
             $this->schedule_table,
             array(

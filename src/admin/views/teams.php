@@ -71,7 +71,7 @@ function render_teams_page() {
                             </thead>
                             <template x-for="group in Object.keys(allTeams[eventName])">
                                 <tbody>
-                                    <tr class="bg-blue-100">
+                                    <tr class="bg-gray-300">
                                         <td :colspan="teamsByEvent[eventName].length + 1" x-text="group" class="font-bold"></td>
                                     </tr>
                                     <template x-for="role in Object.keys(allTeams[eventName][group])">
