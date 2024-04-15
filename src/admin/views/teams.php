@@ -179,16 +179,18 @@ function render_teams_page() {
                     })
                     .then(data => {
                         console.log(data);
-                        //Rest input
+                        // Reset input after receiving response data
                         this.error = 'Team added.';
                         this.selectedEvent = '';
                         this.selectedGroup = '';
-                        this.selectedTeam = '';
+                        // Create a new object and assign it to the existing property
+                        this.selectedTeam = { ...this.selectedTeam };
                         this.selectedDates = [];
                     })
                     .catch(error => {
                         console.error('Error saving volunteer:', error);
                     });
+
                 },
 
                 disabledSubmit() {
