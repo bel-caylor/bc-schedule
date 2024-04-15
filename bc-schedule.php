@@ -41,10 +41,10 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
     // Enqueue the bundled JavaScript file
     wp_enqueue_script(
         'bc-schedule-admin-main',
-        BC_SCHEDULE_URL . 'dist/admin.js',
-        // BC_SCHEDULE_URL . 'dist/admin.min.js',
+        // BC_SCHEDULE_URL . 'dist/admin.js',
+        BC_SCHEDULE_URL . 'dist/admin.min.js',
         array(),
-        '1.0.0',
+        '2.0.0',
         true
     );
 
@@ -53,10 +53,10 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
     if ($current_screen->id === 'toplevel_page_volunteer-schedule') {
         wp_enqueue_style(
             'bc-schedule-admin-styles',
-            BC_SCHEDULE_URL . 'dist/stylesheet.css',
-            // BC_SCHEDULE_URL . 'dist/stylesheet.min.0787e61bea0d3ebf4aea.css',
+            // BC_SCHEDULE_URL . 'dist/stylesheet.css',
+            BC_SCHEDULE_URL . 'dist/stylesheet.min.6179dbc68df13cd0761b.css',
             array(),
-            '1.0.0'
+            '2.0.0'
         );
     }
 
