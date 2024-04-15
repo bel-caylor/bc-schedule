@@ -167,7 +167,8 @@ class BCS_Teams_Manager {
             JOIN {$wpdb->prefix}bcs_roles r ON r.id = s.role_id
             JOIN {$wpdb->prefix}bcs_events e ON e.id = s.event_id
             GROUP BY s.event_id, r.group_name
-            HAVING COUNT(DISTINCT s.volunteer_id) = 0;
+            HAVING COUNT(DISTINCT s.volunteer_id) = 0
+            ORDER BY e.date ASC;
         " );
     }
 
