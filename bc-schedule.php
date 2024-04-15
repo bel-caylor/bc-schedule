@@ -3,7 +3,7 @@
  * 
  * Plugin Name: Schedule Manager
  * Description: Church Volunteer Schedule.
- * Version: 1.2.4
+ * Version: 2.0.0
  * Author: Belinda Caylor
 */
 
