@@ -155,6 +155,14 @@ function render_volunteer_page() {
                     //Rest input
                     this.selectedUserIds = [];
                     this.selectedRoleId = '';
+
+                    // Loop through allUsers and uncheck checkboxes
+                    this.allUsers.forEach(user => {
+                        const checkbox = document.querySelector(`input[id="${user.ID}"]`);
+                        if (checkbox) {
+                            checkbox.checked = false;
+                        }
+                    });
                 }   
             }
         }
