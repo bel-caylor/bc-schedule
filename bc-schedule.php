@@ -3,7 +3,7 @@
  * 
  * Plugin Name: Schedule Manager
  * Description: Church Volunteer Schedule.
- * Version: 2.0.4
+ * Version: 2.0.5
  * Author: Belinda Caylor
 */
 
@@ -44,7 +44,7 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
         // BC_SCHEDULE_URL . 'dist/admin.js',
         BC_SCHEDULE_URL . 'dist/admin.min.js',
         array(),
-        '2.0.4',
+        '2.0.5',
         true
     );
 
@@ -56,7 +56,7 @@ function bc_schedule_enqueue_admin_assets( $hook ) {
             // BC_SCHEDULE_URL . 'dist/stylesheet.css',
             BC_SCHEDULE_URL . 'dist/stylesheet.min.6ed43d264a3c250ff49d.css',
             array(),
-            '2.0.4'
+            '2.0.5'
         );
     }
 
@@ -73,14 +73,14 @@ function enqueue_bcs_frontend_scripts() {
         // BC_SCHEDULE_URL . 'dist/stylesheet.css',
         BC_SCHEDULE_URL . 'dist/stylesheet.min.6ed43d264a3c250ff49d.css',
         array(),
-        '2.0.4'
+        '2.0.5'
     );
 
     $bcs_frontend_data = array(
         'ajax_url' => admin_url('admin-ajax.php')
     );
 
-    wp_enqueue_script('bcs-frontend', BC_SCHEDULE_URL . '/dist/frontend.js', array('jquery'), false, true);
+    // wp_enqueue_script('bcs-frontend', BC_SCHEDULE_URL . '/dist/frontend.js', array('jquery'), false, true);
     wp_localize_script('bcs-frontend', 'bcs_frontend_data', $bcs_frontend_data);
 }
 add_action('wp_enqueue_scripts', 'enqueue_bcs_frontend_scripts');
