@@ -6,6 +6,7 @@ class BCS_Teams_Manager {
         global $wpdb;
         $this->team_table = $wpdb->prefix . 'bcs_teams';
         $this->schedule_table = $wpdb->prefix . 'bcs_schedule';
+        $this->exclude_dates = $wpdb->prefix . 'bcs_exclude_dates';
     }
 
     public function insert_team_volunteer( $group_name, $team_name, $volunteers ) {
@@ -190,23 +191,34 @@ class BCS_Teams_Manager {
             " );
             $event_id = $event_row[0]->id;
             foreach ($team_members as $team_member) {
-                $volunteer_row = $wpdb->get_results( "
-                    SELECT *
-                    FROM {$wpdb->prefix}bcs_volunteers
-                    WHERE role_id = {$team_member->role_id} AND wp_user_id = {$team_member->wp_user_id}
-                " );
-                $volunteer_id = $volunteer_row[0]->id;
-                //Update Schedule record.
-                $result = $wpdb->update(
-                    $this->schedule_table,
-                    array(
-                        'volunteer_id' => $volunteer_id,
-                    ),
-                    array(
-                        'event_id' => $event_id,
-                        'role_id' => $team_member->role_id,
+                //Determine if team member is available for this date.
+                $existing_row = $wpdb->get_row(
+                    $wpdb->prepare(
+                        "SELECT * FROM $this->exclude_dates 
+                        WHERE user_id = %s AND date = %s",
+                        $team_member->wp_user_id,
+                        $date
                     )
                 );
+                if (!$existing_row) {
+                    $volunteer_row = $wpdb->get_results( "
+                        SELECT *
+                        FROM {$wpdb->prefix}bcs_volunteers
+                        WHERE role_id = {$team_member->role_id} AND wp_user_id = {$team_member->wp_user_id}
+                    " );
+                    $volunteer_id = $volunteer_row[0]->id;
+                    //Update Schedule record.
+                    $result = $wpdb->update(
+                        $this->schedule_table,
+                        array(
+                            'volunteer_id' => $volunteer_id,
+                        ),
+                        array(
+                            'event_id' => $event_id,
+                            'role_id' => $team_member->role_id,
+                        )
+                    );
+                }
             }
         }
         return true;
