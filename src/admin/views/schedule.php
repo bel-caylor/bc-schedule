@@ -82,7 +82,7 @@ function render_schedule_admin_table() {
                                                                                 <option value="">Select</option>
                                                                                 <template x-if="allVolunteers[eventName][group] && allVolunteers[eventName][group][role]">
                                                                                     <template x-for="volunteer in Object.keys(allVolunteers[eventName][group][role])" :key="volunteer">
-                                                                                        <option x-show="!((excludeDates[allVolunteers[eventName][group][role][volunteer].wp_user_id] || []).includes(event.date))" 
+                                                                                        <option x-show="!((excludeDates[allVolunteers[eventName][group][role][volunteer].wp_user_id] || []).includes(event.date.slice(0, 10)))" 
                                                                                             :value="volunteer" x-text="allVolunteers[eventName][group][role][volunteer].first_name" x-data-date="event.date" x-data-userid="volunteer.wp_user_id"></option>
                                                                                     </template>
                                                                                 </template>
